@@ -1,0 +1,9 @@
+@font-face {
+  font-family: english;
+  src: url("../fonts/Ubuntu-Regular.ttf");
+}
+
+@font-face {
+  font-family: arabic;
+  src: url("../fonts/Zain-Bold.ttf");
+}
