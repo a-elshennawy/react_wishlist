@@ -1,5 +1,13 @@
 @import url("./fonts.css");
 
+:root {
+  --mainColor: #000;
+  --mainColorTrans: #00000059;
+  --secColor: #00cc6d;
+  --triColor: #0092cc;
+  --white: #fff;
+}
+
 * {
   box-sizing: border-box;
   text-transform: capitalize !important;
@@ -11,108 +19,180 @@ img {
 }
 
 body {
-  background-color: #000 !important;
+  background-color: var(--mainColor) !important;
+  color: var(--white) !important;
+  overflow-x: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+body.light {
+  --mainColor: #fff;
+  --mainColorTrans: #00000059;
+  --secColor: #00cc6d;
+  --triColor: #0092cc;
+  --white: #000;
+  transition: all 0.3s ease-in-out;
+}
+
+section {
+  padding: 50px 0px;
   overflow-x: hidden;
 }
 
-.taskApp {
-  min-width: 80%;
-  margin: auto;
-  position: absolute;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -30%);
+nav {
+  position: sticky;
+  top: 0;
+  left: 0;
+  padding: 10px 5px;
+  background-color: var(--mainColorTrans);
+  backdrop-filter: blur(10px);
+  z-index: 111;
 
-  .taskInputForm {
-    margin: 0;
-    padding: 10px 5px;
-
-    h4 {
-      color: #fff;
-      margin: 0;
-      padding: 10px 0px;
-    }
-
-    input {
-      border: none;
-      border-radius: 10px;
-      padding: 8px;
-      font-weight: bolder;
-
-      &:focus {
-        border: none;
-        outline: none;
-      }
-    }
-
-    .subBtn {
-      border: none;
-      border-radius: 10px;
-      padding: 5px 10px;
-      background-color: transparent;
-      color: #fff;
-      font-size: 30px;
-      transition: all 0.3s ease-in-out;
-
-      &:hover {
-        color: #00ff00;
-      }
-    }
+  span {
+    cursor: pointer;
+    font-size: 25px;
+    color: var(--white);
+    background-color: transparent;
   }
 
-  .taskList {
-    text-align: start;
-    margin: 0;
-    padding: 5px 10px;
-    list-style: none;
+  button {
+    padding: 5px 10px !important;
+    background-color: var(--white);
+    border: none;
+    border-radius: 8px;
 
-    .taskItem {
-      color: #fff;
-
-      input {
-        margin-inline-end: 8px;
-        accent-color: #00ff00;
-      }
-
-      span {
-        cursor: pointer;
-        margin-inline-start: 100px;
-        font-size: 25px;
-        transition: all 0.3s ease-in-out;
-
-        &:hover {
-          color: #fd0000;
-        }
-      }
+    a {
+      text-decoration: none;
+      color: var(--mainColor);
+      font-weight: bold;
     }
   }
 }
 
-.madeBy {
-  position: fixed;
-  bottom: 20px;
-  left: 1%;
-  transform: translate((-1%));
+.item {
+  background-color: var(--triColor);
+  color: #fff;
+  border-radius: 8px;
+  padding: 20px 10px;
+
+  svg {
+    font-size: 30px;
+    margin-bottom: 10px;
+  }
+}
+
+ul {
+  list-style: none;
+  background-color: var(--triColor);
+  border-radius: 10px;
+  padding: 20px 10px;
+  color: var(--white);
+
+  li {
+    font-size: 20px;
+    svg {
+      margin-inline-end: 5px;
+      color: #f9fd00;
+    }
+  }
+}
+
+.faq {
+  background-color: var(--triColor);
+  border-radius: 10px;
+  padding: 20px 10px;
+  color: var(--white);
+}
+
+.startArea {
+  padding: 20px 10px;
+  background-color: var(--secColor);
+  color: var(--mainColor);
+  border-radius: 10px;
+}
+
+.landingBtn {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--mainColor);
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
 
   a {
     text-decoration: none;
-    color: #fff;
-    display: inline;
+    color: var(--white);
+    transition: all 0.3s ease-in-out;
+  }
 
-    img {
-      width: 30%;
+  &:hover {
+    background-color: var(--white);
+
+    a {
+      color: var(--mainColor);
     }
   }
 }
 
-.freePalestine {
+.toHomeBtn {
   position: fixed;
-  top: 0;
-  left: 0;
+  top: 20px;
+  left: 20px;
+  padding: 5px 10px;
+  background-color: var(--white);
+  border: none;
+  border-radius: 8px;
 
   a {
-    img {
-      width: 15%;
+    text-decoration: none;
+    color: var(--mainColor);
+    font-weight: bold;
+  }
+}
+
+form {
+  background-color: var(--white);
+  color: var(--mainColor);
+  border-radius: 10px;
+  padding: 20px 10px;
+  font-weight: bold;
+
+  .inputContainer {
+    label {
+      padding: 5px 0px;
+    }
+    input {
+      padding: 5px;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      box-shadow: 0 0 5px var(--mainColor);
     }
   }
+
+  button {
+    border: none;
+    border-radius: 8px;
+    background-color: var(--white);
+    color: var(--mainColor);
+    padding: 5px 10px;
+    box-shadow: 0 0 5px var(--mainColor);
+    font-weight: bold;
+  }
+}
+
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+html {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
