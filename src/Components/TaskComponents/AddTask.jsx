@@ -79,7 +79,7 @@ export default function AddTask() {
         timestamp: serverTimestamp(),
         status: status,
         dueDate: dueDate || null,
-        pinned: true,
+        pinned: false,
       });
 
       setTaskTitle("");
