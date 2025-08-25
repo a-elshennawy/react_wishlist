@@ -7,5 +7,5 @@
 <li>dedicated component for overdue update every hour for accurate tracking</li>
 </ol>
 <hr>
-<h3>hosted on: <a href:"clarity-tasks.pages.dev">clarity-tasks.pages.dev</a><h3>
-<a href:"https://ahmed-elshennawy.vercel.app/">contact me :)</a>
+<h3>hosted on: <a href="clarity-tasks.pages.dev">clarity-tasks.pages.dev</a><h3>
+<a href="https://ahmed-elshennawy.vercel.app/">contact me :)</a>
