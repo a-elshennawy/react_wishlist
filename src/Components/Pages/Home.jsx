@@ -3,7 +3,7 @@ import DoneTasks from "../TaskComponents/DoneTasks";
 import OverDueTasks from "../TaskComponents/OverDueTasks";
 import PendingTasks from "../TaskComponents/PendingTasks";
 import { useAuth } from "../Contexts/AuthContext";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import OverdueChecker from "../ReusableComponents/OverdueChecker";
 
 export default function Home() {
@@ -39,7 +39,7 @@ export default function Home() {
         </h2>
         <AddTask />
         <hr />
-        <div className="col-12 taskTab">
+        <div className="col-12 row justify-content-start align-items-center gap-1 m-0 taskTab">
           <button
             className={`taskTabBtn ${
               activeTab === "pending" ? "pendingTab" : ""

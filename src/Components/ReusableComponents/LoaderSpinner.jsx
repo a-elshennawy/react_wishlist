@@ -4,7 +4,7 @@ export default function LoaderSpinner() {
   return (
     <>
       <div className="loader">
-        <BarLoader speedMultiplier={1} color="#fff" />
+        <BarLoader speedMultiplier={1} color="var(--white)" />
       </div>
     </>
   );

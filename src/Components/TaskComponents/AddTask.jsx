@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { IoAddCircleSharp } from "react-icons/io5";
 import { db } from "../../firebase";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
@@ -10,11 +10,57 @@ export default function AddTask() {
   const [taskDesc, setTaskDesc] = useState("");
   const [taskLinks, setTaskLinks] = useState("");
   const [dueDate, setDueDate] = useState("");
+  const [loading, setLoading] = useState(false);
+  const modalRef = useRef(null);
+
+  const closeModal = () => {
+    if (modalRef.current) {
+      modalRef.current.classList.remove("show");
+      modalRef.current.style.display = "none";
+      document.body.classList.remove("modal-open");
+    }
+
+    const backdrop = document.querySelector(".modal-backdrop");
+    if (backdrop) {
+      backdrop.remove();
+    }
+  };
+
+  useEffect(() => {
+    const handleModalHidden = () => {
+      closeModal();
+    };
+
+    const modalElement = modalRef.current;
+    if (modalElement) {
+      modalElement.addEventListener("hidden.bs.modal", handleModalHidden);
+    }
+
+    return () => {
+      if (modalElement) {
+        modalElement.removeEventListener("hidden.bs.modal", handleModalHidden);
+      }
+    };
+  }, []);
+
+  const openModal = () => {
+    if (modalRef.current) {
+      modalRef.current.classList.add("show");
+      modalRef.current.style.display = "block";
+      document.body.classList.add("modal-open");
+
+      const backdrop = document.createElement("div");
+      backdrop.className = "modal-backdrop fade show";
+      document.body.appendChild(backdrop);
+    }
+  };
 
   const addTask = async (e) => {
     e.preventDefault();
 
     if (!taskTitle.trim()) return;
+
+    setLoading(true);
 
     try {
       const currentdate = new Date();
@@ -27,12 +73,13 @@ export default function AddTask() {
 
       await addDoc(collection(db, "tasks"), {
         title: taskTitle,
-        description: taskDesc,
+        description: taskDesc || "none",
         links: taskLinks || "none",
         user: currentUser.email,
         timestamp: serverTimestamp(),
         status: status,
-        dueDate: dueDate,
+        dueDate: dueDate || null,
+        pinned: true,
       });
 
       setTaskTitle("");
@@ -40,32 +87,23 @@ export default function AddTask() {
       setTaskLinks("");
       setDueDate("");
 
-      const modalElement = document.getElementById("exampleModal");
-      modalElement.classList.remove("show");
-      modalElement.style.display = "none";
-      document.body.classList.remove("modal-open");
-      const backdrop = document.querySelector(".modal-backdrop");
-      if (backdrop) {
-        backdrop.remove();
-      }
+      closeModal();
     } catch (err) {
       console.error("Failed to add task", err);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <>
       <div className="col-12 text-start py-2">
-        <button
-          type="button"
-          className="addTaskBtn"
-          data-bs-toggle="modal"
-          data-bs-target="#exampleModal"
-        >
+        <button type="button" className="addTaskBtn" onClick={openModal}>
           <IoAddCircleSharp /> add task
         </button>
 
         <div
+          ref={modalRef}
           className="modal fade"
           id="exampleModal"
           tabIndex="-1"
@@ -90,7 +128,7 @@ export default function AddTask() {
                     />
                   </div>
                   <div className="inputContainer col-12">
-                    <label htmlFor="taskDesc">task description *</label>
+                    <label htmlFor="taskDesc">task description</label>
                     <textarea
                       id="taskDesc"
                       rows={3}
@@ -111,7 +149,6 @@ export default function AddTask() {
                         e.target.style.height = "auto";
                         e.target.style.height = e.target.scrollHeight + "px";
                       }}
-                      required
                     />
                   </div>
                   <div className="inputContainer col-12">
@@ -125,20 +162,21 @@ export default function AddTask() {
                     />
                   </div>
                   <div className="inputContainer col-12">
-                    <label htmlFor="taskDueDate">due date *</label>
+                    <label htmlFor="taskDueDate">due date</label>
                     <input
                       type="date"
                       id="taskDueDate"
                       value={dueDate}
                       onChange={(e) => setDueDate(e.target.value)}
-                      required
                     />
                   </div>
                   <div className="modal-footer col-12">
-                    <button type="button" data-bs-dismiss="modal">
+                    <button type="button" onClick={closeModal}>
                       cancel
                     </button>
-                    <button type="submit">Save task</button>
+                    <button type="submit" disabled={loading}>
+                      {loading ? "adding..." : "add task"}
+                    </button>
                   </div>
                 </form>
               </div>

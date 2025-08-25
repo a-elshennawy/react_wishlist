@@ -10,9 +10,11 @@ import {
   doc,
   onSnapshot,
   deleteDoc,
+  updateDoc,
 } from "firebase/firestore";
 import { MdDeleteForever } from "react-icons/md";
 import TaskDetails from "./TaskDetails";
+import { AiFillPushpin, AiOutlinePushpin } from "react-icons/ai";
 
 export default function DoneTasks() {
   const { currentUser } = useAuth();
@@ -43,6 +45,22 @@ export default function DoneTasks() {
           querySnapshot.forEach((doc) => {
             tasks.push({ id: doc.id, ...doc.data() });
           });
+
+          tasks.sort((a, b) => {
+            const aIsPinned = a.pinned || false;
+            const bIsPinned = b.pinned || false;
+
+            if (aIsPinned && !bIsPinned) return -1;
+            if (!aIsPinned && bIsPinned) return 1;
+            if (aIsPinned && bIsPinned) return 0;
+
+            if (!a.dueDate && !b.dueDate) return 0;
+            if (!a.dueDate) return -1;
+            if (!b.dueDate) return 1;
+
+            return new Date(a.dueDate) - new Date(b.dueDate);
+          });
+
           setDoneTasks(tasks);
           setError("");
           setLoading(false);
@@ -65,6 +83,21 @@ export default function DoneTasks() {
       }
     };
   }, [currentUser]);
+
+  const togglePin = async (taskId) => {
+    try {
+      const taskRef = doc(db, "tasks", taskId);
+      const task = doneTasks.find((t) => t.id === taskId);
+      const currentPinnedStatus = task.pinned || false;
+
+      await updateDoc(taskRef, {
+        pinned: !currentPinnedStatus,
+      });
+    } catch (err) {
+      console.error("error toggling pin", err);
+      setError("failed to update pin status");
+    }
+  };
 
   const deleteTask = async (taskId) => {
     if (!window.confirm("Are you sure you want to delete this task?")) {
@@ -136,7 +169,7 @@ export default function DoneTasks() {
 
   return (
     <>
-      <div className="col-12">
+      <div className="col-12 p-0">
         <h4 className="text-start">
           you have {doneTasks.length} completed tasks
         </h4>
@@ -146,27 +179,40 @@ export default function DoneTasks() {
           </div>
         ) : (
           <div className="row gap-2 m-0">
-            {doneTasks.map((task) => (
-              <div
-                key={task.id}
-                className="taskItem col-lg-3 col-10 text-start doneTask row justify-content-center align-items-center gap-1"
-              >
-                <h3 className="col-12">{task.title}</h3>
-                <p className="col-12 m-0">due to: {formatDate(task.dueDate)}</p>
-                <p className="col-12 m-0">
-                  completed at: {formatCompletionDate(task.completedAt)}
-                  <FaCheckCircle />
-                </p>
-                <div className="actions m-0 row gap-1 justify-content-start align-items-center col-12">
-                  <button onClick={() => handleTaskDetails(task)}>
-                    details <FaExclamationCircle />
-                  </button>
-                  <button onClick={() => deleteTask(task.id)}>
-                    delete <MdDeleteForever />
-                  </button>
+            {doneTasks.map((task) => {
+              const isPinned = task.pinned || false;
+              return (
+                <div
+                  key={task.id}
+                  className="taskItem col-lg-3 col-12 text-start doneTask row justify-content-center align-items-center gap-1"
+                >
+                  <h3 className="col-12">
+                    {task.title}
+                    <span
+                      className="float-end"
+                      onClick={() => togglePin(task.id)}
+                    >
+                      {isPinned ? <AiFillPushpin /> : <AiOutlinePushpin />}
+                    </span>
+                  </h3>
+                  <p className="col-12 m-0">
+                    due to : {formatDate(task.dueDate)}
+                  </p>
+                  <p className="col-12 m-0">
+                    completed at : {formatCompletionDate(task.completedAt)}
+                    <FaCheckCircle />
+                  </p>
+                  <div className="actions m-0 row gap-1 justify-content-start align-items-center col-12">
+                    <button onClick={() => handleTaskDetails(task)}>
+                      details <FaExclamationCircle />
+                    </button>
+                    <button onClick={() => deleteTask(task.id)}>
+                      delete <MdDeleteForever />
+                    </button>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         )}
       </div>

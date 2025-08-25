@@ -15,6 +15,7 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 import TaskDetails from "./TaskDetails";
+import { AiFillPushpin, AiOutlinePushpin } from "react-icons/ai";
 
 export default function PendingTasks() {
   const { currentUser } = useAuth();
@@ -45,6 +46,22 @@ export default function PendingTasks() {
           querySnapshot.forEach((doc) => {
             tasks.push({ id: doc.id, ...doc.data() });
           });
+
+          tasks.sort((a, b) => {
+            const aIsPinned = a.pinned || false;
+            const bIsPinned = b.pinned || false;
+
+            if (aIsPinned && !bIsPinned) return -1;
+            if (!aIsPinned && bIsPinned) return 1;
+            if (aIsPinned && bIsPinned) return 0;
+
+            if (!a.dueDate && !b.dueDate) return 0;
+            if (!a.dueDate) return -1;
+            if (!b.dueDate) return 1;
+
+            return new Date(a.dueDate) - new Date(b.dueDate);
+          });
+
           setPendingTasks(tasks);
           setError("");
           setLoading(false);
@@ -67,6 +84,21 @@ export default function PendingTasks() {
       }
     };
   }, [currentUser]);
+
+  const togglePin = async (taskId) => {
+    try {
+      const taskRef = doc(db, "tasks", taskId);
+      const task = pendingTasks.find((t) => t.id === taskId);
+      const currentPinnedStatus = task.pinned || false;
+
+      await updateDoc(taskRef, {
+        pinned: !currentPinnedStatus,
+      });
+    } catch (err) {
+      console.error("error toggling pin", err);
+      setError("failed to update pin status");
+    }
+  };
 
   const markAsDone = async (taskId) => {
     try {
@@ -137,7 +169,7 @@ export default function PendingTasks() {
 
   return (
     <>
-      <div className="col-12">
+      <div className="col-12 p-0">
         <h4 className="text-start">
           you have {pendingTasks.length} pending tasks
         </h4>
@@ -147,29 +179,47 @@ export default function PendingTasks() {
           </div>
         ) : (
           <div className="row gap-2 m-0">
-            {pendingTasks.map((task) => (
-              <div
-                key={task.id}
-                className="taskItem col-lg-3 col-10 text-start pendingTask row justify-content-center align-items-center gap-1"
-              >
-                <h3 className="col-12">{task.title}</h3>
-                <p className="col-12 m-0">due to: {formatDate(task.dueDate)}</p>
-                <p className="col-12 m-0">
-                  pending <MdPending />
-                </p>
-                <div className="actions m-0 row gap-1 justify-content-start align-items-center col-12">
-                  <button onClick={() => markAsDone(task.id)}>
-                    done <FaCheckCircle />
-                  </button>
-                  <button onClick={() => handleTaskDetails(task)}>
-                    details <FaExclamationCircle />
-                  </button>
-                  <button onClick={() => deleteTask(task.id)}>
-                    delete <MdDeleteForever />
-                  </button>
+            {pendingTasks.map((task) => {
+              const isPinned = task.pinned || false;
+
+              return (
+                <div
+                  key={task.id}
+                  className="taskItem col-lg-3 col-12 text-start pendingTask row justify-content-center align-items-center gap-1"
+                >
+                  <h3 className="col-12">
+                    {task.title}
+                    <span
+                      className="float-end"
+                      onClick={() => togglePin(task.id)}
+                    >
+                      {isPinned ? <AiFillPushpin /> : <AiOutlinePushpin />}
+                    </span>
+                  </h3>
+                  {task.dueDate ? (
+                    <p className="col-12 m-0">
+                      due to: {formatDate(task.dueDate)}
+                    </p>
+                  ) : (
+                    <p className="col-12 m-0">task has no due date</p>
+                  )}
+                  <p className="col-12 m-0">
+                    pending <MdPending />
+                  </p>
+                  <div className="actions m-0 row gap-1 justify-content-start align-items-center col-12">
+                    <button onClick={() => markAsDone(task.id)}>
+                      done <FaCheckCircle />
+                    </button>
+                    <button onClick={() => handleTaskDetails(task)}>
+                      details <FaExclamationCircle />
+                    </button>
+                    <button onClick={() => deleteTask(task.id)}>
+                      delete <MdDeleteForever />
+                    </button>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         )}
       </div>

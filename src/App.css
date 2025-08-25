@@ -36,9 +36,8 @@ body.light {
 }
 
 section {
-  padding: 50px 0px;
+  padding: 10px 0px;
   overflow-x: hidden;
-  position: relative;
 }
 
 nav {
@@ -258,17 +257,17 @@ form {
 }
 
 .taskTab {
-  padding: 10px 0px;
+  padding: 10px 0px !important;
 
   .taskTabBtn {
     padding: 5px 10px;
-    margin: 0px 10px;
     border: 1px solid var(--white);
     background-color: transparent;
     color: var(--white);
     font-weight: bold;
     text-transform: uppercase !important;
     letter-spacing: 1px;
+    width: fit-content;
   }
 
   .pendingTab {
@@ -292,9 +291,15 @@ form {
 
 .taskItem {
   border: none;
-  padding: 10px 5px;
+  padding: 10px 5px !important;
   margin: 0 !important;
   color: #fff;
+
+  h3 {
+    span {
+      cursor: pointer;
+    }
+  }
 
   p {
     display: inline-flex;

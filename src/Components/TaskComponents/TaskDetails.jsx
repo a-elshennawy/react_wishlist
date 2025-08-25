@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { db } from "../../firebase";
 import { doc, updateDoc, deleteDoc } from "firebase/firestore";
-import { FaTimes, FaSave, FaTrash } from "react-icons/fa";
 
 export default function TaskDetails({
   task,
@@ -43,6 +42,18 @@ export default function TaskDetails({
     };
   }, []);
 
+  const calcStatus = (dueDate) => {
+    if (!dueDate) return "pending";
+
+    const currentDate = new Date();
+    const taskDueDate = new Date(dueDate);
+
+    currentDate.setHours(0, 0, 0, 0);
+    taskDueDate.setHours(0, 0, 0, 0);
+
+    return taskDueDate < currentDate ? "overdue" : "pending";
+  };
+
   const handleInputChange = (field, value) => {
     setEditedTask((prev) => ({
       ...prev,
@@ -61,11 +72,15 @@ export default function TaskDetails({
 
     try {
       const taskRef = doc(db, "tasks", task.id);
+      const newStatus = calcStatus(editedTask.dueDate);
       await updateDoc(taskRef, {
         title: editedTask.title,
         description: editedTask.description,
         links: editedTask.links,
         dueDate: editedTask.dueDate,
+        status: newStatus,
+
+        ...(newStatus === "pending" && { daysOverdue: 0 }),
       });
 
       onTaskUpdated();
@@ -189,7 +204,7 @@ export default function TaskDetails({
                   </button>
 
                   <button onClick={handleSave} disabled={loading}>
-                    {loading ? "Saving..." : <>Save</>}
+                    {loading ? "applying..." : "apply changes"}
                   </button>
                 </div>
               </form>
