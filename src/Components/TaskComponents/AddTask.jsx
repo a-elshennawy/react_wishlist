@@ -134,11 +134,6 @@ export default function AddTask() {
                       rows={3}
                       value={taskDesc}
                       onChange={(e) => setTaskDesc(e.target.value)}
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter" && !e.shiftKey) {
-                          e.preventDefault();
-                        }
-                      }}
                       style={{
                         resize: "none",
                         minHeight: "80px",

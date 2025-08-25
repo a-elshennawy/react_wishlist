@@ -153,11 +153,6 @@ export default function TaskDetails({
                     }
                     disabled={loading}
                     rows={3}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" && !e.shiftKey) {
-                        e.preventDefault();
-                      }
-                    }}
                     style={{
                       resize: "none",
                       minHeight: "80px",
