@@ -1,0 +1,183 @@
+import { FaCheckCircle, FaExclamationCircle } from "react-icons/fa";
+import LoadingSpinner from "../ReusableComponents/LoaderSpinner";
+import { useState, useEffect } from "react";
+import { useAuth } from "../Contexts/AuthContext";
+import { db } from "../../firebase";
+import {
+  collection,
+  query,
+  where,
+  doc,
+  onSnapshot,
+  deleteDoc,
+} from "firebase/firestore";
+import { MdDeleteForever } from "react-icons/md";
+import TaskDetails from "./TaskDetails";
+
+export default function DoneTasks() {
+  const { currentUser } = useAuth();
+  const [doneTasks, setDoneTasks] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [selectedTask, setSelectedTask] = useState(null);
+  const [showTaskDetails, setShowTaskDetails] = useState(false);
+
+  useEffect(() => {
+    if (!currentUser) return;
+
+    let unsubscribe = null;
+
+    try {
+      setLoading(true);
+      const tasksRef = collection(db, "tasks");
+      const q = query(
+        tasksRef,
+        where("user", "==", currentUser.email),
+        where("status", "==", "done")
+      );
+
+      unsubscribe = onSnapshot(
+        q,
+        (querySnapshot) => {
+          const tasks = [];
+          querySnapshot.forEach((doc) => {
+            tasks.push({ id: doc.id, ...doc.data() });
+          });
+          setDoneTasks(tasks);
+          setError("");
+          setLoading(false);
+        },
+        (err) => {
+          console.error("Error fetching completed tasks:", err);
+          setError("failed to load tasks");
+          setLoading(false);
+        }
+      );
+    } catch (err) {
+      console.error("error setting up listener:", err);
+      setError("failed to load tasks");
+      setLoading(false);
+    }
+
+    return () => {
+      if (unsubscribe) {
+        unsubscribe();
+      }
+    };
+  }, [currentUser]);
+
+  const deleteTask = async (taskId) => {
+    if (!window.confirm("Are you sure you want to delete this task?")) {
+      return;
+    }
+
+    try {
+      const taskRef = doc(db, "tasks", taskId);
+      await deleteDoc(taskRef);
+    } catch (err) {
+      console.error("error deleting task:", err);
+      setError("failed to delete task");
+    }
+  };
+
+  const formatDate = (dateString) => {
+    if (!dateString) return "no due date";
+    const options = { year: "numeric", month: "2-digit", day: "2-digit" };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
+
+  const formatCompletionDate = (dateString) => {
+    if (!dateString) return "unknown date";
+
+    if (dateString.toDate) {
+      const date = dateString.toDate();
+      const options = { month: "short", day: "numeric" };
+      return date.toLocaleDateString(undefined, options);
+    }
+
+    const date = new Date(dateString);
+    const options = { month: "short", day: "numeric" };
+    return date.toLocaleDateString(undefined, options);
+  };
+
+  if (loading) {
+    return (
+      <div className="col-12 text-center">
+        <LoadingSpinner />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="col-12 text-center py-4">
+        <p className="text-danger">{error}</p>
+      </div>
+    );
+  }
+
+  const handleTaskDetails = (task) => {
+    setSelectedTask(task);
+    setShowTaskDetails(true);
+  };
+
+  const handleCloseDetails = () => {
+    setShowTaskDetails(false);
+    setSelectedTask(null);
+  };
+
+  const handleTaskUpdated = () => {
+    console.log("Task updated successfully");
+  };
+
+  const handleTaskDeleted = () => {
+    console.log("Task deleted successfully");
+  };
+
+  return (
+    <>
+      <div className="col-12">
+        <h4 className="text-start">
+          you have {doneTasks.length} completed tasks
+        </h4>
+        {doneTasks.length === 0 ? (
+          <div className="col-12 text-start py-4">
+            <p>Nothing is done yet 👀</p>
+          </div>
+        ) : (
+          <div className="row gap-2 m-0">
+            {doneTasks.map((task) => (
+              <div
+                key={task.id}
+                className="taskItem col-lg-3 col-10 text-start doneTask row justify-content-center align-items-center gap-1"
+              >
+                <h3 className="col-12">{task.title}</h3>
+                <p className="col-12 m-0">due to: {formatDate(task.dueDate)}</p>
+                <p className="col-12 m-0">
+                  completed at: {formatCompletionDate(task.completedAt)}
+                  <FaCheckCircle />
+                </p>
+                <div className="actions m-0 row gap-1 justify-content-start align-items-center col-12">
+                  <button onClick={() => handleTaskDetails(task)}>
+                    details <FaExclamationCircle />
+                  </button>
+                  <button onClick={() => deleteTask(task.id)}>
+                    delete <MdDeleteForever />
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+      {showTaskDetails && selectedTask && (
+        <TaskDetails
+          task={selectedTask}
+          onClose={handleCloseDetails}
+          onTaskUpdated={handleTaskUpdated}
+          onTaskDeleted={handleTaskDeleted}
+        />
+      )}
+    </>
+  );
+}

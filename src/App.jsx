@@ -3,10 +3,12 @@ import { lazy, Suspense } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LoaderSpinner from "./Components/ReusableComponents/LoaderSpinner";
 import Layout from "./Components/Layout/Layout";
+import { AuthProvider } from "./Components/Contexts/AuthContext";
 
 const LandingPage = lazy(() => import("./Components/Pages/LandingPage"));
 const Login = lazy(() => import("./Components/Pages/Login"));
 const Signup = lazy(() => import("./Components/Pages/Signup"));
+const ForgotPassword = lazy(() => import("./Components/Pages/ForgotPassword"));
 
 const createRoute = (path, element) => ({
   path,
@@ -22,8 +24,13 @@ function App() {
     },
     createRoute("/login", <Login />),
     createRoute("/signup", <Signup />),
+    createRoute("/forgotPassword", <ForgotPassword />),
   ]);
-  return <RouterProvider router={routes} />;
+  return (
+    <AuthProvider>
+      <RouterProvider router={routes} />
+    </AuthProvider>
+  );
 }
 
 export default App;
