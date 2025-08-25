@@ -97,7 +97,7 @@ export default function AddTask() {
 
   return (
     <>
-      <div className="col-12 text-start py-2">
+      <div className="col-12 text-start py-2 px-0">
         <button type="button" className="addTaskBtn" onClick={openModal}>
           <IoAddCircleSharp /> add task
         </button>
