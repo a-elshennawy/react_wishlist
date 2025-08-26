@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { db } from "../../firebase";
 import { doc, updateDoc, deleteDoc } from "firebase/firestore";
 
@@ -14,10 +14,19 @@ export default function TaskDetails({
   const [taskLinks, setTaskLinks] = useState(
     task.links && task.links.length > 0 ? [...task.links] : [""]
   );
+  const textareaRef = useRef(null);
 
   useEffect(() => {
     setEditedTask(task);
     setTaskLinks(task.links && task.links.length > 0 ? [...task.links] : [""]);
+
+    setTimeout(() => {
+      if (textareaRef.current) {
+        textareaRef.current.style.height = "auto";
+        textareaRef.current.style.height =
+          textareaRef.current.scrollHeight + "px";
+      }
+    }, 0);
   }, [task]);
 
   const addLinkField = () => {
@@ -171,17 +180,17 @@ export default function TaskDetails({
                 <div className="inputContainer col-12">
                   <label>Description</label>
                   <textarea
+                    ref={textareaRef}
                     value={editedTask.description || ""}
                     onChange={(e) =>
                       handleInputChange("description", e.target.value)
                     }
                     disabled={loading}
-                    rows={3}
-                    cols={35}
                     onInput={(e) => {
                       e.target.style.height = "auto";
                       e.target.style.height = e.target.scrollHeight + "px";
                     }}
+                    style={{ minHeight: "60px", width: "100%", resize: "none" }}
                   />
                 </div>
                 <div className="inputContainer col-12">
