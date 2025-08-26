@@ -15,6 +15,7 @@ import {
 import { MdDeleteForever } from "react-icons/md";
 import TaskDetails from "./TaskDetails";
 import { AiFillPushpin, AiOutlinePushpin } from "react-icons/ai";
+import CategoryTab from "./CategoryTab";
 
 export default function DoneTasks() {
   const { currentUser } = useAuth();
@@ -23,6 +24,22 @@ export default function DoneTasks() {
   const [error, setError] = useState("");
   const [selectedTask, setSelectedTask] = useState(null);
   const [showTaskDetails, setShowTaskDetails] = useState(false);
+  const [filteredTasks, setFilteredTasks] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("all");
+
+  useEffect(() => {
+    if (selectedCategory === "all") {
+      setFilteredTasks(doneTasks);
+    } else {
+      setFilteredTasks(
+        doneTasks.filter((task) => task.category === selectedCategory)
+      );
+    }
+  }, [selectedCategory, doneTasks]);
+
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category);
+  };
 
   useEffect(() => {
     if (!currentUser) return;
@@ -170,39 +187,46 @@ export default function DoneTasks() {
   return (
     <>
       <div className="col-12 p-0">
+        <CategoryTab
+          onCategoryChange={handleCategoryChange}
+          activeCategory={selectedCategory}
+        />
         <h4 className="text-start">
-          you have {doneTasks.length} completed tasks
+          you have {filteredTasks.length} completed tasks
         </h4>
-        {doneTasks.length === 0 ? (
+        {filteredTasks.length === 0 ? (
           <div className="col-12 text-start py-4">
             <p>Nothing is done yet 👀</p>
           </div>
         ) : (
           <div className="row gap-2 m-0">
-            {doneTasks.map((task) => {
+            {filteredTasks.map((task) => {
               const isPinned = task.pinned || false;
               return (
                 <div
                   key={task.id}
-                  className="taskItem col-lg-3 col-12 text-start doneTask row justify-content-center align-items-center gap-1"
+                  className="taskItem col-lg-3 col-12 text-start doneTask row justify-content-start align-items-center gap-1"
                 >
-                  <h3 className="col-12">
-                    {task.title}
+                  <div className="col-12 row justify-content-between align-items-center m-0 p-0">
+                    <h3 className="col-10 m-0 p-0">{task.title}</h3>
                     <span
-                      className="float-end"
+                      className="col-2 p-0 pinIcon text-end"
                       onClick={() => togglePin(task.id)}
                     >
                       {isPinned ? <AiFillPushpin /> : <AiOutlinePushpin />}
                     </span>
-                  </h3>
-                  <p className="col-12 m-0">
+                  </div>
+                  <h6 className={`col-12 p-0 ${task.category}`}>
+                    {task.category}
+                  </h6>
+                  <p className="col-12 m-0 p-0">
                     due to : {formatDate(task.dueDate)}
                   </p>
-                  <p className="col-12 m-0">
+                  <p className="col-12 m-0 p-0">
                     completed at : {formatCompletionDate(task.completedAt)}
                     <FaCheckCircle />
                   </p>
-                  <div className="actions m-0 row gap-1 justify-content-start align-items-center col-12">
+                  <div className="actions m-0 p-0 row gap-1 justify-content-start align-items-center col-12">
                     <button onClick={() => handleTaskDetails(task)}>
                       details <FaExclamationCircle />
                     </button>

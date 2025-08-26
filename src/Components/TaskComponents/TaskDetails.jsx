@@ -76,6 +76,7 @@ export default function TaskDetails({
       await updateDoc(taskRef, {
         title: editedTask.title,
         description: editedTask.description,
+        category: editedTask.category,
         links: editedTask.links,
         dueDate: editedTask.dueDate,
         status: newStatus,
@@ -165,7 +166,23 @@ export default function TaskDetails({
                     }}
                   />
                 </div>
-
+                <div className="inputContainer col-12">
+                  <label htmlFor="category">category (optional)</label>
+                  <select
+                    id="category"
+                    onChange={(e) => setTaskCategory(e.target.value)}
+                    value={editedTask.category}
+                  >
+                    <option disabled value="">
+                      select the task category
+                    </option>
+                    <option value="work">work</option>
+                    <option value="personal">personal</option>
+                    <option value="workout">workout</option>
+                    <option value="entertainment">entertainment</option>
+                    <option value="daily">daily</option>
+                  </select>
+                </div>
                 <div className="inputContainer col-12">
                   <label>Links</label>
                   <input

@@ -22,6 +22,7 @@ import {
 import { MdDeleteForever } from "react-icons/md";
 import TaskDetails from "./TaskDetails";
 import { AiFillPushpin, AiOutlinePushpin } from "react-icons/ai";
+import CategoryTab from "./CategoryTab";
 
 export default function OverDueTasks() {
   const { currentUser } = useAuth();
@@ -30,6 +31,22 @@ export default function OverDueTasks() {
   const [error, setError] = useState("");
   const [selectedTask, setSelectedTask] = useState(null);
   const [showTaskDetails, setShowTaskDetails] = useState(false);
+  const [filteredTasks, setFilteredTasks] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("all");
+
+  useEffect(() => {
+    if (selectedCategory === "all") {
+      setFilteredTasks(overdueTasks);
+    } else {
+      setFilteredTasks(
+        overdueTasks.filter((task) => task.category === selectedCategory)
+      );
+    }
+  }, [selectedCategory, overdueTasks]);
+
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category);
+  };
 
   const calcDaysOverdue = (dueDate) => {
     if (!dueDate) return;
@@ -250,41 +267,48 @@ export default function OverDueTasks() {
   return (
     <>
       <div className="col-12 p-0">
+        <CategoryTab
+          onCategoryChange={handleCategoryChange}
+          activeCategory={selectedCategory}
+        />
         <h4 className="text-start">
-          you have {overdueTasks.length} overdue tasks
+          you have {filteredTasks.length} overdue tasks
         </h4>
-        {overdueTasks.length === 0 ? (
+        {filteredTasks.length === 0 ? (
           <div className="col-12 text-start py-4">
             <p>Nothing is overdue .. yaaay 🎉</p>
           </div>
         ) : (
           <div className="row gap-2 m-0">
-            {overdueTasks.map((task) => {
+            {filteredTasks.map((task) => {
               const isPinned = task.pinned || false;
               return (
                 <div
                   key={task.id}
-                  className="taskItem col-lg-3 col-12 text-start overdueTask row justify-content-center align-items-center gap-1"
+                  className="taskItem col-lg-3 col-12 text-start overdueTask row justify-content-start align-items-center gap-1"
                 >
-                  <h3 className="col-12">
-                    {task.title}
+                  <div className="col-12 row justify-content-between align-items-center m-0 p-0">
+                    <h3 className="col-10 m-0 p-0">{task.title}</h3>
                     <span
-                      className="float-end"
+                      className="col-2 p-0 pinIcon text-end"
                       onClick={() => togglePin(task.id)}
                     >
                       {isPinned ? <AiFillPushpin /> : <AiOutlinePushpin />}
                     </span>
-                  </h3>
-                  <p className="col-12 m-0">
+                  </div>
+                  <h6 className={`col-12 p-0 ${task.category}`}>
+                    {task.category}
+                  </h6>
+                  <p className="col-12 m-0 p-0">
                     due to : {formatDate(task.dueDate)} <FaQuestionCircle />
                   </p>
-                  <p className="col-12 m-0">
+                  <p className="col-12 m-0 p-0">
                     {getOverdue(
                       task.daysOverdue || calcDaysOverdue(task.dueDate)
                     )}
                     <FaClock />
                   </p>
-                  <div className="actions m-0 row gap-1 justify-content-start align-items-center col-12">
+                  <div className="actions m-0 row gap-1 justify-content-start align-items-center col-12 p-0">
                     <button onClick={() => markAsDone(task.id)}>
                       done <FaCheckCircle />
                     </button>

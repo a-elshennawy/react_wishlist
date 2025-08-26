@@ -3,7 +3,7 @@ import DoneTasks from "../TaskComponents/DoneTasks";
 import OverDueTasks from "../TaskComponents/OverDueTasks";
 import PendingTasks from "../TaskComponents/PendingTasks";
 import { useAuth } from "../Contexts/AuthContext";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import OverdueChecker from "../ReusableComponents/OverdueChecker";
 
 export default function Home() {
@@ -33,7 +33,7 @@ export default function Home() {
     <>
       <OverdueChecker />
       <section className="container-fluid row justify-content-start align-items-center m-0 gap-2 text-center">
-        <h2 className="text-start">
+        <h2 className="text-start p-0">
           welcome {getDisplayName(currentUser.email)},<br />
           let's track your work
         </h2>

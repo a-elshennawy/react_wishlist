@@ -228,7 +228,8 @@ form {
 
       .inputContainer {
         input,
-        textarea {
+        textarea,
+        select {
           padding: 5px;
           border: 1px solid var(--mainColor);
           border-radius: 3px !important;
@@ -289,16 +290,85 @@ form {
   }
 }
 
+.categoryTab {
+  padding: 0px 0px 10px 0px !important;
+
+  .categoryTabBtn {
+    padding: 5px;
+    border: 1px solid var(--white);
+    background-color: transparent;
+    color: var(--white);
+    text-transform: uppercase !important;
+    width: fit-content;
+    font-weight: bold;
+  }
+
+  .all {
+    background-color: var(--white);
+    color: var(--mainColor);
+  }
+
+  .work {
+    border: 1px solid #002fff;
+    background-color: #002fff;
+    color: #fff;
+  }
+  .personal {
+    border: 1px solid #ffae00;
+    background-color: #ffae00;
+    color: #000;
+  }
+  .workout {
+    border: 1px solid #ff0000;
+    background-color: #ff0000;
+    color: #fff;
+  }
+  .entertainment {
+    border: 1px solid #00ffea;
+    background-color: #00ffea;
+    color: #000;
+  }
+  .daily {
+    border: 1px solid #a6ff00;
+    background-color: #a6ff00;
+    color: #000;
+  }
+}
+
 .taskItem {
   border: none;
   padding: 10px 5px !important;
   margin: 0 !important;
   color: #fff;
 
-  h3 {
-    span {
-      cursor: pointer;
+  .pinIcon {
+    cursor: pointer;
+    padding: 0px;
+    width: fit-content;
+    svg {
+      font-size: 20px;
     }
+  }
+
+  h6 {
+    width: fit-content;
+    background-color: #00000059;
+  }
+
+  .work {
+    background-color: #002fff59;
+  }
+  .personal {
+    background-color: #ffae0059;
+  }
+  .workout {
+    background-color: #ff000059;
+  }
+  .entertainment {
+    background-color: #00ffea59;
+  }
+  .daily {
+    background-color: #a6ff0059;
   }
 
   p {

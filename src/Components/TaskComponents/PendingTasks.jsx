@@ -16,6 +16,7 @@ import {
 } from "firebase/firestore";
 import TaskDetails from "./TaskDetails";
 import { AiFillPushpin, AiOutlinePushpin } from "react-icons/ai";
+import CategoryTab from "./CategoryTab";
 
 export default function PendingTasks() {
   const { currentUser } = useAuth();
@@ -24,6 +25,22 @@ export default function PendingTasks() {
   const [error, setError] = useState("");
   const [selectedTask, setSelectedTask] = useState(null);
   const [showTaskDetails, setShowTaskDetails] = useState(false);
+  const [filteredTasks, setFilteredTasks] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("all");
+
+  useEffect(() => {
+    if (selectedCategory === "all") {
+      setFilteredTasks(pendingTasks);
+    } else {
+      setFilteredTasks(
+        pendingTasks.filter((task) => task.category === selectedCategory)
+      );
+    }
+  }, [selectedCategory, pendingTasks]);
+
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category);
+  };
 
   useEffect(() => {
     if (!currentUser) return;
@@ -63,6 +80,7 @@ export default function PendingTasks() {
           });
 
           setPendingTasks(tasks);
+          setFilteredTasks(tasks);
           setError("");
           setLoading(false);
         },
@@ -170,43 +188,50 @@ export default function PendingTasks() {
   return (
     <>
       <div className="col-12 p-0">
+        <CategoryTab
+          onCategoryChange={handleCategoryChange}
+          activeCategory={selectedCategory}
+        />
         <h4 className="text-start">
-          you have {pendingTasks.length} pending tasks
+          you have {filteredTasks.length} pending tasks
         </h4>
-        {pendingTasks.length === 0 ? (
+        {filteredTasks.length === 0 ? (
           <div className="col-12 text-start py-4">
             <p>No pending tasks! 🎉</p>
           </div>
         ) : (
           <div className="row gap-2 m-0">
-            {pendingTasks.map((task) => {
+            {filteredTasks.map((task) => {
               const isPinned = task.pinned || false;
 
               return (
                 <div
                   key={task.id}
-                  className="taskItem col-lg-3 col-12 text-start pendingTask row justify-content-center align-items-center gap-1"
+                  className="taskItem col-lg-3 col-12 text-start pendingTask row justify-content-start align-items-center gap-1"
                 >
-                  <h3 className="col-12">
-                    {task.title}
+                  <div className="col-12 row justify-content-between align-items-center m-0 p-0">
+                    <h3 className="col-10 m-0 p-0">{task.title}</h3>
                     <span
-                      className="float-end"
+                      className="col-2 p-0 pinIcon text-end"
                       onClick={() => togglePin(task.id)}
                     >
                       {isPinned ? <AiFillPushpin /> : <AiOutlinePushpin />}
                     </span>
-                  </h3>
+                  </div>
+                  <h6 className={`col-12 m-0 p-0 ${task.category} `}>
+                    {task.category}
+                  </h6>
                   {task.dueDate ? (
-                    <p className="col-12 m-0">
+                    <p className="col-12 m-0 p-0">
                       due to: {formatDate(task.dueDate)}
                     </p>
                   ) : (
-                    <p className="col-12 m-0">task has no due date</p>
+                    <p className="col-12 m-0 p-0">task has no due date</p>
                   )}
-                  <p className="col-12 m-0">
+                  <p className="col-12 m-0 p-0">
                     pending <MdPending />
                   </p>
-                  <div className="actions m-0 row gap-1 justify-content-start align-items-center col-12">
+                  <div className="actions m-0 row gap-1 justify-content-start align-items-center col-12 p-0">
                     <button onClick={() => markAsDone(task.id)}>
                       done <FaCheckCircle />
                     </button>
