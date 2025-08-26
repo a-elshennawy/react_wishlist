@@ -63,10 +63,10 @@ export default function Login() {
               {loading ? "Logging in..." : "Log In"}
             </button>
           </div>
-          <div className="col-12 py-12">
+          <div className="col-12 py-12 px-0">
             <Link to={"/forgotPassword"}>forgot your password?</Link>
           </div>
-          <div className="col-12">
+          <div className="col-12 p-0">
             <Link to={"/signup"}>don't have an account ? sign up</Link>
           </div>
         </form>

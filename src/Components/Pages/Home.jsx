@@ -5,6 +5,7 @@ import PendingTasks from "../TaskComponents/PendingTasks";
 import { useAuth } from "../Contexts/AuthContext";
 import { useState } from "react";
 import OverdueChecker from "../ReusableComponents/OverdueChecker";
+import Progress from "../TaskComponents/Progress";
 
 export default function Home() {
   const { currentUser } = useAuth();
@@ -37,6 +38,9 @@ export default function Home() {
           welcome {getDisplayName(currentUser.email)},<br />
           let's track your work
         </h2>
+        <div className="col-md-10 col-12 col-lg-3 p-0">
+          <Progress />
+        </div>
         <AddTask />
         <hr />
         <div className="col-12 row justify-content-start align-items-center gap-1 m-0 taskTab">

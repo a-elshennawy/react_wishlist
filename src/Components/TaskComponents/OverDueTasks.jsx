@@ -285,7 +285,7 @@ export default function OverDueTasks() {
               return (
                 <div
                   key={task.id}
-                  className="taskItem col-lg-3 col-12 text-start overdueTask row justify-content-start align-items-center gap-1"
+                  className="taskItem col-md-8 col-12 col-lg-3 text-start overdueTask row justify-content-start align-items-center gap-1"
                 >
                   <div className="col-12 row justify-content-between align-items-center m-0 p-0">
                     <h3 className="col-10 m-0 p-0">{task.title}</h3>

@@ -79,7 +79,7 @@ export default function Signup() {
               {loading ? "Creating Account..." : "Sign Up"}
             </button>
           </div>
-          <div className="col-12">
+          <div className="col-12 p-0">
             <Link to={"/login"}>already have accont ? log in</Link>
           </div>
         </form>

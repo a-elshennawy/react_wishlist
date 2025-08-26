@@ -7,6 +7,12 @@
   --triColor: #0092cc;
   --white: #fff;
   --darkRed: #970000;
+  --itemsGB: linear-gradient(
+    135deg,
+    rgba(99, 0, 255, 0.15),
+    rgba(0, 204, 255, 0.15)
+  );
+  --taskBG: rgba(255, 255, 255, 0.1);
 }
 
 * {
@@ -32,6 +38,11 @@ body.light {
   --secColor: #00cc6d;
   --triColor: #0092cc;
   --white: #000;
+  --taskBG: linear-gradient(
+    135deg,
+    rgba(99, 0, 255, 0.15),
+    rgba(0, 204, 255, 0.15)
+  );
   transition: all 0.3s ease-in-out;
 }
 
@@ -163,8 +174,8 @@ ul {
 }
 
 form {
-  background-color: var(--white);
-  color: var(--mainColor);
+  background: var(--taskBG);
+  color: var(--white);
   border-radius: 10px;
   padding: 20px 10px;
   font-weight: bold;
@@ -339,7 +350,11 @@ form {
   border: none;
   padding: 10px 5px !important;
   margin: 0 !important;
-  color: #fff;
+  background: var(--taskBG);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--white);
+  border-radius: 10px;
 
   .pinIcon {
     cursor: pointer;
@@ -352,7 +367,7 @@ form {
 
   h6 {
     width: fit-content;
-    background-color: #00000059;
+    background-color: #00000034;
   }
 
   .work {
@@ -381,9 +396,12 @@ form {
 
   .actions {
     button {
-      background-color: var(--mainColor);
+      background: var(--taskBG);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
       color: var(--white);
       border: none;
+      border-radius: 8px;
       padding: 5px 10px;
       font-weight: bold;
       display: inline-flex;
@@ -398,16 +416,42 @@ form {
   }
 }
 
-.pendingTask {
-  background-color: var(--triColor);
-}
+.progress-component {
+  background: var(--itemsGB);
+  color: var(--white);
+  padding: 10px;
+  border-radius: 10px;
 
-.doneTask {
-  background-color: var(--secColor);
-}
+  p {
+    margin: 0;
+    margin-top: 20px !important;
+    padding: 5px;
+    background-color: #fd0000;
+    width: fit-content;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 8px;
+  }
 
-.overdueTask {
-  background-color: var(--darkRed);
+  .progress-container {
+    width: 100%;
+    height: 10px;
+    background-color: var(--mainColor);
+    overflow: hidden;
+    margin: 10px 0;
+    border-radius: 8px;
+
+    .progress-bar {
+      height: 100%;
+      background-color: #4caf50;
+      transition: width 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 12px;
+    }
+  }
 }
 
 .loader {
