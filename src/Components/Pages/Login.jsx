@@ -32,7 +32,7 @@ export default function Login() {
       <section className="formContainer container-fluid row justify-content-center align-items-center m-0">
         <form
           onSubmit={handleSubmit}
-          className="col-lg-2 col-10 row justify-content-center align-items-center m-0 gap-2 text-center"
+          className="accountform col-lg-2 col-10 row justify-content-center align-items-center m-0 gap-2 text-center"
         >
           <h3>log in</h3>
           {error && <div className="alert alert-danger">{error}</div>}

@@ -28,7 +28,7 @@ img {
 body {
   background-color: var(--mainColor) !important;
   color: var(--white) !important;
-  overflow-x: hidden;
+  overflow-x: hidden !important;
   transition: all 0.3s ease-in-out;
 }
 
@@ -173,7 +173,7 @@ ul {
   padding: 100px 0px;
 }
 
-form {
+.accountform {
   background: var(--taskBG);
   color: var(--white);
   border-radius: 10px;
@@ -222,19 +222,24 @@ form {
 
 .taskModal {
   margin-top: 100px !important;
-  background-color: var(--white) !important;
-  color: var(--mainColor) !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff !important;
   border-radius: 5px !important;
   overflow: hidden;
 
   .modal-body {
-    background-color: var(--white) !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 
     form {
       padding: 0;
 
       label {
         display: block;
+        padding: 5px 0px !important;
       }
 
       .inputContainer {
@@ -258,8 +263,10 @@ form {
           border: none;
           padding: 5px 10px;
           border-radius: 3px;
-          background-color: var(--mainColor);
-          color: var(--white);
+          background: rgba(255, 255, 255, 0.1) !important;
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          color: #fff !important;
           font-weight: bold;
           box-shadow: none !important;
         }

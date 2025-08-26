@@ -33,7 +33,7 @@ export default function ForgotPassword() {
         <section className="formContainer container-fluid row justify-content-center align-items-center m-0">
           <form
             onSubmit={handleSubmit}
-            className="col-lg-2 col-10 row justify-content-center align-items-center m-0 gap-3 text-center"
+            className="accountform col-lg-2 col-10 row justify-content-center align-items-center m-0 gap-3 text-center"
           >
             <h3>Password Reset</h3>
             {message && <div className="alert alert-success">{message}</div>}
