@@ -54,7 +54,17 @@ export default function Progress() {
   if (loading) {
     return (
       <div className="progress-component">
-        <h6>checking your progress...</h6>
+        <h6 className="text-start m-0">checking your progress...</h6>
+      </div>
+    );
+  }
+
+  if (totalTasks == 0) {
+    return (
+      <div className="progress-component">
+        <h6 className="text-start m-0">
+          add your first task to start tracking your progress
+        </h6>
       </div>
     );
   }
