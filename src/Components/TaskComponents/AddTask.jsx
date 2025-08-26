@@ -9,7 +9,7 @@ export default function AddTask() {
   const [taskTitle, setTaskTitle] = useState("");
   const [taskDesc, setTaskDesc] = useState("");
   const [taskCategory, setTaskCategory] = useState("");
-  const [taskLinks, setTaskLinks] = useState("");
+  const [taskLinks, setTaskLinks] = useState([""]);
   const [dueDate, setDueDate] = useState("");
   const [loading, setLoading] = useState(false);
   const modalRef = useRef(null);
@@ -25,6 +25,23 @@ export default function AddTask() {
     if (backdrop) {
       backdrop.remove();
     }
+  };
+
+  const addLinkField = () => {
+    setTaskLinks([...taskLinks, ""]);
+  };
+
+  const removeLinkField = (index) => {
+    if (taskLinks.length === 1) return;
+    const newLinks = [...taskLinks];
+    newLinks.splice(index, 1);
+    setTaskLinks(newLinks);
+  };
+
+  const handleLinkChange = (index, value) => {
+    const newLinks = [...taskLinks];
+    newLinks[index] = value;
+    setTaskLinks(newLinks);
   };
 
   useEffect(() => {
@@ -71,12 +88,13 @@ export default function AddTask() {
       selectedDate.setHours(0, 0, 0, 0);
 
       const status = selectedDate < currentdate ? "overdue" : "pending";
+      const nonEmptyLinks = taskLinks.filter((link) => link.trim() !== "");
 
       await addDoc(collection(db, "tasks"), {
         title: taskTitle,
         description: taskDesc || null,
         category: taskCategory || "no category",
-        links: taskLinks || null,
+        links: nonEmptyLinks.length > 0 ? nonEmptyLinks : null,
         user: currentUser.email,
         timestamp: serverTimestamp(),
         status: status,
@@ -87,7 +105,7 @@ export default function AddTask() {
       setTaskTitle("");
       setTaskDesc("");
       setTaskCategory("");
-      setTaskLinks("");
+      setTaskLinks([""]);
       setDueDate("");
 
       closeModal();
@@ -162,14 +180,36 @@ export default function AddTask() {
                     </select>
                   </div>
                   <div className="inputContainer col-12">
-                    <label htmlFor="taskLinks">links (optional)</label>
-                    <input
-                      type="text"
-                      id="taskLinks"
-                      value={taskLinks}
-                      onChange={(e) => setTaskLinks(e.target.value)}
-                      placeholder="https://example.com"
-                    />
+                    <label>related links (optional)</label>
+                    {taskLinks.map((link, index) => (
+                      <div key={index} className="link-input-group mb-2">
+                        <input
+                          className="me-2"
+                          type="text"
+                          value={link}
+                          onChange={(e) =>
+                            handleLinkChange(index, e.target.value)
+                          }
+                          placeholder="https://example.com"
+                        />
+                        {taskLinks.length > 1 && (
+                          <button
+                            type="button"
+                            onClick={() => removeLinkField(index)}
+                            className="removeBtn mt-2"
+                          >
+                            Remove
+                          </button>
+                        )}
+                      </div>
+                    ))}
+                    <button
+                      type="button"
+                      onClick={addLinkField}
+                      className="addBtn"
+                    >
+                      + Add Another Link
+                    </button>
                   </div>
                   <div className="inputContainer col-12">
                     <label htmlFor="taskDueDate">due date (optional)</label>

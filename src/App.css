@@ -256,6 +256,23 @@ ul {
             outline: none;
           }
         }
+
+        .link-input-group {
+          .removeBtn {
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            background-color: #fd0000;
+            color: #fff;
+          }
+        }
+        .addBtn {
+          border: none;
+          padding: 5px 10px;
+          border-radius: 3px;
+          background-color: var(--triColor);
+          color: #fff;
+        }
       }
 
       .modal-footer {
@@ -375,6 +392,15 @@ ul {
   h6 {
     width: fit-content;
     background-color: #00000034;
+  }
+
+  .linksList {
+    background-color: transparent !important;
+
+    .linkItem {
+      padding: 5px 0px;
+      font-size: 16px;
+    }
   }
 
   .work {

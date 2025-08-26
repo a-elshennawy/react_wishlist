@@ -28,6 +28,15 @@ export default function PendingTasks() {
   const [filteredTasks, setFilteredTasks] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("all");
 
+  const getDomainFromUrl = (url) => {
+    try {
+      const domain = new URL(url).hostname;
+      return domain.replace(/^www\./, "");
+    } catch (e) {
+      return url.length > 30 ? url.substring(0, 30) + "..." : url;
+    }
+  };
+
   useEffect(() => {
     if (selectedCategory === "all") {
       setFilteredTasks(pendingTasks);
@@ -228,6 +237,23 @@ export default function PendingTasks() {
                   ) : (
                     <p className="col-12 m-0 p-0">task has no due date</p>
                   )}
+                  <div className="col-12 m-0 p-0">
+                    <ul className="linksList m-0 p-0">
+                      {task.links &&
+                        task.links.map((link, index) => (
+                          <li key={index} className="linkItem">
+                            <a
+                              href={link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="task-link"
+                            >
+                              {getDomainFromUrl(link)}
+                            </a>
+                          </li>
+                        ))}
+                    </ul>
+                  </div>
                   <p className="col-12 m-0 p-0">
                     pending <MdPending />
                   </p>

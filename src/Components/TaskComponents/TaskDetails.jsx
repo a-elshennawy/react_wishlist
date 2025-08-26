@@ -11,10 +11,31 @@ export default function TaskDetails({
   const [editedTask, setEditedTask] = useState(task);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [taskLinks, setTaskLinks] = useState(
+    task.links && task.links.length > 0 ? [...task.links] : [""]
+  );
 
   useEffect(() => {
     setEditedTask(task);
+    setTaskLinks(task.links && task.links.length > 0 ? [...task.links] : [""]);
   }, [task]);
+
+  const addLinkField = () => {
+    setTaskLinks([...taskLinks, ""]);
+  };
+
+  const removeLinkField = (index) => {
+    if (taskLinks.length === 1) return;
+    const newLinks = [...taskLinks];
+    newLinks.splice(index, 1);
+    setTaskLinks(newLinks);
+  };
+
+  const handleLinkChange = (index, value) => {
+    const newLinks = [...taskLinks];
+    newLinks[index] = value;
+    setTaskLinks(newLinks);
+  };
 
   useEffect(() => {
     const modalElement = document.getElementById("taskDetailsModal");
@@ -73,11 +94,13 @@ export default function TaskDetails({
     try {
       const taskRef = doc(db, "tasks", task.id);
       const newStatus = calcStatus(editedTask.dueDate);
+      const nonEmptyLinks = taskLinks.filter((link) => link.trim() !== "");
+
       await updateDoc(taskRef, {
         title: editedTask.title,
         description: editedTask.description,
         category: editedTask.category,
-        links: editedTask.links,
+        links: nonEmptyLinks.length > 0 ? nonEmptyLinks : null,
         dueDate: editedTask.dueDate,
         status: newStatus,
 
@@ -179,16 +202,37 @@ export default function TaskDetails({
                   </select>
                 </div>
                 <div className="inputContainer col-12">
-                  <label>Links</label>
-                  <input
-                    type="text"
-                    value={editedTask.links || ""}
-                    onChange={(e) => handleInputChange("links", e.target.value)}
-                    disabled={loading}
-                    placeholder="https://example.com"
-                  />
+                  <label>related links (optional)</label>
+                  {taskLinks.map((link, index) => (
+                    <div key={index} className="link-input-group mb-2">
+                      <input
+                        className="me-2"
+                        type="text"
+                        value={link}
+                        onChange={(e) =>
+                          handleLinkChange(index, e.target.value)
+                        }
+                        placeholder="https://example.com"
+                      />
+                      {taskLinks.length > 1 && (
+                        <button
+                          type="button"
+                          onClick={() => removeLinkField(index)}
+                          className="removeBtn mt-2"
+                        >
+                          Remove
+                        </button>
+                      )}
+                    </div>
+                  ))}
+                  <button
+                    type="button"
+                    onClick={addLinkField}
+                    className="addBtn"
+                  >
+                    + Add Another Link
+                  </button>
                 </div>
-
                 <div className="inputConatiner col-12">
                   <label>Due Date</label>
                   <input
