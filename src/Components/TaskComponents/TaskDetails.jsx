@@ -154,12 +154,7 @@ export default function TaskDetails({
                     }
                     disabled={loading}
                     rows={3}
-                    style={{
-                      resize: "none",
-                      minHeight: "80px",
-                      maxHeight: "200px",
-                      overflowY: "auto",
-                    }}
+                    cols={35}
                     onInput={(e) => {
                       e.target.style.height = "auto";
                       e.target.style.height = e.target.scrollHeight + "px";

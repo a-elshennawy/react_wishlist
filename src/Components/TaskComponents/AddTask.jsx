@@ -135,14 +135,9 @@ export default function AddTask() {
                     <textarea
                       id="taskDesc"
                       rows={3}
+                      cols={35}
                       value={taskDesc}
                       onChange={(e) => setTaskDesc(e.target.value)}
-                      style={{
-                        resize: "none",
-                        minHeight: "80px",
-                        maxHeight: "200px",
-                        overflowY: "auto",
-                      }}
                       onInput={(e) => {
                         e.target.style.height = "auto";
                         e.target.style.height = e.target.scrollHeight + "px";
