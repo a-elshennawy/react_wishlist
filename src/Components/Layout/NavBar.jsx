@@ -11,28 +11,26 @@ export default function NavBar() {
       await logout();
       navigate("/");
     } catch (err) {
-      console.error("failed to log out", error);
+      console.error("failed to log out", err);
     }
   }
 
   return (
     <>
-      <nav className="container-fluid row justif-content-between align-items-center">
-        <div className="col-6 text-start">
-          <ThemeToggle />
-        </div>
-        <div className="col-6 text-end">
+      <nav className="container-fluid m-0">
+        <div className="text-end">
           {currentUser ? (
             <>
-              <button onClick={handleLogout} className="logOutBtn">
+              <div className="float-start">
+                <ThemeToggle />
+              </div>
+              <button onClick={handleLogout} className="logOutBtn float-end">
                 Sign Out
               </button>
             </>
           ) : (
-            <button>
-              <Link to={"/login"} className="text-decoration-none">
-                Login
-              </Link>
+            <button className="landingBtn ">
+              <Link to={"/login"}>Login</Link>
             </button>
           )}
         </div>

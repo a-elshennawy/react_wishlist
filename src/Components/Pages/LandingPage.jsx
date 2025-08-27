@@ -11,6 +11,7 @@ import { motion } from "motion/react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../Contexts/AuthContext";
 import Home from "./Home";
+import { IoIosArrowDown } from "react-icons/io";
 
 export default function LandingPage() {
   const { currentUser } = useAuth();
@@ -21,42 +22,28 @@ export default function LandingPage() {
         <Home />
       ) : (
         <>
-          <section className="container-fluid row justify-content-center align-items-center text-center gap-5 m-0">
-            <motion.div
-              initial={{ opacity: 0, y: -100 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.5, delay: 0.5 }}
-              className="z-1"
-              style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "100%",
-                background:
-                  "radial-gradient(circle at top center, rgba(240, 240, 255, 0.15), transparent 70%)",
-              }}
-            />
-            <motion.div
-              initial={{ y: -100, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.5, ease: "easeInOut" }}
-              className="col-10 z-2"
-            >
-              <h1>Tasks Done. No Noise, Just Progress.</h1>
-              <h4>
-                a to-do app that helps you finish your work instead of learning
-                how to use it. ClarityTasks is the blissfully simple way to
-                manage your tasks across all your devices.
-              </h4>
-            </motion.div>
-            <div className="col-12 row justify-content-center align-items-center gap-2 m-0 z-2">
+          <section className="container-fluid row justify-content-center align-items-center text-center m-0 px-0">
+            <div className="hero col-12 p-0">
+              <div className="bgLayer"></div>
               <motion.div
-                initial={{ x: -100, opacity: 0 }}
-                whileInView={{ x: 0, opacity: 1 }}
-                transition={{ duration: 0.5, ease: "easeInOut" }}
-                className="col-lg-2 col-10 item"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                className="textSec"
               >
+                <h1>Tasks Done. No Noise, Just Progress.</h1>
+                <button className="landingBtn mt-2">
+                  <Link to={"/signup"}>START NOW !!</Link>
+                </button>
+              </motion.div>
+              <div className="scrollDiv">
+                <h5>scroll for more</h5>
+                <IoIosArrowDown />
+              </div>
+            </div>
+            <div className="howTo col-12 row justify-content-center align-items-center gap-3 m-0 py-5">
+              <div className="bgLayer"></div>
+              <div className="col-lg-2 col-10 item">
                 <FaCheckCircle />
                 <h4>Do, Don't Configure</h4>
                 <p>
@@ -64,13 +51,8 @@ export default function LandingPage() {
                   task, set a due date, and get it done. a task manager,
                   simplified to its purest form.
                 </p>
-              </motion.div>
-              <motion.div
-                initial={{ y: 100, opacity: 0 }}
-                whileInView={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.5, ease: "easeInOut" }}
-                className="col-lg-2 col-10 item"
-              >
+              </div>
+              <div className="col-lg-2 col-10 item">
                 <FcTwoSmartphones />
                 <FaLaptop />
                 <h4>Your Tasks, Anywhere</h4>
@@ -79,13 +61,8 @@ export default function LandingPage() {
                   always there, always in sync. Start a task on your commute and
                   finish it at your desk.
                 </p>
-              </motion.div>
-              <motion.div
-                initial={{ x: 100, opacity: 0 }}
-                whileInView={{ x: 0, opacity: 1 }}
-                transition={{ duration: 0.5, ease: "easeInOut" }}
-                className="col-lg-2 col-10 item"
-              >
+              </div>
+              <div className="col-lg-2 col-10 item">
                 <IoAlarm />
                 <h4>Smart & Automatic</h4>
                 <p>
@@ -93,78 +70,41 @@ export default function LandingPage() {
                   Overdue if time runs out, so you always know what needs your
                   immediate attention.
                 </p>
-              </motion.div>
-            </div>
-            <div className="col-12 row justify-content-center align-items-center gap-2 m-0 z-2">
-              <motion.h2
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.8, ease: "easeInOut" }}
-                className="col-12"
-              >
-                how it works ?
-              </motion.h2>
-              <motion.div
-                initial={{ x: -100, opacity: 0 }}
-                whileInView={{ x: 0, opacity: 1 }}
-                transition={{ duration: 0.5, ease: "easeInOut" }}
-                className="col-lg-2 col-10 item"
-              >
+              </div>
+              <h2 className="col-12">how it works ?</h2>
+              <div className="col-lg-2 col-10 item">
                 <PiNumberCircleOneFill />
                 <h4>add</h4>
                 <p>
                   Type your task title and description. Set a due date. That's
                   it.
                 </p>
-              </motion.div>
-              <motion.div
-                initial={{ y: 100, opacity: 0 }}
-                whileInView={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.5, ease: "easeInOut" }}
-                className="col-lg-2 col-10 item"
-              >
+              </div>
+              <div className="col-lg-2 col-10 item">
                 <PiNumberCircleTwoFill />
                 <h4>see</h4>
                 <p>Your list is clear: Pending, Done, or Overdue</p>
-              </motion.div>
-              <motion.div
-                initial={{ x: 100, opacity: 0 }}
-                whileInView={{ x: 0, opacity: 1 }}
-                transition={{ duration: 0.5, ease: "easeInOut" }}
-                className="col-lg-2 col-10 item"
-              >
+              </div>
+              <div className="col-lg-2 col-10 item">
                 <PiNumberCircleThreeFill />
                 <h4>do</h4>
                 <p>
                   Check it off. Edit it if you need to. Feel the satisfaction.
                 </p>
-              </motion.div>
+              </div>
             </div>
-            <motion.div
-              initial={{ scale: 0, opacity: 0 }}
-              whileInView={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.8, ease: "easeInOut" }}
-              className="startArea col-lg-3 col-10 row justify-content-center align-items-center m-0 z-2"
-            >
-              <div className="col-12">
-                <h4>Ready to clear your mind?</h4>
-                <h5>
-                  Stop wrestling with complicated apps. Get started in seconds.
-                </h5>
-              </div>
-              <div className="col-12 py-3">
-                <button className="landingBtn">
-                  <Link to={"/signup"}>Sign Up for Free - It's Simple</Link>
-                </button>
-              </div>
-            </motion.div>
-            <div className="col-12 row justify-content-center align-items-center m-0 z-2 gap-2">
-              <motion.ul
-                initial={{ x: -100, opacity: 0 }}
-                whileInView={{ x: 0, opacity: 1 }}
-                transition={{ duration: 0.5, ease: "easeInOut" }}
-                className="col-lg-4 col-10 m-0"
-              >
+            <div className="toSignUpSec col-12 m-0 py-3">
+              <div className="bgLayer"></div>
+              <h4>Ready to clear your mind?</h4>
+              <h5>
+                Stop wrestling with complicated apps. Get started in seconds.
+              </h5>
+              <button className="landingBtn mt-3">
+                <Link to={"/signup"}>Sign Up for Free - It's Simple</Link>
+              </button>
+            </div>
+            <div className="footer col-12 row justify-content-center align-items-start text-start gap-2 m-0 py-5">
+              <ul className="col-lg-3 col-10 m-0 footerItem">
                 <h4>
                   <mark>highlighted</mark> features
                 </h4>
@@ -192,13 +132,8 @@ export default function LandingPage() {
                   <BsStars />
                   100% Free
                 </li>
-              </motion.ul>
-              <motion.div
-                initial={{ x: 100, opacity: 0 }}
-                whileInView={{ x: 0, opacity: 1 }}
-                transition={{ duration: 0.5, ease: "easeInOut" }}
-                className="col-lg-4 col-10 m-0 faq"
-              >
+              </ul>
+              <div className="col-lg-3 col-10 m-0 footerItem">
                 <h4>FAQ</h4>
                 <p className="m-0">
                   <strong>Q: Is it really free?</strong>
@@ -224,21 +159,14 @@ export default function LandingPage() {
                   you mark them as Done or delete them, so you never forget
                   about them.
                 </p>
-              </motion.div>
-            </div>
-            <motion.div
-              initial={{ y: 100, scale: 0, opacity: 0 }}
-              whileInView={{ y: 0, scale: 1, opacity: 1 }}
-              transition={{ duration: 0.8, ease: "easeInOut" }}
-              className="startArea col-lg-3 col-10 row justify-content-center align-items-center m-0 z-2"
-            >
-              <h3 className="col-12">Stop organizing. Start doing.</h3>
-              <div className="col-12 py-3">
-                <button className="landingBtn">
+              </div>
+              <div className="col-lg-3 col-10 m-0 footerItem">
+                <h3>Stop organizing. Start doing.</h3>
+                <button className="landingBtn mt-3">
                   <Link to={"/signup"}>Get Started Now</Link>
                 </button>
               </div>
-            </motion.div>
+            </div>
           </section>
         </>
       )}

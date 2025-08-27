@@ -33,8 +33,8 @@ export default function Home() {
   return (
     <>
       <OverdueChecker />
-      <section className="container-fluid row justify-content-start align-items-center m-0 gap-2 text-center">
-        <h2 className="text-start p-0">
+      <section className="container-fluid row justify-content-start align-items-center m-0 gap-2 text-center pt-5">
+        <h2 className="text-start px-0 pt-3">
           welcome {getDisplayName(currentUser.email)},<br />
           let's track your work
         </h2>

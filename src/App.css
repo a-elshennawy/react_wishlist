@@ -13,6 +13,7 @@
     rgba(0, 204, 255, 0.15)
   );
   --taskBG: rgba(255, 255, 255, 0.1);
+  font-size: 16px;
 }
 
 * {
@@ -47,12 +48,12 @@ body.light {
 }
 
 section {
-  padding: 10px 0px;
+  padding: 0px;
   overflow-x: hidden;
 }
 
 nav {
-  position: sticky;
+  position: fixed;
   top: 0;
   left: 0;
   padding: 10px 5px;
@@ -63,21 +64,19 @@ nav {
   span {
     cursor: pointer;
     font-size: 25px;
-    color: var(--white);
-    background-color: transparent;
+    background-color: var(--white);
+    color: var(--mainColor);
+    padding: 5px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-content: center;
+    justify-content: center;
   }
 
   button {
     padding: 5px 10px !important;
-    background-color: var(--white);
     border: none;
     border-radius: 8px;
-
-    a {
-      text-decoration: none;
-      color: var(--mainColor);
-      font-weight: bold;
-    }
   }
 
   .logOutBtn {
@@ -88,7 +87,7 @@ nav {
 }
 
 .item {
-  background-color: var(--triColor);
+  background: rgba(255, 255, 255, 0.1);
   color: #fff;
   border-radius: 8px;
   padding: 20px 10px;
@@ -99,55 +98,116 @@ nav {
   }
 }
 
-ul {
-  list-style: none;
-  background-color: var(--triColor);
-  border-radius: 10px;
-  padding: 20px 10px;
-  color: var(--white);
+.hero {
+  position: relative;
+  height: 100dvh;
+  padding: 0 !important;
+  color: #fff;
 
-  li {
-    font-size: 20px;
+  .bgLayer {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image: url("/public/images/headerBG.webp");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    filter: brightness(50%);
+  }
+
+  .textSec {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100dvw;
+  }
+
+  .scrollDiv {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translate(-50%, -10%);
     svg {
-      margin-inline-end: 5px;
-      color: #f9fd00;
+      font-size: 30px;
+      animation: scrollDiv 1.5s infinite ease-in-out;
     }
   }
 }
 
-.faq {
-  background-color: var(--triColor);
-  border-radius: 10px;
-  padding: 20px 10px;
-  color: var(--white);
+.howTo {
+  position: relative;
+  color: #fff;
+
+  .bgLayer {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image: url("/public/images/secondBG.webp");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    filter: brightness(30%);
+  }
 }
 
-.startArea {
-  padding: 20px 10px;
-  background-color: var(--secColor);
-  color: var(--mainColor);
-  border-radius: 10px;
+.toSignUpSec {
+  position: relative;
+  color: #fff;
+
+  .bgLayer {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image: url("/public/images/startBG.webp");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    filter: brightness(30%);
+  }
+}
+
+.footer {
+  background-color: #000;
+  color: #fff;
+
+  .footerItem {
+    padding: 10px 0px;
+  }
+
+  ul {
+    list-style: none;
+
+    li {
+      svg {
+        margin-inline-end: 5px;
+        color: #f9fd00;
+      }
+    }
+  }
 }
 
 .landingBtn {
   padding: 5px 10px;
   border: none;
   border-radius: 8px;
-  background-color: var(--mainColor);
+  background-color: #fff;
   font-weight: bold;
   transition: all 0.3s ease-in-out;
 
   a {
     text-decoration: none;
-    color: var(--white);
+    color: #000;
     transition: all 0.3s ease-in-out;
   }
 
   &:hover {
-    background-color: var(--white);
+    background-color: #000;
+    box-shadow: 0 0 5px #fff;
 
     a {
-      color: var(--mainColor);
+      color: #fff;
     }
   }
 }
@@ -396,6 +456,7 @@ ul {
 
   .linksList {
     background-color: transparent !important;
+    list-style: none;
 
     .linkItem {
       padding: 5px 0px;
@@ -501,4 +562,29 @@ ul {
 html {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+@keyframes scrollDiv {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(20px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@media screen and (max-width: 992px) {
+  :root {
+    font-size: 14px;
+  }
+
+  .footer {
+    .footerItem {
+      border-bottom: 1px solid var(--white);
+    }
+  }
 }

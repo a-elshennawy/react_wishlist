@@ -36,7 +36,7 @@ export const ThemeToggle = () => {
           setTheme((theme) => (theme === "light" ? "dark" : "light"));
         }}
       >
-        <a>{theme === "light" ? <MdDarkMode /> : <MdLightMode />}</a>
+        {theme === "light" ? <MdDarkMode /> : <MdLightMode />}
       </span>
     </>
   );
