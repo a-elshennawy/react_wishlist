@@ -197,7 +197,9 @@ export default function TaskDetails({
                   <label htmlFor="category">category (optional)</label>
                   <select
                     id="category"
-                    onChange={(e) => setTaskCategory(e.target.value)}
+                    onChange={(e) =>
+                      handleInputChange("category", e.target.value)
+                    }
                     value={editedTask.category}
                   >
                     <option disabled value="">
