@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { ThemeToggle } from "../Contexts/ThemeProvider";
 import { useAuth } from "../Contexts/AuthContext";
+import LeaderBoard from "../ReusableComponents/LeaderBoard";
 
 export default function NavBar() {
   const { currentUser, logout } = useAuth();
@@ -24,9 +25,14 @@ export default function NavBar() {
               <div className="float-start">
                 <ThemeToggle />
               </div>
+
               <button onClick={handleLogout} className="logOutBtn float-end">
                 Sign Out
               </button>
+
+              <div className="float-end mx-2">
+                <LeaderBoard />
+              </div>
             </>
           ) : (
             <button className="landingBtn ">

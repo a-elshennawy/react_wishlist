@@ -548,6 +548,84 @@ nav {
   }
 }
 
+.rankModal {
+  margin-top: 100px !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff !important;
+  border-radius: 5px !important;
+  overflow: hidden;
+
+  .modal-body {
+    .modal-title {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+
+      svg {
+        margin-inline-start: 5px;
+      }
+    }
+
+    .list-group {
+      border-radius: 0;
+
+      .list-group-item {
+        background-color: transparent;
+        color: #fff !important;
+        margin: 5px 0px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 10px 5px;
+        border-radius: 5px;
+
+        .rankBadge {
+          background-color: #fff;
+          color: #000;
+          padding: 5px;
+          border-radius: 5px;
+        }
+
+        .CurrentUserBadge {
+          background-color: #4caf50;
+        }
+
+        .scoreBadge {
+          background-color: #0092cc;
+        }
+      }
+
+      .first {
+        background-color: gold;
+        color: #000 !important;
+
+        .rankBadge {
+          background-color: #000;
+          color: #fff;
+          padding: 5px;
+          border-radius: 5px;
+        }
+      }
+
+      .second {
+        background-color: silver;
+        color: #fff !important;
+      }
+
+      .third {
+        background-color: #cd7f32;
+      }
+    }
+
+    button {
+      background: rgba(255, 255, 255, 0.1) !important;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+    }
+  }
+}
+
 .loader {
   position: absolute;
   top: 50%;
