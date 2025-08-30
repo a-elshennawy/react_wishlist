@@ -17,6 +17,7 @@ import {
 import TaskDetails from "./TaskDetails";
 import { AiFillPushpin, AiOutlinePushpin } from "react-icons/ai";
 import CategoryTab from "./CategoryTab";
+import DateFilter from "./DateFilter";
 
 export default function PendingTasks() {
   const { currentUser } = useAuth();
@@ -27,6 +28,20 @@ export default function PendingTasks() {
   const [showTaskDetails, setShowTaskDetails] = useState(false);
   const [filteredTasks, setFilteredTasks] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const [showTodayTasksOnly, setShowTodayTasksOnly] = useState(false);
+
+  const isToday = (dateString) => {
+    if (!dateString) return false;
+
+    const taskDate = new Date(dateString);
+    const today = new Date();
+
+    return (
+      taskDate.getDate() === today.getDate() &&
+      taskDate.getMonth() === today.getMonth() &&
+      taskDate.getFullYear() == today.getFullYear()
+    );
+  };
 
   const getDomainFromUrl = (url) => {
     try {
@@ -38,17 +53,27 @@ export default function PendingTasks() {
   };
 
   useEffect(() => {
-    if (selectedCategory === "all") {
-      setFilteredTasks(pendingTasks);
-    } else {
-      setFilteredTasks(
-        pendingTasks.filter((task) => task.category === selectedCategory)
+    let tasksToFilter = pendingTasks;
+
+    if (selectedCategory !== "all") {
+      tasksToFilter = tasksToFilter.filter(
+        (task) => task.category === selectedCategory
       );
     }
-  }, [selectedCategory, pendingTasks]);
+
+    if (showTodayTasksOnly) {
+      tasksToFilter = tasksToFilter.filter((task) => isToday(task.dueDate));
+    }
+
+    setFilteredTasks(tasksToFilter);
+  }, [selectedCategory, pendingTasks, showTodayTasksOnly]);
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
+  };
+
+  const handleDateFilterChange = () => {
+    setShowTodayTasksOnly(!showTodayTasksOnly);
   };
 
   useEffect(() => {
@@ -197,6 +222,10 @@ export default function PendingTasks() {
   return (
     <>
       <div className="col-12 p-0">
+        <DateFilter
+          onDateFilterChange={handleDateFilterChange}
+          isActive={showTodayTasksOnly}
+        />
         <CategoryTab
           onCategoryChange={handleCategoryChange}
           activeCategory={selectedCategory}

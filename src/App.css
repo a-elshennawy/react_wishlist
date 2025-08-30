@@ -430,6 +430,24 @@ nav {
   }
 }
 
+.dateFilterTab {
+  padding: 0px 0px 5px 0px !important;
+
+  .dateFilterBtn {
+    padding: 5px;
+    border: 1px solid var(--white);
+    background-color: transparent;
+    color: var(--white);
+    text-transform: uppercase !important;
+    width: fit-content;
+    font-weight: bold;
+  }
+  .selected {
+    background-color: var(--white);
+    color: var(--mainColor);
+  }
+}
+
 .taskItem {
   border: none;
   padding: 10px 5px !important;
