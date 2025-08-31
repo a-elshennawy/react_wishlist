@@ -28,7 +28,7 @@ export default function PendingTasks() {
   const [showTaskDetails, setShowTaskDetails] = useState(false);
   const [filteredTasks, setFilteredTasks] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const [showTodayTasksOnly, setShowTodayTasksOnly] = useState(false);
+  const [showTodayTasksOnly, setShowTodayTasksOnly] = useState(true);
 
   const isToday = (dateString) => {
     if (!dateString) return false;
