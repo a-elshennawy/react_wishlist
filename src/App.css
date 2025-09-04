@@ -7,11 +7,6 @@
   --triColor: #0092cc;
   --white: #fff;
   --darkRed: #970000;
-  --itemsGB: linear-gradient(
-    135deg,
-    rgba(99, 0, 255, 0.15),
-    rgba(0, 204, 255, 0.15)
-  );
   --taskBG: rgba(255, 255, 255, 0.1);
   font-size: 16px;
 }
@@ -529,7 +524,7 @@ nav {
 }
 
 .progress-component {
-  background: var(--itemsGB);
+  background: var(--taskBG);
   color: var(--white);
   padding: 10px;
   border-radius: 10px;
