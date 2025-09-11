@@ -81,6 +81,14 @@ nav {
     color: #fff;
     font-weight: bold;
   }
+
+  .docsBtn {
+    background-color: #0092cc;
+    a {
+      text-decoration: none;
+      color: #000;
+    }
+  }
 }
 
 .item {
@@ -695,6 +703,27 @@ nav {
       backdrop-filter: blur(10px);
       border: 1px solid rgba(255, 255, 255, 0.2);
       color: #fff;
+    }
+  }
+}
+
+.docs {
+  .explainSection {
+    padding: 20px 0px;
+
+    ul {
+      list-style: none;
+      padding: 10px;
+      background: var(--taskBG);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: var(--white);
+      border-radius: 15px;
+
+      li {
+        font-size: 20px;
+        margin: 10px 0px;
+      }
     }
   }
 }
