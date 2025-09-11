@@ -81,6 +81,14 @@ nav {
     color: #fff;
     font-weight: bold;
   }
+
+  .docsBtn {
+    background-color: #0092cc;
+    a {
+      text-decoration: none;
+      color: #000;
+    }
+  }
 }
 
 .item {

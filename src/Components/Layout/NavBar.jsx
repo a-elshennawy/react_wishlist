@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { ThemeToggle } from "../Contexts/ThemeProvider";
 import { useAuth } from "../Contexts/AuthContext";
 import LeaderBoard from "../ReusableComponents/LeaderBoard";
@@ -6,6 +6,7 @@ import LeaderBoard from "../ReusableComponents/LeaderBoard";
 export default function NavBar() {
   const { currentUser, logout } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   async function handleLogout() {
     try {
@@ -25,6 +26,16 @@ export default function NavBar() {
               <div className="float-start">
                 <ThemeToggle />
               </div>
+
+              {location.pathname === "/docs" ? (
+                <button className="docsBtn float-start mx-2">
+                  <Link to="/">back</Link>
+                </button>
+              ) : (
+                <button className="docsBtn float-start mx-2">
+                  <Link to="/docs">documentations</Link>
+                </button>
+              )}
 
               <button onClick={handleLogout} className="logOutBtn float-end">
                 Sign Out
