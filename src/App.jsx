@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LoaderSpinner from "./Components/ReusableComponents/LoaderSpinner";
 import Layout from "./Components/Layout/Layout";
 import { AuthProvider } from "./Components/Contexts/AuthContext";
+import Docs from "./Components/Pages/Docs";
 
 const LandingPage = lazy(() => import("./Components/Pages/LandingPage"));
 const Login = lazy(() => import("./Components/Pages/Login"));
@@ -20,7 +21,10 @@ function App() {
     {
       path: "/",
       element: <Layout />,
-      children: [createRoute("", <LandingPage />)],
+      children: [
+        createRoute("", <LandingPage />),
+        createRoute("docs", <Docs />),
+      ],
     },
     createRoute("/login", <Login />),
     createRoute("/signup", <Signup />),

@@ -699,6 +699,27 @@ nav {
   }
 }
 
+.docs {
+  .explainSection {
+    padding: 20px 0px;
+
+    ul {
+      list-style: none;
+      padding: 10px;
+      background: var(--taskBG);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: var(--white);
+      border-radius: 15px;
+
+      li {
+        font-size: 20px;
+        margin: 10px 0px;
+      }
+    }
+  }
+}
+
 .loader {
   position: absolute;
   top: 50%;
