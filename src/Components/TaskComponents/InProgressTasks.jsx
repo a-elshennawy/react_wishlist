@@ -1,4 +1,3 @@
-import { FaCheckCircle, FaExclamationCircle } from "react-icons/fa";
 import LoadingSpinner from "../ReusableComponents/LoaderSpinner";
 import { useState, useEffect } from "react";
 import { useAuth } from "../Contexts/AuthContext";
@@ -7,19 +6,21 @@ import {
   collection,
   query,
   where,
+  updateDoc,
   doc,
   onSnapshot,
   deleteDoc,
-  updateDoc,
+  serverTimestamp,
 } from "firebase/firestore";
-import { MdDeleteForever } from "react-icons/md";
 import TaskDetails from "./TaskDetails";
-import { AiFillPushpin, AiOutlinePushpin } from "react-icons/ai";
 import CategoryTab from "./CategoryTab";
+import { AiFillPushpin, AiOutlinePushpin } from "react-icons/ai";
+import { MdDeleteForever, MdPending } from "react-icons/md";
+import { FaCheckCircle, FaExclamationCircle } from "react-icons/fa";
 
-export default function DoneTasks() {
+export default function InProgressTasks() {
   const { currentUser } = useAuth();
-  const [doneTasks, setDoneTasks] = useState([]);
+  const [inProgressTasks, setInProgressTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [selectedTask, setSelectedTask] = useState(null);
@@ -37,14 +38,16 @@ export default function DoneTasks() {
   };
 
   useEffect(() => {
-    if (selectedCategory === "all") {
-      setFilteredTasks(doneTasks);
-    } else {
-      setFilteredTasks(
-        doneTasks.filter((task) => task.category === selectedCategory)
+    let tasksToFilter = inProgressTasks;
+
+    if (selectedCategory !== "all") {
+      tasksToFilter = tasksToFilter.filter(
+        (task) => task.category === selectedCategory
       );
     }
-  }, [selectedCategory, doneTasks]);
+
+    setFilteredTasks(tasksToFilter);
+  }, [selectedCategory, inProgressTasks]);
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
@@ -61,7 +64,7 @@ export default function DoneTasks() {
       const q = query(
         tasksRef,
         where("user", "==", currentUser.email),
-        where("status", "==", "done")
+        where("status", "==", "inProgress")
       );
 
       unsubscribe = onSnapshot(
@@ -76,42 +79,24 @@ export default function DoneTasks() {
             const aIsPinned = a.pinned || false;
             const bIsPinned = b.pinned || false;
 
-            if (aIsPinned && !bIsPinned) {
-              return -1;
-            }
-            if (!aIsPinned && bIsPinned) {
-              return 1;
-            }
+            if (aIsPinned && !bIsPinned) return -1;
+            if (!aIsPinned && bIsPinned) return 1;
+            if (aIsPinned && bIsPinned) return 0;
 
-            const dateA = a.completedAt
-              ? a.completedAt.toDate
-                ? a.completedAt.toDate()
-                : new Date(a.completedAt)
-              : null;
-            const dateB = b.completedAt
-              ? b.completedAt.toDate
-                ? b.completedAt.toDate()
-                : new Date(b.completedAt)
-              : null;
+            if (!a.dueDate && !b.dueDate) return 0;
+            if (!a.dueDate) return -1;
+            if (!b.dueDate) return 1;
 
-            if (dateA && dateB) {
-              return dateB.getTime() - dateA.getTime();
-            }
-            if (dateA) {
-              return -1;
-            }
-            if (dateB) {
-              return 1;
-            }
-            return 0;
+            return new Date(a.dueDate) - new Date(b.dueDate);
           });
 
-          setDoneTasks(tasks);
+          setInProgressTasks(tasks);
+          setFilteredTasks(tasks);
           setError("");
           setLoading(false);
         },
         (err) => {
-          console.error("Error fetching completed tasks:", err);
+          console.error("Error fetching in progress tasks:", err);
           setError("failed to load tasks");
           setLoading(false);
         }
@@ -132,7 +117,7 @@ export default function DoneTasks() {
   const togglePin = async (taskId) => {
     try {
       const taskRef = doc(db, "tasks", taskId);
-      const task = doneTasks.find((t) => t.id === taskId);
+      const task = pendingTasks.find((t) => t.id === taskId);
       const currentPinnedStatus = task.pinned || false;
 
       await updateDoc(taskRef, {
@@ -141,6 +126,19 @@ export default function DoneTasks() {
     } catch (err) {
       console.error("error toggling pin", err);
       setError("failed to update pin status");
+    }
+  };
+
+  const markAsDone = async (taskId) => {
+    try {
+      const taskRef = doc(db, "tasks", taskId);
+      await updateDoc(taskRef, {
+        status: "done",
+        completedAt: serverTimestamp(),
+      });
+    } catch (err) {
+      console.error("error updating task:", err);
+      setError("failed to update task");
     }
   };
 
@@ -162,20 +160,6 @@ export default function DoneTasks() {
     if (!dateString) return "no due date";
     const options = { year: "numeric", month: "2-digit", day: "2-digit" };
     return new Date(dateString).toLocaleDateString(undefined, options);
-  };
-
-  const formatCompletionDate = (dateString) => {
-    if (!dateString) return "unknown date";
-
-    if (dateString.toDate) {
-      const date = dateString.toDate();
-      const options = { month: "short", day: "numeric" };
-      return date.toLocaleDateString(undefined, options);
-    }
-
-    const date = new Date(dateString);
-    const options = { month: "short", day: "numeric" };
-    return date.toLocaleDateString(undefined, options);
   };
 
   if (loading) {
@@ -220,20 +204,21 @@ export default function DoneTasks() {
           activeCategory={selectedCategory}
         />
         <h4 className="text-start">
-          you have {filteredTasks.length} completed tasks
+          you have {filteredTasks.length} tasks in progress
         </h4>
         {filteredTasks.length === 0 ? (
           <div className="col-12 text-start py-4">
-            <p>Nothing is done yet 👀</p>
+            <p>No tasks in progress 😌</p>
           </div>
         ) : (
           <div className="row gap-2 m-0">
             {filteredTasks.map((task) => {
               const isPinned = task.pinned || false;
+
               return (
                 <div
                   key={task.id}
-                  className="taskItem col-md-8 col-12 col-lg-3 text-start doneTask row justify-content-start align-items-center gap-1"
+                  className="taskItem col-md-8 col-12 col-lg-3 text-start pendingTask row justify-content-start align-items-center gap-1"
                 >
                   <div className="col-12 row justify-content-between align-items-center m-0 p-0">
                     <h3 className="col-10 m-0 p-0">{task.title}</h3>
@@ -244,12 +229,16 @@ export default function DoneTasks() {
                       {isPinned ? <AiFillPushpin /> : <AiOutlinePushpin />}
                     </span>
                   </div>
-                  <h6 className={`col-12 p-0 ${task.category}`}>
+                  <h6 className={`col-12 m-0 p-0 ${task.category} `}>
                     {task.category}
                   </h6>
-                  <p className="col-12 m-0 p-0">
-                    due to : {formatDate(task.dueDate)}
-                  </p>
+                  {task.dueDate ? (
+                    <p className="col-12 m-0 p-0">
+                      due to: {formatDate(task.dueDate)}
+                    </p>
+                  ) : (
+                    <p className="col-12 m-0 p-0">task has no due date</p>
+                  )}
                   <div className="col-12 m-0 p-0">
                     <ul className="linksList m-0 p-0">
                       {task.links &&
@@ -268,10 +257,12 @@ export default function DoneTasks() {
                     </ul>
                   </div>
                   <p className="col-12 m-0 p-0">
-                    completed at : {formatCompletionDate(task.completedAt)}
-                    <FaCheckCircle />
+                    pending <MdPending />
                   </p>
-                  <div className="actions m-0 p-0 row gap-1 justify-content-start align-items-center col-12">
+                  <div className="actions m-0 row gap-1 justify-content-start align-items-center col-12 p-0">
+                    <button onClick={() => markAsDone(task.id)}>
+                      done <FaCheckCircle />
+                    </button>
                     <button onClick={() => handleTaskDetails(task)}>
                       details <FaExclamationCircle />
                     </button>
@@ -285,6 +276,7 @@ export default function DoneTasks() {
           </div>
         )}
       </div>
+
       {showTaskDetails && selectedTask && (
         <TaskDetails
           task={selectedTask}

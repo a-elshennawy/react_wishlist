@@ -6,6 +6,7 @@ import { useAuth } from "../Contexts/AuthContext";
 import { useState } from "react";
 import OverdueChecker from "../ReusableComponents/OverdueChecker";
 import Progress from "../TaskComponents/Progress";
+import InProgressTasks from "../TaskComponents/InProgressTasks";
 
 export default function Home() {
   const { currentUser } = useAuth();
@@ -21,6 +22,8 @@ export default function Home() {
     switch (activeTab) {
       case "pending":
         return <PendingTasks />;
+      case "inProgress":
+        return <InProgressTasks />;
       case "done":
         return <DoneTasks />;
       case "overdue":
@@ -51,6 +54,14 @@ export default function Home() {
             onClick={() => setActiveTab("pending")}
           >
             pending
+          </button>
+          <button
+            className={`taskTabBtn ${
+              activeTab === "inProgress" ? "progressTab" : ""
+            }`}
+            onClick={() => setActiveTab("inProgress")}
+          >
+            in progress
           </button>
           <button
             className={`taskTabBtn ${activeTab === "done" ? "doneTab" : ""}`}

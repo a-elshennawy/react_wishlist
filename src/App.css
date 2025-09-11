@@ -5,6 +5,7 @@
   --mainColorTrans: #00000059;
   --secColor: #00cc6d;
   --triColor: #0092cc;
+  --progressColor: #eeff07;
   --white: #fff;
   --darkRed: #970000;
   --taskBG: rgba(255, 255, 255, 0.1);
@@ -33,6 +34,7 @@ body.light {
   --mainColorTrans: #00000059;
   --secColor: #00cc6d;
   --triColor: #0092cc;
+  --progressColor: #eeff07;
   --white: #000;
   --taskBG: linear-gradient(
     135deg,
@@ -344,6 +346,58 @@ nav {
         }
       }
     }
+
+    .activitySection {
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      padding: 10px 5px;
+      justify-content: space-between;
+      flex-direction: column;
+      max-height: 600px;
+      overflow: hidden;
+      display: flex;
+
+      .activityContent {
+        padding: 10px 0px;
+        overflow-y: auto;
+        flex-grow: 1;
+        max-height: calc(100% - 100px);
+
+        .activityItem {
+          padding: 5px;
+          border-radius: 8px;
+          background: rgba(255, 255, 255, 0.1) !important;
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          width: fit-content;
+        }
+      }
+
+      .activityInput {
+        display: inline-flex;
+        gap: 5px;
+
+        textarea {
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          background: rgba(255, 255, 255, 0.1) !important;
+          color: #fff;
+          border-radius: 5px;
+          padding: 5px;
+
+          &:focus {
+            outline: none;
+          }
+        }
+
+        button {
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          background: rgba(255, 255, 255, 0.1) !important;
+          color: #fff;
+          border-radius: 5px;
+          padding: 5px 10px;
+        }
+      }
+    }
   }
 }
 
@@ -365,6 +419,12 @@ nav {
     border: 1px solid var(--triColor);
     background-color: var(--triColor);
     color: #fff;
+  }
+
+  .progressTab {
+    border: 1px solid var(--progressColor);
+    background-color: var(--progressColor);
+    color: #000;
   }
 
   .doneTab {
