@@ -159,15 +159,22 @@ export default function TaskDetails({
       const newStatus = calcStatus(editedTask.dueDate);
       const nonEmptyLinks = taskLinks.filter((link) => link.trim() !== "");
 
+      const existingActivities = currentTask.activities || [];
+
+      let finalStatus = newStatus;
+      if (existingActivities.length > 0 && finalStatus !== "overdue") {
+        finalStatus = "inProgress";
+      }
+
       await updateDoc(taskRef, {
         title: editedTask.title,
         description: editedTask.description,
         category: editedTask.category,
         links: nonEmptyLinks.length > 0 ? nonEmptyLinks : null,
         dueDate: editedTask.dueDate,
-        status: newStatus,
+        status: finalStatus,
 
-        ...(newStatus === "pending" && { daysOverdue: 0 }),
+        ...(finalStatus === "pending" && { daysOverdue: 0 }),
       });
 
       onTaskUpdated();
