@@ -401,7 +401,9 @@ export default function TaskDetails({
                         <h6 className="m-0">
                           {formatTimestamp(activity.timestamp)}
                         </h6>
-                        <h6 className="mt-1">{linkifyText(activity.text)}</h6>
+                        <h6 className="mt-1" style={{ whiteSpace: "pre-wrap" }}>
+                          {linkifyText(activity.text)}
+                        </h6>
                       </div>
                     ))
                   ) : (
@@ -426,8 +428,10 @@ export default function TaskDetails({
                     }}
                     style={{
                       minHeight: "50px",
+                      maxHeight: "60px",
                       width: "80%",
                       resize: "none",
+                      overflowY: "auto",
                     }}
                   />
                   <button onClick={handleAddActivity} disabled={loading}>
