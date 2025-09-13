@@ -382,10 +382,11 @@ nav {
       }
 
       .activityInput {
-        display: inline-flex;
+        display: flex;
         gap: 5px;
 
         textarea {
+          flex-grow: 1;
           border: 1px solid rgba(255, 255, 255, 0.2);
           background: rgba(255, 255, 255, 0.1) !important;
           color: #fff;
