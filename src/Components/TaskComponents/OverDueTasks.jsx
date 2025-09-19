@@ -335,13 +335,22 @@ export default function OverDueTasks() {
                     <FaClock />
                   </p>
                   <div className="actions m-0 row gap-1 justify-content-start align-items-center col-12 p-0">
-                    <button onClick={() => markAsDone(task.id)}>
+                    <button
+                      className="basicBtnStyle"
+                      onClick={() => markAsDone(task.id)}
+                    >
                       done <FaCheckCircle />
                     </button>
-                    <button onClick={() => handleTaskDetails(task)}>
+                    <button
+                      className="basicBtnStyle"
+                      onClick={() => handleTaskDetails(task)}
+                    >
                       details <FaExclamationCircle />
                     </button>
-                    <button onClick={() => deleteTask(task.id)}>
+                    <button
+                      className="basicBtnStyle"
+                      onClick={() => deleteTask(task.id)}
+                    >
                       delete <MdDeleteForever />
                     </button>
                   </div>

@@ -272,10 +272,16 @@ export default function DoneTasks() {
                     <FaCheckCircle />
                   </p>
                   <div className="actions m-0 p-0 row gap-1 justify-content-start align-items-center col-12">
-                    <button onClick={() => handleTaskDetails(task)}>
+                    <button
+                      className="basicBtnStyle"
+                      onClick={() => handleTaskDetails(task)}
+                    >
                       details <FaExclamationCircle />
                     </button>
-                    <button onClick={() => deleteTask(task.id)}>
+                    <button
+                      className="basicBtnStyle"
+                      onClick={() => deleteTask(task.id)}
+                    >
                       delete <MdDeleteForever />
                     </button>
                   </div>

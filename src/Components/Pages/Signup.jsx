@@ -75,7 +75,7 @@ export default function Signup() {
             />
           </div>
           <div className="col-12 py-2">
-            <button disabled={loading} type="submit">
+            <button className="basicBtnStyle" disabled={loading} type="submit">
               {loading ? "Creating Account..." : "Sign Up"}
             </button>
           </div>

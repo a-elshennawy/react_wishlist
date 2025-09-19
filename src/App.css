@@ -44,6 +44,21 @@ body.light {
   transition: all 0.3s ease-in-out;
 }
 
+.basicBtnStyle {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  background-color: var(--white);
+  color: var(--mainColor);
+  display: inline-flex;
+
+  a {
+    text-decoration: none;
+    color: var(--mainColor);
+  }
+}
+
 section {
   padding: 10px 0px;
   overflow-x: hidden;
@@ -70,23 +85,14 @@ nav {
     justify-content: center;
   }
 
-  button {
-    padding: 5px 10px !important;
-    border: none;
-    border-radius: 8px;
-  }
-
   .logOutBtn {
     background-color: #fd0000;
     color: #fff;
-    font-weight: bold;
   }
 
   .docsBtn {
-    background-color: #0092cc;
     a {
-      text-decoration: none;
-      color: #000;
+      color: var(--mainColor);
     }
   }
 }
@@ -94,7 +100,7 @@ nav {
 .item {
   background: rgba(255, 255, 255, 0.1);
   color: #fff;
-  border-radius: 8px;
+  border-radius: 10px;
   padding: 20px 10px;
 
   svg {
@@ -193,45 +199,11 @@ nav {
   }
 }
 
-.landingBtn {
-  padding: 5px 10px;
-  border: none;
-  border-radius: 8px;
-  background-color: #fff;
-  font-weight: bold;
-  transition: all 0.3s ease-in-out;
-
-  a {
-    text-decoration: none;
-    color: #000;
-    transition: all 0.3s ease-in-out;
-  }
-
-  &:hover {
-    background-color: #000;
-    box-shadow: 0 0 5px #fff;
-
-    a {
-      color: #fff;
-    }
-  }
-}
-
 .toHomeBtn {
   position: fixed;
   top: 20px;
   left: 20px;
-  padding: 5px 10px;
-  background-color: var(--white);
-  border: none;
-  border-radius: 8px;
   z-index: 1111;
-
-  a {
-    text-decoration: none;
-    color: var(--mainColor);
-    font-weight: bold;
-  }
 }
 
 .formContainer {
@@ -253,31 +225,15 @@ nav {
     input {
       text-transform: none !important;
       padding: 5px;
-      border-radius: 8px;
+      border-radius: 10px;
       border: none;
       outline: none;
       box-shadow: 0 0 5px var(--mainColor);
     }
   }
-
-  button {
-    border: none;
-    border-radius: 8px;
-    background-color: var(--white);
-    color: var(--mainColor);
-    padding: 5px 10px;
-    box-shadow: 0 0 5px var(--mainColor);
-    font-weight: bold;
-  }
 }
 
 .addTaskBtn {
-  padding: 5px 10px !important;
-  border: 1px solid var(--white);
-  background-color: transparent;
-  color: var(--white);
-  display: inline-flex;
-
   svg {
     align-self: center;
     font-size: 20px;
@@ -291,7 +247,7 @@ nav {
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: #fff !important;
-  border-radius: 5px !important;
+  border-radius: 10px !important;
   overflow: hidden;
 
   .modal-body {
@@ -313,9 +269,21 @@ nav {
         select {
           padding: 5px;
           border: 1px solid var(--mainColor);
-          border-radius: 3px !important;
+          border-radius: 10px !important;
           box-shadow: none;
           text-transform: none !important;
+          background: rgba(255, 255, 255, 0.1) !important;
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          color: #fff;
+
+          option {
+            color: #000;
+          }
+
+          &::placeholder {
+            color: #fff;
+          }
 
           &:focus {
             outline: none;
@@ -324,32 +292,32 @@ nav {
 
         .link-input-group {
           .removeBtn {
-            border: none;
-            padding: 5px 10px;
-            border-radius: 3px;
             background-color: #fd0000;
             color: #fff;
           }
         }
         .addBtn {
-          border: none;
-          padding: 5px 10px;
-          border-radius: 3px;
           background-color: var(--triColor);
           color: #fff;
         }
       }
 
+      .taskStatus {
+        width: fit-content !important;
+        padding: 5px;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.1) !important;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: #fff !important;
+      }
+
       .modal-footer {
         button {
-          border: none;
-          padding: 5px 10px;
-          border-radius: 3px;
           background: rgba(255, 255, 255, 0.1) !important;
           backdrop-filter: blur(10px);
           border: 1px solid rgba(255, 255, 255, 0.2);
           color: #fff !important;
-          font-weight: bold;
           box-shadow: none !important;
         }
       }
@@ -357,7 +325,7 @@ nav {
 
     .activitySection {
       border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 8px;
+      border-radius: 10px;
       padding: 10px 5px;
       justify-content: space-between;
       flex-direction: column;
@@ -373,7 +341,7 @@ nav {
 
         .activityItem {
           padding: 5px;
-          border-radius: 8px;
+          border-radius: 10px;
           background: rgba(255, 255, 255, 0.1) !important;
           backdrop-filter: blur(10px);
           border: 1px solid rgba(255, 255, 255, 0.2);
@@ -390,7 +358,7 @@ nav {
           border: 1px solid rgba(255, 255, 255, 0.2);
           background: rgba(255, 255, 255, 0.1) !important;
           color: #fff;
-          border-radius: 5px;
+          border-radius: 10px;
           padding: 5px;
 
           &:focus {
@@ -402,7 +370,7 @@ nav {
           border: 1px solid rgba(255, 255, 255, 0.2);
           background: rgba(255, 255, 255, 0.1) !important;
           color: #fff;
-          border-radius: 5px;
+          border-radius: 10px;
           padding: 5px 10px;
         }
       }
@@ -576,11 +544,6 @@ nav {
       backdrop-filter: blur(10px);
       border: 1px solid rgba(255, 255, 255, 0.2);
       color: var(--white);
-      border: none;
-      border-radius: 8px;
-      padding: 5px 10px;
-      font-weight: bold;
-      display: inline-flex;
       width: fit-content;
 
       svg {
@@ -606,16 +569,16 @@ nav {
     width: fit-content;
     color: #fff;
     font-weight: bold;
-    border-radius: 8px;
+    border-radius: 10px;
   }
 
   .progress-container {
     width: 100%;
-    height: 10px;
+    height: 14px;
     background-color: var(--mainColor);
     overflow: hidden;
     margin: 10px 0;
-    border-radius: 8px;
+    border-radius: 10px;
 
     .progress-bar {
       height: 100%;
@@ -636,7 +599,7 @@ nav {
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: #fff !important;
-  border-radius: 5px !important;
+  border-radius: 10px !important;
   overflow: hidden;
 
   .modal-body {
@@ -651,21 +614,22 @@ nav {
     }
 
     .list-group {
-      border-radius: 0;
-
       .list-group-item {
-        background-color: transparent;
+        background: rgba(255, 255, 255, 0.1);
         color: #fff !important;
         margin: 5px 0px;
+        backdrop-filter: blur(10px);
         border: 1px solid rgba(255, 255, 255, 0.2);
         padding: 10px 5px;
-        border-radius: 5px;
+        border-radius: 10px;
+        font-weight: bold;
 
         .rankBadge {
           background-color: #fff;
           color: #000;
           padding: 5px;
-          border-radius: 5px;
+          border-radius: 10px;
+          margin-inline-end: 10px !important;
         }
 
         .CurrentUserBadge {
@@ -678,24 +642,11 @@ nav {
       }
 
       .first {
-        background-color: gold;
-        color: #000 !important;
-
-        .rankBadge {
-          background-color: #000;
-          color: #fff;
-          padding: 5px;
-          border-radius: 5px;
-        }
-      }
-
-      .second {
-        background-color: silver;
-        color: #000 !important;
-      }
-
-      .third {
-        background-color: #cd7f32;
+        background: linear-gradient(
+          135deg,
+          rgba(99, 0, 255, 0.15),
+          rgba(0, 204, 255, 0.15)
+        );
       }
     }
 

@@ -74,8 +74,9 @@ export default function LeaderBoard() {
         type="button"
         data-bs-toggle="modal"
         data-bs-target="#leaderboardModal"
+        className="basicBtnStyle"
       >
-        <MdLeaderboard /> leaderboard
+        leaderboard
       </button>
 
       <Portal>

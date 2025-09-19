@@ -25,7 +25,7 @@ export default function CategoryTab({ onCategoryChange, activeCategory = "" }) {
         {categories.map((category) => (
           <button
             key={category.id}
-            className={`categoryTabBtn ${
+            className={`basicBtnStyle categoryTabBtn ${
               selectedCategory === category.id ? category.name + " active" : ""
             }`}
             onClick={() => handleCategoryClick(category.id)}
