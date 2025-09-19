@@ -59,7 +59,7 @@ export default function Login() {
             />
           </div>
           <div className="col-12 py-2">
-            <button disabled={loading} type="submit">
+            <button className="basicBtnStyle" disabled={loading} type="submit">
               {loading ? "Logging in..." : "Log In"}
             </button>
           </div>

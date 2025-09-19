@@ -22,7 +22,7 @@ export default function LandingPage() {
         <Home />
       ) : (
         <>
-          <section className="container-fluid row justify-content-center align-items-center text-center m-0 px-0">
+          <section className="container-fluid row justify-content-center align-items-center text-center m-0 p-0">
             <div className="hero col-12 p-0">
               <div className="bgLayer"></div>
               <motion.div
@@ -32,7 +32,7 @@ export default function LandingPage() {
                 className="textSec"
               >
                 <h1>Tasks Done. No Noise, Just Progress.</h1>
-                <button className="landingBtn mt-2">
+                <button className="basicBtnStyle mt-2">
                   <Link to={"/signup"}>START NOW !!</Link>
                 </button>
               </motion.div>
@@ -99,7 +99,7 @@ export default function LandingPage() {
               <h5>
                 Stop wrestling with complicated apps. Get started in seconds.
               </h5>
-              <button className="landingBtn mt-3">
+              <button className="basicBtnStyle mt-3">
                 <Link to={"/signup"}>Sign Up for Free - It's Simple</Link>
               </button>
             </div>
@@ -162,7 +162,7 @@ export default function LandingPage() {
               </div>
               <div className="col-lg-3 col-10 m-0 footerItem">
                 <h3>Stop organizing. Start doing.</h3>
-                <button className="landingBtn mt-3">
+                <button className="basicBtnStyle mt-3">
                   <Link to={"/signup"}>Get Started Now</Link>
                 </button>
               </div>

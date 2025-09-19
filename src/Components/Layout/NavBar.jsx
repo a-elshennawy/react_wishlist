@@ -28,16 +28,19 @@ export default function NavBar() {
               </div>
 
               {location.pathname === "/docs" ? (
-                <button className="docsBtn float-start mx-2">
+                <button className="basicBtnStyle docsBtn float-start mx-2">
                   <Link to="/">back</Link>
                 </button>
               ) : (
-                <button className="docsBtn float-start mx-2">
+                <button className="basicBtnStyle docsBtn float-start mx-2">
                   <Link to="/docs">documentations</Link>
                 </button>
               )}
 
-              <button onClick={handleLogout} className="logOutBtn float-end">
+              <button
+                onClick={handleLogout}
+                className="basicBtnStyle logOutBtn float-end"
+              >
                 Sign Out
               </button>
 
@@ -46,7 +49,7 @@ export default function NavBar() {
               </div>
             </>
           ) : (
-            <button className="landingBtn ">
+            <button className="basicBtnStyle landingBtn ">
               <Link to={"/login"}>Login</Link>
             </button>
           )}

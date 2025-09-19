@@ -38,17 +38,17 @@ export default function Home() {
       <OverdueChecker />
       <section className="container-fluid row justify-content-start align-items-center m-0 gap-2 text-center pt-5">
         <h2 className="text-start px-0 pt-3">
-          welcome {getDisplayName(currentUser.email)},<br />
-          let's track your work
+          welcome {getDisplayName(currentUser.email)}
+          <br />
         </h2>
         <div className="col-md-10 col-12 col-lg-3 p-0">
           <Progress />
         </div>
         <AddTask />
-        <hr />
+        <hr className="m-0" />
         <div className="col-12 row justify-content-start align-items-center gap-1 m-0 taskTab">
           <button
-            className={`taskTabBtn ${
+            className={`basicBtnStyle taskTabBtn ${
               activeTab === "pending" ? "pendingTab" : ""
             }`}
             onClick={() => setActiveTab("pending")}
@@ -56,7 +56,7 @@ export default function Home() {
             pending
           </button>
           <button
-            className={`taskTabBtn ${
+            className={`basicBtnStyle taskTabBtn ${
               activeTab === "inProgress" ? "progressTab" : ""
             }`}
             onClick={() => setActiveTab("inProgress")}
@@ -64,13 +64,15 @@ export default function Home() {
             in progress
           </button>
           <button
-            className={`taskTabBtn ${activeTab === "done" ? "doneTab" : ""}`}
+            className={`basicBtnStyle taskTabBtn ${
+              activeTab === "done" ? "doneTab" : ""
+            }`}
             onClick={() => setActiveTab("done")}
           >
             done
           </button>
           <button
-            className={`taskTabBtn ${
+            className={`basicBtnStyle taskTabBtn ${
               activeTab === "overdue" ? "overDueTab" : ""
             }`}
             onClick={() => setActiveTab("overdue")}

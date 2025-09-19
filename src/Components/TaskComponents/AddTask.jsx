@@ -119,7 +119,11 @@ export default function AddTask() {
   return (
     <>
       <div className="col-12 text-start py-2 px-0">
-        <button type="button" className="addTaskBtn" onClick={openModal}>
+        <button
+          type="button"
+          className="addTaskBtn basicBtnStyle"
+          onClick={openModal}
+        >
           <IoAddCircleSharp /> add task
         </button>
 
@@ -196,7 +200,7 @@ export default function AddTask() {
                           <button
                             type="button"
                             onClick={() => removeLinkField(index)}
-                            className="removeBtn mt-2"
+                            className="basicBtnStyle removeBtn mt-2"
                           >
                             Remove
                           </button>
@@ -206,7 +210,7 @@ export default function AddTask() {
                     <button
                       type="button"
                       onClick={addLinkField}
-                      className="addBtn"
+                      className="basicBtnStyle addBtn"
                     >
                       + Add Another Link
                     </button>
@@ -220,11 +224,19 @@ export default function AddTask() {
                       onChange={(e) => setDueDate(e.target.value)}
                     />
                   </div>
-                  <div className="modal-footer col-12">
-                    <button type="button" onClick={closeModal}>
+                  <div className="modal-footer pb-0 col-12">
+                    <button
+                      className="basicBtnStyle"
+                      type="button"
+                      onClick={closeModal}
+                    >
                       cancel
                     </button>
-                    <button type="submit" disabled={loading}>
+                    <button
+                      className="basicBtnStyle"
+                      type="submit"
+                      disabled={loading}
+                    >
                       {loading ? "adding..." : "add task"}
                     </button>
                   </div>

@@ -346,7 +346,7 @@ export default function TaskDetails({
                         <button
                           type="button"
                           onClick={() => removeLinkField(index)}
-                          className="removeBtn mt-2"
+                          className="basicBtnStyle removeBtn mt-2"
                         >
                           Remove
                         </button>
@@ -356,7 +356,7 @@ export default function TaskDetails({
                   <button
                     type="button"
                     onClick={addLinkField}
-                    className="addBtn"
+                    className="basicBtnStyle addBtn"
                   >
                     + Add Another Link
                   </button>
@@ -373,35 +373,48 @@ export default function TaskDetails({
                     disabled={loading}
                   />
                 </div>
-
-                <p className="col-12">status: {currentTask.status}</p>
+                <div className="col-12 mt-2">
+                  <p className="taskStatus">status: {currentTask.status}</p>
+                </div>
 
                 <div className="modal-footer col-12 justify-content-start px-0">
-                  <button onClick={handleDelete} disabled={loading}>
+                  <button
+                    className="basicBtnStyle"
+                    onClick={handleDelete}
+                    disabled={loading}
+                  >
                     Delete Task
                   </button>
 
-                  <button onClick={onClose} disabled={loading}>
+                  <button
+                    className="basicBtnStyle"
+                    onClick={onClose}
+                    disabled={loading}
+                  >
                     Cancel
                   </button>
 
-                  <button onClick={handleSave} disabled={loading}>
+                  <button
+                    className="basicBtnStyle"
+                    onClick={handleSave}
+                    disabled={loading}
+                  >
                     {loading ? "applying..." : "apply changes"}
                   </button>
                 </div>
               </form>
 
               <div className="col-12 col-lg-6 activitySection row text-start m-0">
-                <h4 className="col-12 p-0">Task activity</h4>
+                <h4 className="col-12 p-0 m-0">Task activity</h4>
                 <div className="activityContent col-12">
                   {currentTask.activities &&
                   currentTask.activities.length > 0 ? (
                     currentTask.activities.map((activity, index) => (
-                      <div key={index} className="activityItem my-1">
-                        <h6 className="m-0">
+                      <div key={index} className="activityItem my-2">
+                        <h6 className="my-1">
                           {formatTimestamp(activity.timestamp)}
                         </h6>
-                        <h6 className="mt-1" style={{ whiteSpace: "pre-wrap" }}>
+                        <h6 className="my-1" style={{ whiteSpace: "pre-wrap" }}>
                           {linkifyText(activity.text)}
                         </h6>
                       </div>

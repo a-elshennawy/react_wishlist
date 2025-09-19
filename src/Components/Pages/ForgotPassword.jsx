@@ -52,7 +52,11 @@ export default function ForgotPassword() {
             </div>
 
             <div className="col-12">
-              <button disabled={loading} type="submit">
+              <button
+                className="basicBtnStyle"
+                disabled={loading}
+                type="submit"
+              >
                 {loading ? "Sending..." : "Reset Password"}
               </button>
             </div>
