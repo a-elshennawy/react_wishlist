@@ -12,36 +12,55 @@ export default function Docs() {
             </h2>
             <li>
               - adding a task, title is the only required field to create a task
+              <p></p>
             </li>
             <li>
-              - if no date added task will have no due date and so on with
-              category
+              <p>
+                - if no date added task will have no due date and so on with
+                category
+              </p>
             </li>
             <li>
-              - by clicking on details button you can edit any details about the
-              task
+              <p>
+                - by clicking on details button you can edit any details about
+                the task
+              </p>
             </li>
             <li>
-              - by adding any activity to the task the task will automatically
-              be in progress instead of pending
+              <p>
+                - by adding any activity to the task the task will automatically
+                be in progress instead of pending
+              </p>
             </li>
             <li>
-              - if due date pass the due date checker will move your task to
-              over due section
+              <p>
+                - if due date pass the due date checker will move your task to
+                over due section
+              </p>
             </li>
             <li>
-              - by clicking done button will move the task to done tasks section
-              and you can still view & edit its details
+              <p>
+                - by clicking done button will move the task to done tasks
+                section and you can still view & edit its details
+              </p>
             </li>
           </ul>
           <ul className="col-lg-5 col-12">
             <h3 className="py-2 m-0">
               <strong>what about leaderboard ?</strong>
             </h3>
-            <li>- each task you submit is +5 point</li>
-            <li>- each completed task is +15 points</li>
-            <li>- each over due task is -2 points</li>
-            <li>- points are updated immediately</li>
+            <li>
+              <p>- each task you submit is +5 point</p>
+            </li>
+            <li>
+              <p>- each completed task is +15 points</p>
+            </li>
+            <li>
+              <p>- each over due task is -2 points</p>
+            </li>
+            <li>
+              <p>- points are updated immediately</p>
+            </li>
           </ul>
         </div>
       </section>

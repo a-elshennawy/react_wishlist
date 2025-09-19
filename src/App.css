@@ -670,10 +670,9 @@ nav {
       backdrop-filter: blur(10px);
       border: 1px solid rgba(255, 255, 255, 0.2);
       color: var(--white);
-      border-radius: 15px;
+      border-radius: 10px;
 
       li {
-        font-size: 20px;
         margin: 10px 0px;
       }
     }
