@@ -5,6 +5,7 @@ import LoaderSpinner from "./Components/ReusableComponents/LoaderSpinner";
 import Layout from "./Components/Layout/Layout";
 import { AuthProvider } from "./Components/Contexts/AuthContext";
 import Docs from "./Components/Pages/Docs";
+import { Offline } from "react-detect-offline";
 
 const LandingPage = lazy(() => import("./Components/Pages/LandingPage"));
 const Login = lazy(() => import("./Components/Pages/Login"));
@@ -32,6 +33,11 @@ function App() {
   ]);
   return (
     <AuthProvider>
+      <Offline>
+        <div className="offline-message">
+          You're offline. Check your connection.
+        </div>
+      </Offline>
       <RouterProvider router={routes} />
     </AuthProvider>
   );
