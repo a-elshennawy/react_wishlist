@@ -383,9 +383,8 @@ nav {
 
   .taskTabBtn {
     padding: 5px 10px;
-    border: 1px solid var(--white);
-    background-color: transparent;
-    color: var(--white);
+    background-color: var(--white);
+    color: var(--mainColor);
     font-weight: bold;
     text-transform: uppercase !important;
     letter-spacing: 1px;
@@ -422,8 +421,7 @@ nav {
 
   .categoryTabBtn {
     padding: 5px;
-    border: 1px solid var(--white);
-    background-color: transparent;
+    background: var(--taskBG);
     color: var(--white);
     text-transform: uppercase !important;
     width: fit-content;
@@ -436,27 +434,22 @@ nav {
   }
 
   .work {
-    border: 1px solid #002fff;
     background-color: #002fff;
     color: #fff;
   }
   .personal {
-    border: 1px solid #ffae00;
     background-color: #ffae00;
     color: #000;
   }
   .workout {
-    border: 1px solid #ff0000;
     background-color: #ff0000;
     color: #fff;
   }
   .entertainment {
-    border: 1px solid #00ffea;
     background-color: #00ffea;
     color: #000;
   }
   .daily {
-    border: 1px solid #a6ff00;
     background-color: #a6ff00;
     color: #000;
   }
@@ -467,8 +460,7 @@ nav {
 
   .dateFilterBtn {
     padding: 5px;
-    border: 1px solid var(--white);
-    background-color: transparent;
+    background: var(--taskBG);
     color: var(--white);
     text-transform: uppercase !important;
     width: fit-content;
