@@ -23,6 +23,7 @@ export default function TaskDetails({
     task.links && task.links.length > 0 ? [...task.links] : [""]
   );
   const textareaRef = useRef(null);
+  const activityRef = useRef(null);
 
   useEffect(() => {
     if (!task.id) return;
@@ -53,6 +54,12 @@ export default function TaskDetails({
       }
     }, 0);
   }, [currentTask]);
+
+  useEffect(() => {
+    if (activityRef.current) {
+      activityRef.current.scrollTop = activityRef.current.scrollHeight;
+    }
+  }, [currentTask.activities]);
 
   const addLinkField = () => {
     setTaskLinks([...taskLinks, ""]);
@@ -406,7 +413,7 @@ export default function TaskDetails({
 
               <div className="col-12 col-lg-6 activitySection row text-start m-0">
                 <h4 className="col-12 p-0 m-0">Task activity</h4>
-                <div className="activityContent col-12">
+                <div className="activityContent col-12" ref={activityRef}>
                   {currentTask.activities &&
                   currentTask.activities.length > 0 ? (
                     currentTask.activities.map((activity, index) => (
