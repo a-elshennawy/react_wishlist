@@ -468,7 +468,7 @@ nav {
   }
   .selected {
     background-color: var(--triColor);
-    color: var(--mainColor);
+    color: #fff;
   }
 }
 
