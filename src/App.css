@@ -7,7 +7,7 @@
   --triColor: #0092cc;
   --progressColor: #eeff07;
   --white: #fff;
-  --darkRed: #970000;
+  --red: #fd0000;
   --taskBG: rgba(255, 255, 255, 0.1);
   font-size: 16px;
 }
@@ -86,7 +86,7 @@ nav {
   }
 
   .logOutBtn {
-    background-color: #fd0000;
+    background-color: var(--red);
     color: #fff;
   }
 
@@ -292,7 +292,7 @@ nav {
 
         .link-input-group {
           .removeBtn {
-            background-color: #fd0000;
+            background-color: var(--red);
             color: #fff;
           }
         }
@@ -410,8 +410,8 @@ nav {
   }
 
   .overDueTab {
-    border: 1px solid var(--darkRed);
-    background-color: var(--darkRed);
+    border: 1px solid var(--red);
+    background-color: var(--red);
     color: #fff;
   }
 }
@@ -467,7 +467,7 @@ nav {
     font-weight: bold;
   }
   .selected {
-    background-color: var(--white);
+    background-color: var(--triColor);
     color: var(--mainColor);
   }
 }
@@ -557,7 +557,7 @@ nav {
     margin: 0;
     margin-top: 20px !important;
     padding: 5px;
-    background-color: #fd0000;
+    background-color: var(--red);
     width: fit-content;
     color: #fff;
     font-weight: bold;
