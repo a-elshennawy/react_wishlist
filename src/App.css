@@ -422,6 +422,7 @@ nav {
   .categoryTabBtn {
     padding: 5px;
     background: var(--taskBG);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     color: var(--white);
     text-transform: uppercase !important;
     width: fit-content;
@@ -435,6 +436,10 @@ nav {
 
   .work {
     background-color: #002fff;
+    color: #fff;
+  }
+  .study {
+    background-color: #00701c;
     color: #fff;
   }
   .personal {
@@ -508,6 +513,9 @@ nav {
 
   .work {
     background-color: #002fff59;
+  }
+  .study {
+    background-color: #00701c;
   }
   .personal {
     background-color: #ffae0059;

@@ -329,6 +329,7 @@ export default function TaskDetails({
                       select the task category
                     </option>
                     <option value="work">work</option>
+                    <option value="study">study</option>
                     <option value="personal">personal</option>
                     <option value="workout">workout</option>
                     <option value="entertainment">entertainment</option>
