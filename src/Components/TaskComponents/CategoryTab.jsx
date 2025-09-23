@@ -4,6 +4,7 @@ export default function CategoryTab({ onCategoryChange, activeCategory = "" }) {
   const categories = [
     { id: "all", name: "all" },
     { id: "work", name: "work" },
+    { id: "study", name: "study" },
     { id: "personal", name: "personal" },
     { id: "workout", name: "workout" },
     { id: "entertainment", name: "entertainment" },
