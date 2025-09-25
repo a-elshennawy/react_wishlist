@@ -4,6 +4,7 @@ import { useAuth } from "../Contexts/AuthContext";
 import LeaderBoard from "../ReusableComponents/LeaderBoard";
 import { FaHome, FaPowerOff } from "react-icons/fa";
 import { FaFileCircleExclamation } from "react-icons/fa6";
+import { BiSolidExit } from "react-icons/bi";
 
 export default function NavBar() {
   const { currentUser, logout } = useAuth();
@@ -44,7 +45,7 @@ export default function NavBar() {
               )}
 
               <button onClick={handleLogout} className="logOutBtn float-end">
-                <FaPowerOff />
+                <BiSolidExit />
               </button>
 
               <div className="float-end mx-2">
