@@ -76,9 +76,7 @@ nav {
   span {
     cursor: pointer;
     font-size: 25px;
-    background-color: var(--white);
-    color: var(--mainColor);
-    padding: 5px;
+    color: var(--white);
     border-radius: 10px;
     display: inline-flex;
     align-content: center;
@@ -86,13 +84,35 @@ nav {
   }
 
   .logOutBtn {
-    background-color: var(--red);
-    color: #fff;
+    display: inline-flex;
+    background-color: transparent;
+    border: none;
+    svg {
+      font-size: 25px;
+      color: var(--red);
+    }
   }
 
   .docsBtn {
+    display: inline-flex;
+    background-color: transparent;
+    border: none;
     a {
-      color: var(--mainColor);
+      text-decoration: none;
+      svg {
+        font-size: 25px;
+        color: var(--white);
+      }
+    }
+  }
+
+  .leaderboardBtn {
+    display: inline-flex;
+    background-color: transparent;
+    border: none;
+    svg {
+      font-size: 25px;
+      color: var(--white);
     }
   }
 }
