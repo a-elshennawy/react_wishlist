@@ -2,6 +2,8 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { ThemeToggle } from "../Contexts/ThemeProvider";
 import { useAuth } from "../Contexts/AuthContext";
 import LeaderBoard from "../ReusableComponents/LeaderBoard";
+import { FaHome, FaPowerOff } from "react-icons/fa";
+import { FaFileCircleExclamation } from "react-icons/fa6";
 
 export default function NavBar() {
   const { currentUser, logout } = useAuth();
@@ -28,20 +30,21 @@ export default function NavBar() {
               </div>
 
               {location.pathname === "/docs" ? (
-                <button className="basicBtnStyle docsBtn float-start mx-2">
-                  <Link to="/">back</Link>
+                <button className="docsBtn float-start mx-2">
+                  <Link to="/">
+                    <FaHome />
+                  </Link>
                 </button>
               ) : (
-                <button className="basicBtnStyle docsBtn float-start mx-2">
-                  <Link to="/docs">documentations</Link>
+                <button className="docsBtn float-start mx-2">
+                  <Link to="/docs">
+                    <FaFileCircleExclamation />
+                  </Link>
                 </button>
               )}
 
-              <button
-                onClick={handleLogout}
-                className="basicBtnStyle logOutBtn float-end"
-              >
-                Sign Out
+              <button onClick={handleLogout} className="logOutBtn float-end">
+                <FaPowerOff />
               </button>
 
               <div className="float-end mx-2">
