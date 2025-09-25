@@ -7,7 +7,6 @@ import {
   PiNumberCircleThreeFill,
   PiNumberCircleTwoFill,
 } from "react-icons/pi";
-import { motion } from "motion/react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../Contexts/AuthContext";
 import Home from "./Home";
@@ -25,17 +24,12 @@ export default function LandingPage() {
           <section className="container-fluid row justify-content-center align-items-center text-center m-0 p-0">
             <div className="hero col-12 p-0">
               <div className="bgLayer"></div>
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                className="textSec"
-              >
+              <div className="textSec">
                 <h1>Tasks Done. No Noise, Just Progress.</h1>
                 <button className="basicBtnStyle mt-2">
                   <Link to={"/signup"}>START NOW !!</Link>
                 </button>
-              </motion.div>
+              </div>
               <div className="scrollDiv">
                 <h5>scroll for more</h5>
                 <IoIosArrowDown />
