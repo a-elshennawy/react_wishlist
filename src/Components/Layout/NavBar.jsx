@@ -2,9 +2,9 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { ThemeToggle } from "../Contexts/ThemeProvider";
 import { useAuth } from "../Contexts/AuthContext";
 import LeaderBoard from "../ReusableComponents/LeaderBoard";
-import { FaHome, FaPowerOff } from "react-icons/fa";
+import { FaHome } from "react-icons/fa";
 import { FaFileCircleExclamation } from "react-icons/fa6";
-import { BiSolidExit } from "react-icons/bi";
+import { PiSignOutDuotone } from "react-icons/pi";
 
 export default function NavBar() {
   const { currentUser, logout } = useAuth();
@@ -45,7 +45,7 @@ export default function NavBar() {
               )}
 
               <button onClick={handleLogout} className="logOutBtn float-end">
-                <BiSolidExit />
+                <PiSignOutDuotone />
               </button>
 
               <div className="float-end mx-2">
