@@ -25,6 +25,9 @@ export default function TaskDetails({
   const textareaRef = useRef(null);
   const activityRef = useRef(null);
 
+  const modalTabs = ["details", "activity"];
+  const [selectedModalTab, setSelectedModalTab] = useState("details");
+
   useEffect(() => {
     if (!task.id) return;
 
@@ -56,10 +59,10 @@ export default function TaskDetails({
   }, [currentTask]);
 
   useEffect(() => {
-    if (activityRef.current) {
+    if (activityRef.current && selectedModalTab === "activity") {
       activityRef.current.scrollTop = activityRef.current.scrollHeight;
     }
-  }, [currentTask.activities]);
+  }, [currentTask.activities, selectedModalTab]);
 
   const addLinkField = () => {
     setTaskLinks([...taskLinks, ""]);
@@ -276,193 +279,218 @@ export default function TaskDetails({
         style={{ display: "none" }}
         onClick={onClose}
       >
-        <div className="modal-dialog modal-xl">
+        <div className="modal-dialog">
           <div
             className="modal-content taskModal"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="modal-body row m-0 gap-2">
+            <div className="modal-body ">
+              <div className="detailActvityToggle pb-2">
+                <button
+                  className={selectedModalTab === "details" ? "selected" : ""}
+                  onClick={() => setSelectedModalTab("details")}
+                >
+                  details
+                </button>
+                <button
+                  className={selectedModalTab === "activity" ? "selected" : ""}
+                  onClick={() => setSelectedModalTab("activity")}
+                >
+                  activity
+                </button>
+              </div>
               {error && <div className="error-message">{error}</div>}
 
-              <form className="row col-12 col-lg-5 text-start m-0">
-                <div className="inputContainer col-12">
-                  <label>task title *</label>
-                  <input
-                    type="text"
-                    value={editedTask.title || ""}
-                    onChange={(e) => handleInputChange("title", e.target.value)}
-                    disabled={loading}
-                  />
-                </div>
-
-                <div className="inputContainer col-12">
-                  <label>Description</label>
-                  <textarea
-                    ref={textareaRef}
-                    value={editedTask.description || ""}
-                    onChange={(e) =>
-                      handleInputChange("description", e.target.value)
-                    }
-                    disabled={loading}
-                    onInput={(e) => {
-                      e.target.style.height = "auto";
-                      e.target.style.height = e.target.scrollHeight + "px";
-                    }}
-                    style={{
-                      minHeight: "60px",
-                      width: "100%",
-                      resize: "none",
-                    }}
-                  />
-                </div>
-
-                <div className="inputContainer col-12">
-                  <label htmlFor="category">category (optional)</label>
-                  <select
-                    id="category"
-                    onChange={(e) =>
-                      handleInputChange("category", e.target.value)
-                    }
-                    value={editedTask.category}
-                  >
-                    <option disabled value="">
-                      select the task category
-                    </option>
-                    <option value="work">work</option>
-                    <option value="study">study</option>
-                    <option value="personal">personal</option>
-                    <option value="workout">workout</option>
-                    <option value="entertainment">entertainment</option>
-                    <option value="daily">daily</option>
-                  </select>
-                </div>
-
-                <div className="inputContainer col-12">
-                  <label>related links (optional)</label>
-                  {taskLinks.map((link, index) => (
-                    <div key={index} className="link-input-group mb-2">
-                      <input
-                        className="me-2"
-                        type="text"
-                        value={link}
-                        onChange={(e) =>
-                          handleLinkChange(index, e.target.value)
-                        }
-                        placeholder="https://example.com"
-                      />
-                      {taskLinks.length > 1 && (
-                        <button
-                          type="button"
-                          onClick={() => removeLinkField(index)}
-                          className="basicBtnStyle removeBtn mt-2"
-                        >
-                          Remove
-                        </button>
-                      )}
-                    </div>
-                  ))}
-                  <button
-                    type="button"
-                    onClick={addLinkField}
-                    className="basicBtnStyle addBtn"
-                  >
-                    + Add Another Link
-                  </button>
-                </div>
-
-                <div className="inputContainer col-12">
-                  <label>Due Date</label>
-                  <input
-                    type="date"
-                    value={formatDateForInput(editedTask.dueDate)}
-                    onChange={(e) =>
-                      handleInputChange("dueDate", e.target.value)
-                    }
-                    disabled={loading}
-                  />
-                </div>
-                <div className="col-12 mt-2">
-                  <p className="taskStatus">status: {currentTask.status}</p>
-                </div>
-
-                <div className="modal-footer col-12 justify-content-start px-0">
-                  <button
-                    className="basicBtnStyle"
-                    onClick={handleDelete}
-                    disabled={loading}
-                  >
-                    Delete Task
-                  </button>
-
-                  <button
-                    className="basicBtnStyle"
-                    onClick={onClose}
-                    disabled={loading}
-                  >
-                    Cancel
-                  </button>
-
-                  <button
-                    className="basicBtnStyle"
-                    onClick={handleSave}
-                    disabled={loading}
-                  >
-                    {loading ? "applying..." : "apply changes"}
-                  </button>
-                </div>
-              </form>
-
-              <div className="col-12 col-lg-6 activitySection row text-start m-0">
-                <h4 className="col-12 p-0 m-0">Task activity</h4>
-                <div className="activityContent col-12" ref={activityRef}>
-                  {currentTask.activities &&
-                  currentTask.activities.length > 0 ? (
-                    currentTask.activities.map((activity, index) => (
-                      <div key={index} className="activityItem my-2">
-                        <h6 className="my-1">
-                          {formatTimestamp(activity.timestamp)}
-                        </h6>
-                        <h6 className="my-1" style={{ whiteSpace: "pre-wrap" }}>
-                          {linkifyText(activity.text)}
-                        </h6>
-                      </div>
-                    ))
-                  ) : (
-                    <p>no activities yet</p>
-                  )}
-                </div>
-                <div className="activityInput col-12 p-0">
-                  <textarea
-                    placeholder="post an update ..."
-                    value={activityText}
-                    onChange={(e) => setActivityText(e.target.value)}
-                    disabled={loading}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" && !e.shiftKey) {
-                        e.preventDefault();
-                        handleAddActivity();
+              {selectedModalTab === "details" && (
+                <form className="row text-start m-0">
+                  <div className="inputContainer px-0 col-12">
+                    <label>task title *</label>
+                    <input
+                      type="text"
+                      value={editedTask.title || ""}
+                      onChange={(e) =>
+                        handleInputChange("title", e.target.value)
                       }
-                    }}
-                    onInput={(e) => {
-                      e.target.style.height = "auto";
-                      e.target.style.height = e.target.scrollHeight + "px";
-                    }}
-                    style={{
-                      minHeight: "50px",
-                      maxHeight: "60px",
-                      width: "80%",
-                      resize: "none",
-                      overflowY: "auto",
-                    }}
-                  />
-                  <button onClick={handleAddActivity} disabled={loading}>
-                    {loading ? "Posting..." : "Post"}
-                  </button>
-                  <button onClick={() => markAsDone(task.id)}>
-                    set task complete
-                  </button>
+                      disabled={loading}
+                    />
+                  </div>
+
+                  <div className="inputContainer px-0 col-12">
+                    <label>Description</label>
+                    <textarea
+                      ref={textareaRef}
+                      value={editedTask.description || ""}
+                      onChange={(e) =>
+                        handleInputChange("description", e.target.value)
+                      }
+                      disabled={loading}
+                      onInput={(e) => {
+                        e.target.style.height = "auto";
+                        e.target.style.height = e.target.scrollHeight + "px";
+                      }}
+                      style={{
+                        minHeight: "60px",
+                        width: "100%",
+                        resize: "none",
+                      }}
+                    />
+                  </div>
+
+                  <div className="inputContainer px-0 col-12">
+                    <label htmlFor="category">category (optional)</label>
+                    <select
+                      id="category"
+                      onChange={(e) =>
+                        handleInputChange("category", e.target.value)
+                      }
+                      value={editedTask.category}
+                    >
+                      <option disabled value="">
+                        select the task category
+                      </option>
+                      <option value="work">work</option>
+                      <option value="study">study</option>
+                      <option value="personal">personal</option>
+                      <option value="workout">workout</option>
+                      <option value="entertainment">entertainment</option>
+                      <option value="daily">daily</option>
+                    </select>
+                  </div>
+
+                  <div className="inputContainer px-0 col-12">
+                    <label>related links (optional)</label>
+                    {taskLinks.map((link, index) => (
+                      <div key={index} className="link-input-group mb-2">
+                        <input
+                          className="me-2"
+                          type="text"
+                          value={link}
+                          onChange={(e) =>
+                            handleLinkChange(index, e.target.value)
+                          }
+                          placeholder="https://example.com"
+                        />
+                        {taskLinks.length > 1 && (
+                          <button
+                            type="button"
+                            onClick={() => removeLinkField(index)}
+                            className="basicBtnStyle removeBtn mt-2"
+                          >
+                            Remove
+                          </button>
+                        )}
+                      </div>
+                    ))}
+                    <button
+                      type="button"
+                      onClick={addLinkField}
+                      className="basicBtnStyle addBtn"
+                    >
+                      + Add Another Link
+                    </button>
+                  </div>
+
+                  <div className="inputContainer px-0 col-12">
+                    <label>Due Date</label>
+                    <input
+                      type="date"
+                      value={formatDateForInput(editedTask.dueDate)}
+                      onChange={(e) =>
+                        handleInputChange("dueDate", e.target.value)
+                      }
+                      disabled={loading}
+                    />
+                  </div>
+                  <div className="col-12 mt-2 px-0">
+                    <p className="taskStatus">status: {currentTask.status}</p>
+                  </div>
+
+                  <div className="modal-footer col-12 justify-content-start px-0">
+                    <button
+                      type="button"
+                      className="basicBtnStyle"
+                      onClick={handleDelete}
+                      disabled={loading}
+                    >
+                      Delete Task
+                    </button>
+
+                    <button
+                      type="button"
+                      className="basicBtnStyle"
+                      onClick={onClose}
+                      disabled={loading}
+                    >
+                      Cancel
+                    </button>
+
+                    <button
+                      type="button"
+                      className="basicBtnStyle"
+                      onClick={handleSave}
+                      disabled={loading}
+                    >
+                      {loading ? "applying..." : "apply changes"}
+                    </button>
+                  </div>
+                </form>
+              )}
+
+              {selectedModalTab === "activity" && (
+                <div className="activitySection text-start">
+                  <div className="activityContent" ref={activityRef}>
+                    {currentTask.activities &&
+                    currentTask.activities.length > 0 ? (
+                      currentTask.activities.map((activity, index) => (
+                        <div key={index} className="activityItem my-2">
+                          <h6 className="my-1">
+                            {formatTimestamp(activity.timestamp)}
+                          </h6>
+                          <h6
+                            className="my-1"
+                            style={{ whiteSpace: "pre-wrap" }}
+                          >
+                            {linkifyText(activity.text)}
+                          </h6>
+                        </div>
+                      ))
+                    ) : (
+                      <p>no activities yet</p>
+                    )}
+                  </div>
+                  <div className="activityInput">
+                    <textarea
+                      placeholder="post an update ..."
+                      value={activityText}
+                      onChange={(e) => setActivityText(e.target.value)}
+                      disabled={loading}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" && !e.shiftKey) {
+                          e.preventDefault();
+                          handleAddActivity();
+                        }
+                      }}
+                      onInput={(e) => {
+                        e.target.style.height = "auto";
+                        e.target.style.height = e.target.scrollHeight + "px";
+                      }}
+                      style={{
+                        minHeight: "50px",
+                        maxHeight: "60px",
+                        width: "80%",
+                        resize: "none",
+                        overflowY: "auto",
+                      }}
+                    />
+                    <button onClick={handleAddActivity} disabled={loading}>
+                      {loading ? "Posting..." : "Post"}
+                    </button>
+                    <button onClick={() => markAsDone(task.id)}>
+                      set task complete
+                    </button>
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
         </div>
