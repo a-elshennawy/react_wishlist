@@ -455,7 +455,7 @@ export default function TaskDetails({
                         </div>
                       ))
                     ) : (
-                      <p>no activities yet</p>
+                      <p className="py-3 m-0">no activities yet</p>
                     )}
                   </div>
                   <div className="activityInput">
