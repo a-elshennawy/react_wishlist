@@ -417,6 +417,10 @@ nav {
           border-radius: 10px;
           padding: 5px;
 
+          &::placeholder {
+            color: #fff;
+          }
+
           &:focus {
             outline: none;
           }
