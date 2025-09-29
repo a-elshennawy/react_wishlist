@@ -600,7 +600,7 @@ export default function TaskDetails({
                       <p className="py-3 m-0">no subtasks added yet...</p>
                     )}
                   </div>
-                  <div className="subTasksInput p-0 pt-2">
+                  <div className="subTasksInput row justify-content-start align-items-cent gap-1 m-0 p-0 pt-2">
                     <input
                       type="text"
                       value={subTaskText}
@@ -612,8 +612,14 @@ export default function TaskDetails({
                           handleAddSubTask();
                         }
                       }}
+                      placeholder="add new..."
+                      className="col-lg-8 col-6"
                     />
-                    <button onClick={handleAddSubTask} disabled={loading}>
+                    <button
+                      className="col-2"
+                      onClick={handleAddSubTask}
+                      disabled={loading}
+                    >
                       add
                     </button>
                   </div>

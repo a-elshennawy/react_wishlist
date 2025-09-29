@@ -267,13 +267,12 @@ nav {
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: #fff !important;
-  border-radius: 10px !important;
-  overflow: hidden;
 
   .modal-body {
     background: rgba(255, 255, 255, 0.1) !important;
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px !important;
 
     .detailActvityToggle {
       width: fit-content;
@@ -439,6 +438,8 @@ nav {
 
       .subTasksContent {
         .subTasksItem {
+          align-items: center;
+          justify-content: center;
           background: rgba(255, 255, 255, 0.1) !important;
           backdrop-filter: blur(10px);
           border: 1px solid rgba(255, 255, 255, 0.2);
@@ -452,6 +453,7 @@ nav {
           p {
             display: inline;
             margin-inline-start: 5px;
+            margin-bottom: 0;
           }
 
           span {
@@ -471,7 +473,6 @@ nav {
       }
 
       .subTasksInput {
-        display: inline-flex;
         input {
           background: rgba(255, 255, 255, 0.1) !important;
           backdrop-filter: blur(10px);
@@ -480,6 +481,10 @@ nav {
           border-radius: 8px;
           color: #fff;
           padding: 5px;
+
+          &::placeholder {
+            color: #fff;
+          }
 
           &:hover {
             outline: none;
@@ -492,7 +497,7 @@ nav {
           border: 1px solid rgba(255, 255, 255, 0.2);
           border-radius: 8px;
           color: #fff;
-          margin-inline-start: 5px;
+          width: fit-content;
         }
       }
     }
