@@ -439,25 +439,21 @@ nav {
   }
 
   .pendingTab {
-    border: 1px solid var(--triColor);
     background-color: var(--triColor);
     color: #fff;
   }
 
   .progressTab {
-    border: 1px solid var(--progressColor);
     background-color: var(--progressColor);
     color: #000;
   }
 
   .doneTab {
-    border: 1px solid var(--secColor);
     background-color: var(--secColor);
     color: #fff;
   }
 
   .overDueTab {
-    border: 1px solid var(--red);
     background-color: var(--red);
     color: #fff;
   }
