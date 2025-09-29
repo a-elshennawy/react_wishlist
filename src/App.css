@@ -370,6 +370,8 @@ nav {
     }
 
     .activitySection {
+      background: rgba(255, 255, 255, 0.1) !important;
+      backdrop-filter: blur(10px);
       border: 1px solid rgba(255, 255, 255, 0.2);
       border-radius: 10px;
       display: flex;
@@ -432,6 +434,8 @@ nav {
     }
 
     .subTasks {
+      background: rgba(255, 255, 255, 0.1) !important;
+      backdrop-filter: blur(10px);
       border: 1px solid rgba(255, 255, 255, 0.2);
       border-radius: 10px;
       padding: 10px;
