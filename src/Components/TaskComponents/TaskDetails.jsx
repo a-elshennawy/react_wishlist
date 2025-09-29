@@ -7,6 +7,7 @@ import {
   onSnapshot,
   serverTimestamp,
 } from "firebase/firestore";
+import { TiDelete } from "react-icons/ti";
 
 export default function TaskDetails({
   task,
@@ -22,10 +23,11 @@ export default function TaskDetails({
   const [taskLinks, setTaskLinks] = useState(
     task.links && task.links.length > 0 ? [...task.links] : [""]
   );
+  const [subTaskText, setSubTaskText] = useState("");
+
   const textareaRef = useRef(null);
   const activityRef = useRef(null);
 
-  const modalTabs = ["details", "activity"];
   const [selectedModalTab, setSelectedModalTab] = useState("details");
 
   useEffect(() => {
@@ -255,6 +257,72 @@ export default function TaskDetails({
     }
   };
 
+  const handleAddSubTask = async () => {
+    if (!subTaskText.trim()) return;
+    setLoading(true);
+    setError("");
+
+    try {
+      const taskRef = doc(db, "tasks", task.id);
+
+      const newSubtask = {
+        text: subTaskText,
+        status: "pending",
+      };
+
+      const existingSubTasks = currentTask.subTasks || [];
+
+      await updateDoc(taskRef, {
+        subTasks: [...existingSubTasks, newSubtask],
+      });
+
+      setSubTaskText("");
+    } catch (err) {
+      console.error("error addin subtask", err);
+      setError("failed adding subtask");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSubTaskCheck = async (index) => {
+    setLoading(true);
+    try {
+      const taskRef = doc(db, "tasks", task.id);
+      const updatedSubTasks = [...currentTask.subTasks];
+
+      // toggle checked
+      updatedSubTasks[index].status =
+        updatedSubTasks[index].status === "done" ? "pending" : "done";
+      await updateDoc(taskRef, {
+        subTasks: updatedSubTasks,
+      });
+    } catch (err) {
+      console.error("error updating subtask", err);
+      setError("failed to update subtask");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleDeleteSubTask = async (index) => {
+    setLoading(true);
+
+    try {
+      const taskRef = doc(db, "tasks", task.id);
+      const updatedSubTasks = [...currentTask.subTasks];
+
+      updatedSubTasks.splice(index, 1);
+      await updateDoc(taskRef, {
+        subTasks: updatedSubTasks,
+      });
+    } catch (err) {
+      console.error("error deleting sub task", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const markAsDone = async (taskId) => {
     try {
       const taskRef = doc(db, "tasks", taskId);
@@ -297,6 +365,12 @@ export default function TaskDetails({
                   onClick={() => setSelectedModalTab("activity")}
                 >
                   activity
+                </button>
+                <button
+                  className={selectedModalTab === "sub_tasks" ? "selected" : ""}
+                  onClick={() => setSelectedModalTab("sub_tasks")}
+                >
+                  sub tasks
                 </button>
               </div>
               {error && <div className="error-message">{error}</div>}
@@ -455,7 +529,7 @@ export default function TaskDetails({
                         </div>
                       ))
                     ) : (
-                      <p className="py-3 m-0">no activities yet</p>
+                      <p className="py-3 m-0">no activities yet...</p>
                     )}
                   </div>
                   <div className="activityInput">
@@ -487,6 +561,60 @@ export default function TaskDetails({
                     </button>
                     <button onClick={() => markAsDone(task.id)}>
                       set task complete
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {selectedModalTab === "sub_tasks" && (
+                <div className="subTasks text-start">
+                  <div className="subTasksContent px-0 py-1">
+                    {currentTask.subTasks && currentTask.subTasks.length > 0 ? (
+                      currentTask.subTasks.map((subTask, index) => (
+                        <>
+                          <div
+                            className={`subTasksItem p-1 my-1 ${
+                              subTask.status === "done" ? "doneSubTask" : ""
+                            }`}
+                            key={index}
+                          >
+                            <input
+                              type="checkbox"
+                              checked={subTask.status === "done"}
+                              onChange={() => handleSubTaskCheck(index)}
+                            />
+                            {subTask.status === "done" ? (
+                              <p>
+                                <del>{subTask.text}</del>
+                              </p>
+                            ) : (
+                              <p>{subTask.text}</p>
+                            )}
+                            <span onClick={() => handleDeleteSubTask(index)}>
+                              <TiDelete />
+                            </span>
+                          </div>
+                        </>
+                      ))
+                    ) : (
+                      <p className="py-3 m-0">no subtasks added yet...</p>
+                    )}
+                  </div>
+                  <div className="subTasksInput p-0 pt-2">
+                    <input
+                      type="text"
+                      value={subTaskText}
+                      onChange={(e) => setSubTaskText(e.target.value)}
+                      disabled={loading}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" && !e.shiftKey) {
+                          e.preventDefault();
+                          handleAddSubTask();
+                        }
+                      }}
+                    />
+                    <button onClick={handleAddSubTask} disabled={loading}>
+                      add
                     </button>
                   </div>
                 </div>
