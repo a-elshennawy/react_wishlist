@@ -438,6 +438,7 @@ nav {
 
       .subTasksContent {
         .subTasksItem {
+          display: flex;
           align-items: center;
           justify-content: center;
           background: rgba(255, 255, 255, 0.1) !important;
