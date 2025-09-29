@@ -534,7 +534,7 @@ export default function TaskDetails({
                   </div>
                   <div className="activityInput">
                     <textarea
-                      placeholder="post an update ..."
+                      placeholder="post update ..."
                       value={activityText}
                       onChange={(e) => setActivityText(e.target.value)}
                       disabled={loading}
