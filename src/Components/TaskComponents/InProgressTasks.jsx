@@ -15,7 +15,7 @@ import {
 import TaskDetails from "./TaskDetails";
 import CategoryTab from "./CategoryTab";
 import { AiFillPushpin, AiOutlinePushpin } from "react-icons/ai";
-import { MdDeleteForever, MdPending } from "react-icons/md";
+import { MdDeleteForever } from "react-icons/md";
 import { FaCheckCircle, FaExclamationCircle } from "react-icons/fa";
 import { TbProgressHelp } from "react-icons/tb";
 
@@ -118,7 +118,7 @@ export default function InProgressTasks() {
   const togglePin = async (taskId) => {
     try {
       const taskRef = doc(db, "tasks", taskId);
-      const task = pendingTasks.find((t) => t.id === taskId);
+      const task = inProgressTasks.find((t) => t.id === taskId);
       const currentPinnedStatus = task.pinned || false;
 
       await updateDoc(taskRef, {
