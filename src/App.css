@@ -444,11 +444,15 @@ nav {
       border-radius: 10px;
       padding: 10px;
       max-height: 600px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
 
       .subTasksContent {
         overflow-y: auto;
         flex-grow: 1;
         min-height: 0;
+
         .subTasksItem {
           display: flex;
           align-items: center;
