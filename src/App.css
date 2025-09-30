@@ -446,6 +446,9 @@ nav {
       max-height: 600px;
 
       .subTasksContent {
+        overflow-y: auto;
+        flex-grow: 1;
+        min-height: 0;
         .subTasksItem {
           display: flex;
           align-items: center;
@@ -483,6 +486,9 @@ nav {
       }
 
       .subTasksInput {
+        display: flex;
+        flex-shrink: 0;
+
         input {
           background: rgba(255, 255, 255, 0.1) !important;
           backdrop-filter: blur(10px);
