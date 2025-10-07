@@ -703,6 +703,7 @@ nav {
   color: var(--white);
   padding: 10px;
   border-radius: 10px;
+  filter: drop-shadow(0 0 10px #4caf50);
 
   p {
     margin: 0;
