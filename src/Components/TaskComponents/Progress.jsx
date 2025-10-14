@@ -179,7 +179,7 @@ export default function Progress() {
                     },
                     trail: {
                       // Change the color of the background track (e.g., to a light grey)
-                      stroke: "#d6d6d6",
+                      stroke: "transparent",
                     },
                     text: {
                       // Change the color of the percentage text
