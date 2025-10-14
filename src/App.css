@@ -703,7 +703,7 @@ nav {
     background: var(--taskBG);
     color: var(--white);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 10px;
+    padding: 5px;
     border-radius: 10px;
 
     .oldTasks {
