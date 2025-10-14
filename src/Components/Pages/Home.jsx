@@ -41,7 +41,7 @@ export default function Home() {
           welcome {getDisplayName(currentUser.email)}
           <br />
         </h2>
-        <div className="col-md-10 col-12 col-lg-3 p-0">
+        <div className="col-12 p-0">
           <Progress />
         </div>
         <AddTask />
