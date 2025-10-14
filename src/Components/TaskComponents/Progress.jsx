@@ -145,7 +145,7 @@ export default function Progress() {
           </div>
         ) : (
           <>
-            <div className="col-lg-2 col-md-4 col-5 progressItem text-center m-0">
+            <div className="col-lg-2 col-md-4 col-6 progressItem text-center m-0">
               <h3>you completed</h3>
               <h1>{weekDoneTasks}</h1>
               <h3>tasks this week</h3>
