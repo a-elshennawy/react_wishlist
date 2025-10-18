@@ -130,8 +130,10 @@ export default function Progress() {
 
   if (loading) {
     return (
-      <div className="progress-component">
-        <h6 className="col-12 text-center m-0">checking your progress...</h6>
+      <div className="progress-component p-0 mb-1">
+        <h6 className="col-12 text-start m-0 p-1 messageComp">
+          checking your progress...
+        </h6>
       </div>
     );
   }
@@ -140,8 +142,10 @@ export default function Progress() {
     <>
       <div className="progress-component row justify-content-start align-items-center p-0 m-0 gap-1">
         {weekSubmittedTasks == 0 ? (
-          <div className="progress-component">
-            <h6 className="col-12 text-center m-0">no activity this week</h6>
+          <div className="progress-component p-0 mb-1">
+            <h6 className="col-12 text-start m-0 p-1 messageComp">
+              no activity this week
+            </h6>
           </div>
         ) : (
           <>

@@ -699,6 +699,14 @@ nav {
 }
 
 .progress-component {
+  .messageComp {
+    width: fit-content;
+    border-radius: 10px;
+    background: var(--taskBG);
+    color: var(--white);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
   .progressItem {
     background: var(--taskBG);
     color: var(--white);
