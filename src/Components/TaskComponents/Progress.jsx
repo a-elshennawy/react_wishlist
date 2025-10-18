@@ -155,7 +155,7 @@ export default function Progress() {
               <h3>tasks this week</h3>
               {oldTasksCompleted > 0 && (
                 <p className="oldTasks m-0 mx-auto">
-                  + {oldTasksCompleted} old{" "}
+                  including {oldTasksCompleted} old{" "}
                   {oldTasksCompleted === 1 ? "task" : "tasks"}
                 </p>
               )}
