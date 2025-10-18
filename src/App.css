@@ -717,7 +717,6 @@ nav {
     .oldTasks {
       padding: 5px;
       background-color: #49ff4fc4;
-      filter: drop-shadow(0 0 5px #49ff4f);
       color: #000;
       font-weight: bold;
       border-radius: 10px;
