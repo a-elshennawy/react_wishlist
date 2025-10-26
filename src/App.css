@@ -837,6 +837,20 @@ nav {
   transform: translate(-50%, -50%);
 }
 
+.upBtn {
+  background-color: transparent;
+  border: none;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  z-index: 1111;
+  color: var(--white);
+
+  svg {
+    font-size: 30px;
+  }
+}
+
 @keyframes alertOffline {
   0% {
     opacity: 1;

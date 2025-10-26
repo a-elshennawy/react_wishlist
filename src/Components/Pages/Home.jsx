@@ -6,6 +6,7 @@ import { useState } from "react";
 import OverdueChecker from "../ReusableComponents/OverdueChecker";
 import Progress from "../TaskComponents/Progress";
 import InProgressTasks from "../TaskComponents/InProgressTasks";
+import UpBtn from "../ReusableComponents/UpBtn";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState("pending");
@@ -70,6 +71,7 @@ export default function Home() {
         </div>
         {renderTaskComponent()}
       </section>
+      <UpBtn />
     </>
   );
 }
