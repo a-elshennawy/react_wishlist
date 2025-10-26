@@ -129,6 +129,17 @@ nav {
   }
 }
 
+.taskComp {
+  max-height: calc(100vh - var(--component-offset, 0px));
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 .hero {
   position: relative;
   height: 100dvh;

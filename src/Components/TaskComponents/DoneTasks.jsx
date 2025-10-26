@@ -27,6 +27,19 @@ export default function DoneTasks() {
   const [filteredTasks, setFilteredTasks] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("all");
 
+  useEffect(() => {
+    const element = document.querySelector(".taskComp");
+
+    if (element) {
+      const rect = element.getBoundingClientRect();
+      const offsetFromTop = rect.top;
+      element.computedStyleMap.setProperty(
+        "--component-offset",
+        `${offsetFromTop}px`
+      );
+    }
+  }, []);
+
   const getDomainFromUrl = (url) => {
     try {
       const domain = new URL(url).hostname;
@@ -227,7 +240,7 @@ export default function DoneTasks() {
             <p>Nothing is done yet 👀</p>
           </div>
         ) : (
-          <div className="row gap-2 m-0">
+          <div className="row gap-2 m-0 taskComp">
             {filteredTasks.map((task) => {
               const isPinned = task.pinned || false;
               return (

@@ -30,6 +30,19 @@ export default function PendingTasks() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [showTodayTasksOnly, setShowTodayTasksOnly] = useState(true);
 
+  useEffect(() => {
+    const element = document.querySelector(".taskComp");
+
+    if (element) {
+      const rect = element.getBoundingClientRect();
+      const offsetFromTop = rect.top;
+      element.computedStyleMap.setProperty(
+        "--component-offset",
+        `${offsetFromTop}px`
+      );
+    }
+  }, []);
+
   const isToday = (dateString) => {
     if (!dateString) return false;
 
@@ -238,7 +251,7 @@ export default function PendingTasks() {
             <p>No pending tasks! 🎉</p>
           </div>
         ) : (
-          <div className="row gap-2 m-0">
+          <div className="row gap-2 m-0 taskComp">
             {filteredTasks.map((task) => {
               const isPinned = task.pinned || false;
 
