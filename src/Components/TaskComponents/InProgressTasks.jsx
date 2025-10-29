@@ -35,12 +35,9 @@ export default function InProgressTasks() {
     if (element) {
       const rect = element.getBoundingClientRect();
       const offsetFromTop = rect.top;
-      element.computedStyleMap.setProperty(
-        "--component-offset",
-        `${offsetFromTop}px`
-      );
+      element.style.setProperty("--component-offset", `${offsetFromTop}px`);
     }
-  }, []);
+  }, [filteredTasks]);
 
   const getDomainFromUrl = (url) => {
     try {

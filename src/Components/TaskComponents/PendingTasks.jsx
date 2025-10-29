@@ -35,13 +35,10 @@ export default function PendingTasks() {
 
     if (element) {
       const rect = element.getBoundingClientRect();
-      const offsetFromTop = rect.top;
-      element.computedStyleMap.setProperty(
-        "--component-offset",
-        `${offsetFromTop}px`
-      );
+      const offsetFromTop = rect.top + 20;
+      element.style.setProperty("--component-offset", `${offsetFromTop}px`);
     }
-  }, []);
+  }, [filteredTasks, showTodayTasksOnly, selectedCategory]);
 
   const isToday = (dateString) => {
     if (!dateString) return false;
@@ -254,7 +251,6 @@ export default function PendingTasks() {
           <div className="row gap-2 m-0 taskComp">
             {filteredTasks.map((task) => {
               const isPinned = task.pinned || false;
-
               return (
                 <div
                   key={task.id}
