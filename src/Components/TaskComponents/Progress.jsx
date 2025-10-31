@@ -162,7 +162,6 @@ export default function Progress() {
             </div>
 
             <div className="col-lg-2 col-md-4 col-5 progressItem prgressCircle text-center m-0">
-              <h3>weekly progress</h3>
               <div
                 style={{
                   width: 100,
