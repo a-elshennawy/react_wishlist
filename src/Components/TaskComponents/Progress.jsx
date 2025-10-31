@@ -149,7 +149,7 @@ export default function Progress() {
           </div>
         ) : (
           <>
-            <div className="col-lg-2 col-md-4 col-6 progressItem text-center m-0">
+            <div className="col-lg-2 col-md-4 col-6 progressItem text-center p-1 m-0">
               <h3>you completed</h3>
               <h1>{weekDoneTasks}</h1>
               <h3>tasks this week</h3>
@@ -161,7 +161,7 @@ export default function Progress() {
               )}
             </div>
 
-            <div className="col-lg-2 col-md-4 col-5 progressItem prgressCircle text-center m-0">
+            <div className="col-lg-1 col-md-3 col-4 progressItem prgressCircle text-center p-2 m-0">
               <div
                 style={{
                   width: 100,
