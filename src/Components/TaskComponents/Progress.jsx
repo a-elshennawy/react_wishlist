@@ -140,7 +140,7 @@ export default function Progress() {
 
   return (
     <>
-      <div className="progress-component row justify-content-start align-items-center p-0 m-0 gap-1">
+      <div className="progress-component row justify-content-start align-items-start p-0 m-0 gap-1">
         {weekSubmittedTasks == 0 ? (
           <div className="progress-component p-0 mb-1">
             <h6 className="col-12 text-start m-0 p-1 messageComp">
