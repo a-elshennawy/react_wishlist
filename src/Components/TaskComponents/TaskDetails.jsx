@@ -21,7 +21,7 @@ export default function TaskDetails({
   const [error, setError] = useState("");
   const [activityText, setActivityText] = useState("");
   const [taskLinks, setTaskLinks] = useState(
-    task.links && task.links.length > 0 ? [...task.links] : [""]
+    task.links && task.links.length > 0 ? [...task.links] : [""],
   );
   const [subTaskText, setSubTaskText] = useState("");
 
@@ -42,7 +42,7 @@ export default function TaskDetails({
         setTaskLinks(
           updatedTask.links && updatedTask.links.length > 0
             ? [...updatedTask.links]
-            : [""]
+            : [""],
         );
       }
     });
@@ -93,8 +93,14 @@ export default function TaskDetails({
   };
 
   const linkifyText = (text) => {
+    // safety check for firebase mistaken delete
+    if (!text || typeof text !== "string") {
+      return text || "";
+    }
+
     const urlRegex = /(https?:\/\/[^\s]+)/g;
     return text.split(urlRegex).map((part, index) => {
+      if (!part) return null;
       if (part.match(urlRegex)) {
         return (
           <a
