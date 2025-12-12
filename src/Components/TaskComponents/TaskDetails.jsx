@@ -359,6 +359,7 @@ export default function TaskDetails({
             onClick={(e) => e.stopPropagation()}
           >
             <div className="modal-body ">
+              <h4 className="mb-3">{editedTask.title}</h4>
               <div className="detailActvityToggle pb-2">
                 <button
                   className={selectedModalTab === "details" ? "selected" : ""}
