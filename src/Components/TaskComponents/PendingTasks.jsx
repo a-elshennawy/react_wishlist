@@ -18,6 +18,7 @@ import TaskDetails from "./TaskDetails";
 import { AiFillPushpin, AiOutlinePushpin } from "react-icons/ai";
 import CategoryTab from "./CategoryTab";
 import DateFilter from "./DateFilter";
+import CustomizedComponent from "../ReusableComponents/CustomizedComponent/CustomizedComponent";
 
 export default function PendingTasks() {
   const { currentUser } = useAuth();
@@ -67,7 +68,7 @@ export default function PendingTasks() {
 
     if (selectedCategory !== "all") {
       tasksToFilter = tasksToFilter.filter(
-        (task) => task.category === selectedCategory
+        (task) => task.category === selectedCategory,
       );
     }
 
@@ -97,7 +98,7 @@ export default function PendingTasks() {
       const q = query(
         tasksRef,
         where("user", "==", currentUser.email),
-        where("status", "==", "pending")
+        where("status", "==", "pending"),
       );
 
       unsubscribe = onSnapshot(
@@ -132,7 +133,7 @@ export default function PendingTasks() {
           console.error("Error fetching pending tasks:", err);
           setError("failed to load tasks");
           setLoading(false);
-        }
+        },
       );
     } catch (err) {
       console.error("error setting up listener:", err);
@@ -240,12 +241,10 @@ export default function PendingTasks() {
           onCategoryChange={handleCategoryChange}
           activeCategory={selectedCategory}
         />
-        <h4 className="text-start">
-          you have {filteredTasks.length} pending tasks
-        </h4>
+
         {filteredTasks.length === 0 ? (
           <div className="col-12 text-start py-4">
-            <p>No pending tasks! 🎉</p>
+            <CustomizedComponent text="No pending tasks" />
           </div>
         ) : (
           <div className="row gap-2 m-0 taskComp">

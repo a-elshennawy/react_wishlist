@@ -18,6 +18,7 @@ import { AiFillPushpin, AiOutlinePushpin } from "react-icons/ai";
 import { MdDeleteForever } from "react-icons/md";
 import { FaCheckCircle, FaExclamationCircle } from "react-icons/fa";
 import { TbProgressHelp } from "react-icons/tb";
+import CustomizedComponent from "../ReusableComponents/CustomizedComponent/CustomizedComponent";
 
 export default function InProgressTasks() {
   const { currentUser } = useAuth();
@@ -53,7 +54,7 @@ export default function InProgressTasks() {
 
     if (selectedCategory !== "all") {
       tasksToFilter = tasksToFilter.filter(
-        (task) => task.category === selectedCategory
+        (task) => task.category === selectedCategory,
       );
     }
 
@@ -75,7 +76,7 @@ export default function InProgressTasks() {
       const q = query(
         tasksRef,
         where("user", "==", currentUser.email),
-        where("status", "==", "inProgress")
+        where("status", "==", "inProgress"),
       );
 
       unsubscribe = onSnapshot(
@@ -110,7 +111,7 @@ export default function InProgressTasks() {
           console.error("Error fetching in progress tasks:", err);
           setError("failed to load tasks");
           setLoading(false);
-        }
+        },
       );
     } catch (err) {
       console.error("error setting up listener:", err);
@@ -214,12 +215,10 @@ export default function InProgressTasks() {
           onCategoryChange={handleCategoryChange}
           activeCategory={selectedCategory}
         />
-        <h4 className="text-start">
-          you have {filteredTasks.length} tasks in progress
-        </h4>
+
         {filteredTasks.length === 0 ? (
           <div className="col-12 text-start py-4">
-            <p>No tasks in progress 😌</p>
+            <CustomizedComponent text="no tasks are in progress yet" />
           </div>
         ) : (
           <div className="row gap-2 m-0 taskComp">

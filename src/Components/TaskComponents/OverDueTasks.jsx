@@ -23,6 +23,7 @@ import { MdDeleteForever } from "react-icons/md";
 import TaskDetails from "./TaskDetails";
 import { AiFillPushpin, AiOutlinePushpin } from "react-icons/ai";
 import CategoryTab from "./CategoryTab";
+import CustomizedComponent from "../ReusableComponents/CustomizedComponent/CustomizedComponent";
 
 export default function OverDueTasks() {
   const { currentUser } = useAuth();
@@ -58,7 +59,7 @@ export default function OverDueTasks() {
       setFilteredTasks(overdueTasks);
     } else {
       setFilteredTasks(
-        overdueTasks.filter((task) => task.category === selectedCategory)
+        overdueTasks.filter((task) => task.category === selectedCategory),
       );
     }
   }, [selectedCategory, overdueTasks]);
@@ -90,7 +91,7 @@ export default function OverDueTasks() {
       const q = query(
         tasksRef,
         where("user", "==", currentUser.email),
-        where("status", "==", "overdue")
+        where("status", "==", "overdue"),
       );
 
       const querySnapshot = await getDocs(q);
@@ -105,7 +106,7 @@ export default function OverDueTasks() {
             updateDoc(doc(db, "tasks", taskDoc.id), {
               daysOverdue: daysOverdue,
               lastOverdueCheck: new Date(),
-            })
+            }),
           );
         }
       });
@@ -130,7 +131,7 @@ export default function OverDueTasks() {
       const q = query(
         tasksRef,
         where("user", "==", currentUser.email),
-        where("status", "==", "overdue")
+        where("status", "==", "overdue"),
       );
 
       unsubscribe = onSnapshot(
@@ -172,7 +173,7 @@ export default function OverDueTasks() {
           console.error("Error fetching overdue tasks:", err);
           setError("failed to load tasks");
           setLoading(false);
-        }
+        },
       );
     } catch (err) {
       console.error("error setting up listener:", err);
@@ -290,12 +291,13 @@ export default function OverDueTasks() {
           onCategoryChange={handleCategoryChange}
           activeCategory={selectedCategory}
         />
-        <h4 className="text-start">
-          you have {filteredTasks.length} overdue tasks
-        </h4>
+
         {filteredTasks.length === 0 ? (
           <div className="col-12 text-start py-4">
-            <p>Nothing is overdue .. yaaay 🎉</p>
+            <CustomizedComponent
+              imgSrc="/images/well-done.png"
+              text="Nothing is overdue .. yaaay"
+            />
           </div>
         ) : (
           <div className="row gap-2 m-0 taskComp">
@@ -340,7 +342,7 @@ export default function OverDueTasks() {
                   </div>
                   <p className="col-12 m-0 p-0">
                     {getOverdue(
-                      task.daysOverdue || calcDaysOverdue(task.dueDate)
+                      task.daysOverdue || calcDaysOverdue(task.dueDate),
                     )}
                     <FaClock />
                   </p>

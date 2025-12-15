@@ -16,6 +16,7 @@ import { MdDeleteForever } from "react-icons/md";
 import TaskDetails from "./TaskDetails";
 import { AiFillPushpin, AiOutlinePushpin } from "react-icons/ai";
 import CategoryTab from "./CategoryTab";
+import CustomizedComponent from "../ReusableComponents/CustomizedComponent/CustomizedComponent";
 
 export default function DoneTasks() {
   const { currentUser } = useAuth();
@@ -51,7 +52,7 @@ export default function DoneTasks() {
       setFilteredTasks(doneTasks);
     } else {
       setFilteredTasks(
-        doneTasks.filter((task) => task.category === selectedCategory)
+        doneTasks.filter((task) => task.category === selectedCategory),
       );
     }
   }, [selectedCategory, doneTasks]);
@@ -71,7 +72,7 @@ export default function DoneTasks() {
       const q = query(
         tasksRef,
         where("user", "==", currentUser.email),
-        where("status", "==", "done")
+        where("status", "==", "done"),
       );
 
       unsubscribe = onSnapshot(
@@ -124,7 +125,7 @@ export default function DoneTasks() {
           console.error("Error fetching completed tasks:", err);
           setError("failed to load tasks");
           setLoading(false);
-        }
+        },
       );
     } catch (err) {
       console.error("error setting up listener:", err);
@@ -229,12 +230,13 @@ export default function DoneTasks() {
           onCategoryChange={handleCategoryChange}
           activeCategory={selectedCategory}
         />
-        <h4 className="text-start">
-          you have {filteredTasks.length} completed tasks
-        </h4>
+
         {filteredTasks.length === 0 ? (
           <div className="col-12 text-start py-4">
-            <p>Nothing is done yet 👀</p>
+            <CustomizedComponent
+              imgSrc="/images/nothing.png"
+              text="nothing is done yet"
+            />
           </div>
         ) : (
           <div className="row gap-2 m-0 taskComp">

@@ -1,0 +1,11 @@
+button {
+    border: none;
+    padding: 5px 10px;
+    background-color: var(--white);
+    border-radius: 10px;
+
+    a {
+        text-decoration: none;
+        color: var(--mainColor);
+    }
+}
