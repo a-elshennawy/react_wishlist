@@ -4,12 +4,13 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LoaderSpinner from "./Components/ReusableComponents/LoaderSpinner";
 import Layout from "./Components/Layout/Layout";
 import { AuthProvider } from "./Components/Contexts/AuthContext";
-import Docs from "./Components/Pages/Docs";
 
 const LandingPage = lazy(() => import("./Components/Pages/LandingPage"));
 const Login = lazy(() => import("./Components/Pages/Login"));
 const Signup = lazy(() => import("./Components/Pages/Signup"));
 const ForgotPassword = lazy(() => import("./Components/Pages/ForgotPassword"));
+const Docs = lazy(() => import("./Components/Pages/Docs"));
+const Not_Found = lazy(() => import("./Components/Pages/Not_Found"));
 
 const createRoute = (path, element) => ({
   path,
@@ -29,6 +30,7 @@ function App() {
     createRoute("/login", <Login />),
     createRoute("/signup", <Signup />),
     createRoute("/forgotPassword", <ForgotPassword />),
+    createRoute("*", <Not_Found />),
   ]);
   return (
     <AuthProvider>

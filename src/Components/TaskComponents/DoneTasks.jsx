@@ -199,8 +199,8 @@ export default function DoneTasks() {
 
   if (error) {
     return (
-      <div className="col-12 text-center py-4">
-        <p className="text-danger">{error}</p>
+      <div className="col-12">
+        <CustomizedComponent imgSrc="/images/sorry.png" text={error} />
       </div>
     );
   }

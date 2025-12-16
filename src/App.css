@@ -1,883 +1,892 @@
 @import url("./fonts.css");
 
 :root {
-  --mainColor: #000;
-  --mainColorTrans: #00000059;
-  --secColor: #00cc6d;
-  --triColor: #0092cc;
-  --progressColor: #eeff07;
-  --white: #fff;
-  --red: #fd0000;
-  --taskBG: rgba(255, 255, 255, 0.1);
-  font-size: 16px;
+    --mainColor: #000;
+    --mainColorTrans: #00000059;
+    --secColor: #00cc6d;
+    --triColor: #0092cc;
+    --progressColor: #eeff07;
+    --white: #fff;
+    --red: #fd0000;
+    --taskBG: rgba(255, 255, 255, 0.1);
+    font-size: 16px;
 }
 
 * {
-  box-sizing: border-box;
-  text-transform: capitalize !important;
-  font-family: english, arabic !important;
+    box-sizing: border-box;
+    text-transform: capitalize !important;
+    font-family: english, arabic !important;
 }
 
 img {
-  width: 100%;
+    width: 100%;
+}
+
+.notFoundIcon {
+    width: 30% !important;
+}
+
+.notFoundIcon-mobile {
+    width: 60% !important;
 }
 
 body {
-  background-color: var(--mainColor) !important;
-  color: var(--white) !important;
-  overflow-x: hidden !important;
-  transition: all 0.3s ease-in-out;
+    background-color: var(--mainColor) !important;
+    color: var(--white) !important;
+    overflow-x: hidden !important;
+    transition: all 0.3s ease-in-out;
 }
 
 body.light {
-  --mainColor: #fff;
-  --mainColorTrans: #00000059;
-  --secColor: #00cc6d;
-  --triColor: #0092cc;
-  --progressColor: #eeff07;
-  --white: #000;
-  --taskBG: linear-gradient(
-    135deg,
-    rgba(99, 0, 255, 0.15),
-    rgba(0, 204, 255, 0.15)
-  );
-  transition: all 0.3s ease-in-out;
+    --mainColor: #fff;
+    --mainColorTrans: #00000059;
+    --secColor: #00cc6d;
+    --triColor: #0092cc;
+    --progressColor: #eeff07;
+    --white: #000;
+    --taskBG: linear-gradient(
+        135deg,
+        rgba(99, 0, 255, 0.15),
+        rgba(0, 204, 255, 0.15)
+    );
+    transition: all 0.3s ease-in-out;
 }
 
 .basicBtnStyle {
-  padding: 5px 10px;
-  border: none;
-  border-radius: 10px;
-  font-weight: bold;
-  background-color: var(--white);
-  color: var(--mainColor);
-  display: inline-flex;
-
-  a {
-    text-decoration: none;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    background-color: var(--white);
     color: var(--mainColor);
-  }
+    display: inline-flex;
+
+    a {
+        text-decoration: none;
+        color: var(--mainColor);
+    }
 }
 
 section {
-  padding: 10px 0px;
-  overflow-x: hidden;
+    padding: 10px 0px;
+    overflow-x: hidden;
 }
 
 nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  padding: 10px 5px;
-  background-color: var(--mainColorTrans);
-  backdrop-filter: blur(10px);
-  z-index: 111;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 10px 5px;
+    background-color: var(--mainColorTrans);
+    backdrop-filter: blur(10px);
+    z-index: 111;
 
-  span {
-    cursor: pointer;
-    font-size: 25px;
-    color: var(--white);
-    border-radius: 10px;
-    display: inline-flex;
-    align-content: center;
-    justify-content: center;
-  }
-
-  .logOutBtn {
-    display: inline-flex;
-    background-color: transparent;
-    border: none;
-    svg {
-      font-size: 25px;
-      color: var(--red);
-    }
-  }
-
-  .docsBtn {
-    display: inline-flex;
-    background-color: transparent;
-    border: none;
-    a {
-      text-decoration: none;
-      svg {
+    span {
+        cursor: pointer;
         font-size: 25px;
         color: var(--white);
-      }
+        border-radius: 10px;
+        display: inline-flex;
+        align-content: center;
+        justify-content: center;
     }
-  }
 
-  .leaderboardBtn {
-    display: inline-flex;
-    background-color: transparent;
-    border: none;
-    svg {
-      font-size: 25px;
-      color: var(--white);
+    .logOutBtn {
+        display: inline-flex;
+        background-color: transparent;
+        border: none;
+        svg {
+            font-size: 25px;
+            color: var(--red);
+        }
     }
-  }
+
+    .docsBtn {
+        display: inline-flex;
+        background-color: transparent;
+        border: none;
+        a {
+            text-decoration: none;
+            svg {
+                font-size: 25px;
+                color: var(--white);
+            }
+        }
+    }
+
+    .leaderboardBtn {
+        display: inline-flex;
+        background-color: transparent;
+        border: none;
+        svg {
+            font-size: 25px;
+            color: var(--white);
+        }
+    }
 }
 
 .item {
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
-  border-radius: 10px;
-  padding: 20px 10px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border-radius: 10px;
+    padding: 20px 10px;
 
-  svg {
-    font-size: 30px;
-    margin-bottom: 10px;
-  }
+    svg {
+        font-size: 30px;
+        margin-bottom: 10px;
+    }
 }
 
 .taskComp {
-  max-height: calc(100vh - var(--component-offset, 0px));
-  overflow-y: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+    max-height: calc(100vh - var(--component-offset, 0px));
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 
-  &::-webkit-scrollbar {
-    display: none;
-  }
+    &::-webkit-scrollbar {
+        display: none;
+    }
 }
 
 .hero {
-  position: relative;
-  height: 100dvh;
-  padding: 0 !important;
-  color: #fff;
+    position: relative;
+    height: 100dvh;
+    padding: 0 !important;
+    color: #fff;
 
-  .bgLayer {
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    background-image: url("/public/images/headerBG.webp");
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    filter: brightness(50%);
-  }
+    .bgLayer {
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        background-image: url("/public/images/headerBG.webp");
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        filter: brightness(50%);
+    }
 
-  .textSec {
+    .textSec {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100dvw;
+    }
+
+    .scrollDiv {
+        position: absolute;
+        bottom: 10%;
+        left: 50%;
+        transform: translate(-50%, -10%);
+        svg {
+            font-size: 30px;
+            animation: scrollDiv 1.5s infinite ease-in-out;
+        }
+    }
+}
+
+.howTo {
+    position: relative;
+    color: #fff;
+
+    .bgLayer {
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        background-image: url("/public/images/secondBG.webp");
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        filter: brightness(30%);
+    }
+}
+
+.toSignUpSec {
+    position: relative;
+    color: #fff;
+
+    .bgLayer {
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        background-image: url("/public/images/startBG.webp");
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        filter: brightness(30%);
+    }
+}
+
+.footer {
+    background-color: #000;
+    color: #fff;
+
+    .footerItem {
+        padding: 10px 0px;
+    }
+
+    ul {
+        list-style: none;
+
+        li {
+            svg {
+                margin-inline-end: 5px;
+                color: #f9fd00;
+            }
+        }
+    }
+}
+
+.toHomeBtn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1111;
+}
+
+.formContainer {
+    padding: 100px 0px;
+}
+
+.accountform {
+    background: var(--taskBG);
+    color: var(--white);
+    border-radius: 10px;
+    padding: 20px 10px;
+    font-weight: bold;
+
+    .inputContainer {
+        label {
+            padding: 5px 0px;
+            display: block;
+        }
+        input {
+            text-transform: none !important;
+            padding: 5px;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+            box-shadow: 0 0 5px var(--mainColor);
+        }
+    }
+}
+
+.addTaskBtn {
+    svg {
+        align-self: center;
+        font-size: 20px;
+        margin-inline-end: 5px;
+    }
+}
+
+.taskModal {
+    margin-top: 100px !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff !important;
+
+    .modal-body {
+        background: rgba(255, 255, 255, 0.1) !important;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 10px !important;
+
+        .detailActvityToggle {
+            width: fit-content;
+            margin: 0px auto;
+
+            :first-child {
+                border-radius: 10px 0px 0px 10px;
+            }
+
+            :last-child {
+                border-radius: 0px 10px 10px 0px;
+            }
+
+            button {
+                padding: 5px 10px;
+                background: rgba(255, 255, 255, 0.1) !important;
+                backdrop-filter: blur(10px);
+                border: none;
+                border-radius: 0;
+                color: #fff;
+                font-weight: bold;
+            }
+
+            .selected {
+                background-color: #fff !important;
+                color: #000;
+            }
+        }
+
+        form {
+            padding: 0;
+
+            label {
+                display: block;
+                padding: 5px 0px !important;
+            }
+
+            .inputContainer {
+                input,
+                textarea,
+                select {
+                    padding: 5px;
+                    border: 1px solid var(--mainColor);
+                    border-radius: 10px !important;
+                    box-shadow: none;
+                    text-transform: none !important;
+                    background: rgba(255, 255, 255, 0.1) !important;
+                    backdrop-filter: blur(10px);
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                    color: #fff;
+
+                    option {
+                        color: #000;
+                    }
+
+                    &::placeholder {
+                        color: #fff;
+                    }
+
+                    &:focus {
+                        outline: none;
+                    }
+                }
+
+                .link-input-group {
+                    .removeBtn {
+                        background-color: var(--red);
+                        color: #fff;
+                    }
+                }
+                .addBtn {
+                    background-color: var(--triColor);
+                    color: #fff;
+                }
+            }
+
+            .taskStatus {
+                width: fit-content !important;
+                padding: 5px;
+                border-radius: 10px;
+                background: rgba(255, 255, 255, 0.1) !important;
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                color: #fff !important;
+            }
+
+            .modal-footer {
+                button {
+                    background: rgba(255, 255, 255, 0.1) !important;
+                    backdrop-filter: blur(10px);
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                    color: #fff !important;
+                    box-shadow: none !important;
+                }
+            }
+        }
+
+        .activitySection {
+            background: rgba(255, 255, 255, 0.1) !important;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            max-height: 600px;
+            overflow: hidden;
+            width: 100%;
+
+            .activityTitle {
+                padding: 10px;
+                margin: 0;
+                flex-shrink: 0;
+            }
+
+            .activityContent {
+                overflow-y: auto;
+                flex-grow: 1;
+                padding: 0 10px;
+                min-height: 0;
+
+                .activityItem {
+                    padding: 5px;
+                    border-radius: 10px;
+                    background: rgba(255, 255, 255, 0.1) !important;
+                    backdrop-filter: blur(10px);
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                    width: fit-content;
+                    margin-bottom: 10px;
+                }
+            }
+
+            .activityInput {
+                display: flex;
+                gap: 5px;
+                padding: 10px;
+                flex-shrink: 0;
+
+                textarea {
+                    flex-grow: 1;
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                    background: rgba(255, 255, 255, 0.1) !important;
+                    color: #fff;
+                    border-radius: 10px;
+                    padding: 5px;
+
+                    &::placeholder {
+                        color: #fff;
+                    }
+
+                    &:focus {
+                        outline: none;
+                    }
+                }
+
+                button {
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                    background: rgba(255, 255, 255, 0.1) !important;
+                    color: #fff;
+                    border-radius: 10px;
+                    padding: 5px 10px;
+                    white-space: nowrap;
+                }
+            }
+        }
+
+        .subTasks {
+            background: rgba(255, 255, 255, 0.1) !important;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 10px;
+            max-height: 600px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+
+            .subTasksContent {
+                overflow-y: auto;
+                flex-grow: 1;
+                min-height: 0;
+
+                .subTasksItem {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background: rgba(255, 255, 255, 0.1) !important;
+                    backdrop-filter: blur(10px);
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                    border-radius: 8px;
+                    width: fit-content;
+
+                    input {
+                        accent-color: var(--secColor) !important;
+                    }
+
+                    p {
+                        display: inline;
+                        margin-inline-start: 5px;
+                        margin-bottom: 0;
+                    }
+
+                    span {
+                        margin-inline-start: 5px;
+                        cursor: pointer;
+
+                        svg {
+                            font-size: 20px;
+                        }
+                    }
+                }
+
+                .doneSubTask {
+                    color: #7e7d7d;
+                    background-color: #00000070 !important;
+                }
+            }
+
+            .subTasksInput {
+                display: flex;
+                flex-shrink: 0;
+
+                input {
+                    background: rgba(255, 255, 255, 0.1) !important;
+                    backdrop-filter: blur(10px);
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                    outline: none;
+                    border-radius: 8px;
+                    color: #fff;
+                    padding: 5px;
+
+                    &::placeholder {
+                        color: #fff;
+                    }
+
+                    &:hover {
+                        outline: none;
+                    }
+                }
+
+                button {
+                    background: rgba(255, 255, 255, 0.1) !important;
+                    backdrop-filter: blur(10px);
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                    border-radius: 8px;
+                    color: #fff;
+                    width: fit-content;
+                }
+            }
+        }
+    }
+}
+
+.taskTab {
+    padding: 10px 0px !important;
+
+    .taskTabBtn {
+        padding: 5px 10px;
+        background-color: var(--white);
+        color: var(--mainColor);
+        font-weight: bold;
+        text-transform: uppercase !important;
+        letter-spacing: 1px;
+        width: fit-content;
+    }
+
+    .pendingTab {
+        background-color: var(--triColor);
+        color: #fff;
+    }
+
+    .progressTab {
+        background-color: var(--progressColor);
+        color: #000;
+    }
+
+    .doneTab {
+        background-color: var(--secColor);
+        color: #fff;
+    }
+
+    .overDueTab {
+        background-color: var(--red);
+        color: #fff;
+    }
+}
+
+.categoryTab {
+    padding: 0px 0px 10px 0px !important;
+
+    .categoryTabBtn {
+        padding: 5px;
+        background: var(--taskBG);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: var(--white);
+        text-transform: uppercase !important;
+        width: fit-content;
+        font-weight: bold;
+    }
+
+    .all {
+        background-color: var(--white);
+        color: var(--mainColor);
+    }
+
+    .work {
+        background-color: #002fff;
+        color: #fff;
+    }
+    .study {
+        background-color: #00701c;
+        color: #fff;
+    }
+    .personal {
+        background-color: #ffae00;
+        color: #000;
+    }
+    .workout {
+        background-color: #ff0000;
+        color: #fff;
+    }
+    .entertainment {
+        background-color: #00ffea;
+        color: #000;
+    }
+    .daily {
+        background-color: #a6ff00;
+        color: #000;
+    }
+}
+
+.dateFilterTab {
+    padding: 0px 0px 5px 0px !important;
+
+    .dateFilterBtn {
+        padding: 5px;
+        background: var(--taskBG);
+        color: var(--white);
+        text-transform: uppercase !important;
+        width: fit-content;
+        font-weight: bold;
+    }
+    .selected {
+        background-color: var(--triColor);
+        color: #fff;
+    }
+}
+
+.taskItem {
+    border: none;
+    padding: 10px 5px !important;
+    margin: 0 !important;
+    background: var(--taskBG);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--white);
+    border-radius: 10px;
+
+    .pinIcon {
+        cursor: pointer;
+        padding: 0px;
+        width: fit-content;
+        svg {
+            font-size: 20px;
+        }
+    }
+
+    h6 {
+        width: fit-content;
+        background-color: #00000034;
+    }
+
+    .linksList {
+        background-color: transparent !important;
+        list-style: none;
+
+        .linkItem {
+            padding: 5px 0px;
+            font-size: 16px;
+        }
+    }
+
+    .work {
+        background-color: #002fff59;
+    }
+    .study {
+        background-color: #00701c;
+        color: #fff;
+    }
+    .personal {
+        background-color: #ffae0059;
+    }
+    .workout {
+        background-color: #ff000059;
+    }
+    .entertainment {
+        background-color: #00ffea59;
+    }
+    .daily {
+        background-color: #a6ff0059;
+    }
+
+    p {
+        display: inline-flex;
+        svg {
+            align-self: center;
+            margin-inline-start: 5px;
+        }
+    }
+
+    .actions {
+        button {
+            background: var(--taskBG);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--white);
+            width: fit-content;
+
+            svg {
+                align-self: center;
+                font-size: 20px;
+                margin-inline-start: 5px;
+            }
+        }
+    }
+}
+
+.progress-component {
+    .messageComp {
+        width: fit-content;
+        border-radius: 10px;
+        background: var(--taskBG);
+        color: var(--white);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .progressItem {
+        background: var(--taskBG);
+        color: var(--white);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+
+        .oldTasks {
+            padding: 5px;
+            background-color: #49ff4fc4;
+            color: #000;
+            font-weight: bold;
+            border-radius: 10px;
+        }
+    }
+
+    .overdueBag {
+        padding: 5px;
+        background-color: var(--red);
+        width: fit-content;
+        color: #fff;
+        font-weight: bold;
+        border-radius: 10px;
+    }
+}
+
+.rankModal {
+    margin-top: 100px !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff !important;
+    border-radius: 10px !important;
+    overflow: hidden;
+
+    .modal-body {
+        .modal-title {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+
+            svg {
+                margin-inline-start: 5px;
+            }
+        }
+
+        .list-group {
+            .list-group-item {
+                background: rgba(255, 255, 255, 0.1);
+                color: #fff !important;
+                margin: 5px 0px;
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                padding: 10px 5px;
+                border-radius: 10px;
+                font-weight: bold;
+
+                .rankBadge {
+                    background-color: #fff;
+                    color: #000;
+                    padding: 5px;
+                    border-radius: 10px;
+                    margin-inline-end: 10px !important;
+                }
+
+                .CurrentUserBadge {
+                    background-color: #4caf50;
+                }
+
+                .scoreBadge {
+                    background-color: #0092cc;
+                }
+            }
+
+            .first {
+                background: linear-gradient(
+                    135deg,
+                    rgba(99, 0, 255, 0.15),
+                    rgba(0, 204, 255, 0.15)
+                );
+            }
+        }
+
+        button {
+            background: rgba(255, 255, 255, 0.1) !important;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+    }
+}
+
+.docs {
+    .explainSection {
+        padding: 20px 0px;
+
+        ul {
+            list-style: none;
+            padding: 10px;
+            background: var(--taskBG);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--white);
+            border-radius: 10px;
+
+            li {
+                margin: 10px 0px;
+            }
+        }
+    }
+}
+
+.loader {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 100dvw;
-  }
-
-  .scrollDiv {
-    position: absolute;
-    bottom: 10%;
-    left: 50%;
-    transform: translate(-50%, -10%);
-    svg {
-      font-size: 30px;
-      animation: scrollDiv 1.5s infinite ease-in-out;
-    }
-  }
-}
-
-.howTo {
-  position: relative;
-  color: #fff;
-
-  .bgLayer {
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    background-image: url("/public/images/secondBG.webp");
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    filter: brightness(30%);
-  }
-}
-
-.toSignUpSec {
-  position: relative;
-  color: #fff;
-
-  .bgLayer {
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    background-image: url("/public/images/startBG.webp");
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    filter: brightness(30%);
-  }
-}
-
-.footer {
-  background-color: #000;
-  color: #fff;
-
-  .footerItem {
-    padding: 10px 0px;
-  }
-
-  ul {
-    list-style: none;
-
-    li {
-      svg {
-        margin-inline-end: 5px;
-        color: #f9fd00;
-      }
-    }
-  }
-}
-
-.toHomeBtn {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  z-index: 1111;
-}
-
-.formContainer {
-  padding: 100px 0px;
-}
-
-.accountform {
-  background: var(--taskBG);
-  color: var(--white);
-  border-radius: 10px;
-  padding: 20px 10px;
-  font-weight: bold;
-
-  .inputContainer {
-    label {
-      padding: 5px 0px;
-      display: block;
-    }
-    input {
-      text-transform: none !important;
-      padding: 5px;
-      border-radius: 10px;
-      border: none;
-      outline: none;
-      box-shadow: 0 0 5px var(--mainColor);
-    }
-  }
-}
-
-.addTaskBtn {
-  svg {
-    align-self: center;
-    font-size: 20px;
-    margin-inline-end: 5px;
-  }
-}
-
-.taskModal {
-  margin-top: 100px !important;
-  background: rgba(255, 255, 255, 0.1) !important;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #fff !important;
-
-  .modal-body {
-    background: rgba(255, 255, 255, 0.1) !important;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 10px !important;
-
-    .detailActvityToggle {
-      width: fit-content;
-      margin: 0px auto;
-
-      :first-child {
-        border-radius: 10px 0px 0px 10px;
-      }
-
-      :last-child {
-        border-radius: 0px 10px 10px 0px;
-      }
-
-      button {
-        padding: 5px 10px;
-        background: rgba(255, 255, 255, 0.1) !important;
-        backdrop-filter: blur(10px);
-        border: none;
-        color: #fff;
-        font-weight: bold;
-      }
-
-      .selected {
-        background-color: #fff !important;
-        color: #000;
-      }
-    }
-
-    form {
-      padding: 0;
-
-      label {
-        display: block;
-        padding: 5px 0px !important;
-      }
-
-      .inputContainer {
-        input,
-        textarea,
-        select {
-          padding: 5px;
-          border: 1px solid var(--mainColor);
-          border-radius: 10px !important;
-          box-shadow: none;
-          text-transform: none !important;
-          background: rgba(255, 255, 255, 0.1) !important;
-          backdrop-filter: blur(10px);
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          color: #fff;
-
-          option {
-            color: #000;
-          }
-
-          &::placeholder {
-            color: #fff;
-          }
-
-          &:focus {
-            outline: none;
-          }
-        }
-
-        .link-input-group {
-          .removeBtn {
-            background-color: var(--red);
-            color: #fff;
-          }
-        }
-        .addBtn {
-          background-color: var(--triColor);
-          color: #fff;
-        }
-      }
-
-      .taskStatus {
-        width: fit-content !important;
-        padding: 5px;
-        border-radius: 10px;
-        background: rgba(255, 255, 255, 0.1) !important;
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        color: #fff !important;
-      }
-
-      .modal-footer {
-        button {
-          background: rgba(255, 255, 255, 0.1) !important;
-          backdrop-filter: blur(10px);
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          color: #fff !important;
-          box-shadow: none !important;
-        }
-      }
-    }
-
-    .activitySection {
-      background: rgba(255, 255, 255, 0.1) !important;
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 10px;
-      display: flex;
-      flex-direction: column;
-      max-height: 600px;
-      overflow: hidden;
-      width: 100%;
-
-      .activityTitle {
-        padding: 10px;
-        margin: 0;
-        flex-shrink: 0;
-      }
-
-      .activityContent {
-        overflow-y: auto;
-        flex-grow: 1;
-        padding: 0 10px;
-        min-height: 0;
-
-        .activityItem {
-          padding: 5px;
-          border-radius: 10px;
-          background: rgba(255, 255, 255, 0.1) !important;
-          backdrop-filter: blur(10px);
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          width: fit-content;
-          margin-bottom: 10px;
-        }
-      }
-
-      .activityInput {
-        display: flex;
-        gap: 5px;
-        padding: 10px;
-        flex-shrink: 0;
-
-        textarea {
-          flex-grow: 1;
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          background: rgba(255, 255, 255, 0.1) !important;
-          color: #fff;
-          border-radius: 10px;
-          padding: 5px;
-
-          &::placeholder {
-            color: #fff;
-          }
-
-          &:focus {
-            outline: none;
-          }
-        }
-
-        button {
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          background: rgba(255, 255, 255, 0.1) !important;
-          color: #fff;
-          border-radius: 10px;
-          padding: 5px 10px;
-          white-space: nowrap;
-        }
-      }
-    }
-
-    .subTasks {
-      background: rgba(255, 255, 255, 0.1) !important;
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 10px;
-      padding: 10px;
-      max-height: 600px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-
-      .subTasksContent {
-        overflow-y: auto;
-        flex-grow: 1;
-        min-height: 0;
-
-        .subTasksItem {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          background: rgba(255, 255, 255, 0.1) !important;
-          backdrop-filter: blur(10px);
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          border-radius: 8px;
-          width: fit-content;
-
-          input {
-            accent-color: var(--secColor) !important;
-          }
-
-          p {
-            display: inline;
-            margin-inline-start: 5px;
-            margin-bottom: 0;
-          }
-
-          span {
-            margin-inline-start: 5px;
-            cursor: pointer;
-
-            svg {
-              font-size: 20px;
-            }
-          }
-        }
-
-        .doneSubTask {
-          color: #7e7d7d;
-          background-color: #00000070 !important;
-        }
-      }
-
-      .subTasksInput {
-        display: flex;
-        flex-shrink: 0;
-
-        input {
-          background: rgba(255, 255, 255, 0.1) !important;
-          backdrop-filter: blur(10px);
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          outline: none;
-          border-radius: 8px;
-          color: #fff;
-          padding: 5px;
-
-          &::placeholder {
-            color: #fff;
-          }
-
-          &:hover {
-            outline: none;
-          }
-        }
-
-        button {
-          background: rgba(255, 255, 255, 0.1) !important;
-          backdrop-filter: blur(10px);
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          border-radius: 8px;
-          color: #fff;
-          width: fit-content;
-        }
-      }
-    }
-  }
-}
-
-.taskTab {
-  padding: 10px 0px !important;
-
-  .taskTabBtn {
-    padding: 5px 10px;
-    background-color: var(--white);
-    color: var(--mainColor);
-    font-weight: bold;
-    text-transform: uppercase !important;
-    letter-spacing: 1px;
-    width: fit-content;
-  }
-
-  .pendingTab {
-    background-color: var(--triColor);
-    color: #fff;
-  }
-
-  .progressTab {
-    background-color: var(--progressColor);
-    color: #000;
-  }
-
-  .doneTab {
-    background-color: var(--secColor);
-    color: #fff;
-  }
-
-  .overDueTab {
-    background-color: var(--red);
-    color: #fff;
-  }
-}
-
-.categoryTab {
-  padding: 0px 0px 10px 0px !important;
-
-  .categoryTabBtn {
-    padding: 5px;
-    background: var(--taskBG);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: var(--white);
-    text-transform: uppercase !important;
-    width: fit-content;
-    font-weight: bold;
-  }
-
-  .all {
-    background-color: var(--white);
-    color: var(--mainColor);
-  }
-
-  .work {
-    background-color: #002fff;
-    color: #fff;
-  }
-  .study {
-    background-color: #00701c;
-    color: #fff;
-  }
-  .personal {
-    background-color: #ffae00;
-    color: #000;
-  }
-  .workout {
-    background-color: #ff0000;
-    color: #fff;
-  }
-  .entertainment {
-    background-color: #00ffea;
-    color: #000;
-  }
-  .daily {
-    background-color: #a6ff00;
-    color: #000;
-  }
-}
-
-.dateFilterTab {
-  padding: 0px 0px 5px 0px !important;
-
-  .dateFilterBtn {
-    padding: 5px;
-    background: var(--taskBG);
-    color: var(--white);
-    text-transform: uppercase !important;
-    width: fit-content;
-    font-weight: bold;
-  }
-  .selected {
-    background-color: var(--triColor);
-    color: #fff;
-  }
-}
-
-.taskItem {
-  border: none;
-  padding: 10px 5px !important;
-  margin: 0 !important;
-  background: var(--taskBG);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: var(--white);
-  border-radius: 10px;
-
-  .pinIcon {
-    cursor: pointer;
-    padding: 0px;
-    width: fit-content;
-    svg {
-      font-size: 20px;
-    }
-  }
-
-  h6 {
-    width: fit-content;
-    background-color: #00000034;
-  }
-
-  .linksList {
-    background-color: transparent !important;
-    list-style: none;
-
-    .linkItem {
-      padding: 5px 0px;
-      font-size: 16px;
-    }
-  }
-
-  .work {
-    background-color: #002fff59;
-  }
-  .study {
-    background-color: #00701c;
-    color: #fff;
-  }
-  .personal {
-    background-color: #ffae0059;
-  }
-  .workout {
-    background-color: #ff000059;
-  }
-  .entertainment {
-    background-color: #00ffea59;
-  }
-  .daily {
-    background-color: #a6ff0059;
-  }
-
-  p {
-    display: inline-flex;
-    svg {
-      align-self: center;
-      margin-inline-start: 5px;
-    }
-  }
-
-  .actions {
-    button {
-      background: var(--taskBG);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: var(--white);
-      width: fit-content;
-
-      svg {
-        align-self: center;
-        font-size: 20px;
-        margin-inline-start: 5px;
-      }
-    }
-  }
-}
-
-.progress-component {
-  .messageComp {
-    width: fit-content;
-    border-radius: 10px;
-    background: var(--taskBG);
-    color: var(--white);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-  }
-
-  .progressItem {
-    background: var(--taskBG);
-    color: var(--white);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 10px;
-
-    .oldTasks {
-      padding: 5px;
-      background-color: #49ff4fc4;
-      color: #000;
-      font-weight: bold;
-      border-radius: 10px;
-    }
-  }
-
-  .overdueBag {
-    padding: 5px;
-    background-color: var(--red);
-    width: fit-content;
-    color: #fff;
-    font-weight: bold;
-    border-radius: 10px;
-  }
-}
-
-.rankModal {
-  margin-top: 100px !important;
-  background: rgba(255, 255, 255, 0.1) !important;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #fff !important;
-  border-radius: 10px !important;
-  overflow: hidden;
-
-  .modal-body {
-    .modal-title {
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-
-      svg {
-        margin-inline-start: 5px;
-      }
-    }
-
-    .list-group {
-      .list-group-item {
-        background: rgba(255, 255, 255, 0.1);
-        color: #fff !important;
-        margin: 5px 0px;
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        padding: 10px 5px;
-        border-radius: 10px;
-        font-weight: bold;
-
-        .rankBadge {
-          background-color: #fff;
-          color: #000;
-          padding: 5px;
-          border-radius: 10px;
-          margin-inline-end: 10px !important;
-        }
-
-        .CurrentUserBadge {
-          background-color: #4caf50;
-        }
-
-        .scoreBadge {
-          background-color: #0092cc;
-        }
-      }
-
-      .first {
-        background: linear-gradient(
-          135deg,
-          rgba(99, 0, 255, 0.15),
-          rgba(0, 204, 255, 0.15)
-        );
-      }
-    }
-
-    button {
-      background: rgba(255, 255, 255, 0.1) !important;
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: #fff;
-    }
-  }
-}
-
-.docs {
-  .explainSection {
-    padding: 20px 0px;
-
-    ul {
-      list-style: none;
-      padding: 10px;
-      background: var(--taskBG);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: var(--white);
-      border-radius: 10px;
-
-      li {
-        margin: 10px 0px;
-      }
-    }
-  }
-}
-
-.loader {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
 
 @keyframes alertOffline {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 ::-webkit-scrollbar {
-  display: none;
+    display: none;
 }
 
 html {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
 @keyframes scrollDiv {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(20px);
-  }
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(20px);
+    }
 
-  100% {
-    transform: translateY(0);
-  }
+    100% {
+        transform: translateY(0);
+    }
 }
 
 @media screen and (max-width: 992px) {
-  :root {
-    font-size: 14px;
-  }
-
-  .footer {
-    .footerItem {
-      border-bottom: 1px solid var(--white);
+    :root {
+        font-size: 14px;
     }
-  }
+
+    .footer {
+        .footerItem {
+            border-bottom: 1px solid var(--white);
+        }
+    }
 }
