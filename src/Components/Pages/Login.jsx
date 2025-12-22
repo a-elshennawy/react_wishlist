@@ -45,6 +45,7 @@ export default function Login() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
+              className="glassmorphism"
             />
           </div>
           <div className="inputContainer col-12">
@@ -56,6 +57,7 @@ export default function Login() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
+              className="glassmorphism"
             />
           </div>
           <div className="col-12 py-2">

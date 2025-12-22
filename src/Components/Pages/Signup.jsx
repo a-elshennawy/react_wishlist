@@ -50,6 +50,7 @@ export default function Signup() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
+              className="glassmorphism"
             />
           </div>
           <div className="inputContainer col-12">
@@ -61,6 +62,7 @@ export default function Signup() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               require
+              className="glassmorphism"
             />
           </div>
           <div className="inputContainer col-12">
@@ -72,6 +74,7 @@ export default function Signup() {
               value={passwordConfirm}
               onChange={(e) => setPasswordConfirm(e.target.value)}
               required
+              className="glassmorphism"
             />
           </div>
           <div className="col-12 py-2">
