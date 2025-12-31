@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "dev.pages.clarity_tasks.twa",
+      "sha256_cert_fingerprints": [
+        "28:62:54:D9:54:83:51:86:C3:CD:97:2C:53:A1:A7:2F:CD:5B:83:C7:D3:D0:53:6E:74:90:A3:47:BD:21:2F:C7"
+      ]
+    }
+  }
+]
