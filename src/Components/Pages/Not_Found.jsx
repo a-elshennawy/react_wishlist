@@ -15,7 +15,7 @@ function Not_Found() {
           className="col-12 col-md-10"
         >
           <img
-            src="/images/notFound.png"
+            src="/images/notFound.webp"
             alt="not found icon"
             className={`${isMobile ? "notFoundIcon-mobile" : "notFoundIcon"}`}
           />

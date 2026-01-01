@@ -207,7 +207,7 @@ export default function PendingTasks() {
   if (error) {
     return (
       <div className="col-12">
-        <CustomizedComponent imgSrc="/images/sorry.png" text={error} />
+        <CustomizedComponent imgSrc="/images/sorry.webp" text={error} />
       </div>
     );
   }

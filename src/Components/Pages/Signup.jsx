@@ -2,6 +2,8 @@ import { Link, useNavigate } from "react-router-dom";
 import ToHomeBtn from "../ReusableComponents/ToHomeBtn";
 import { useState } from "react";
 import { useAuth } from "../Contexts/AuthContext";
+import { motion } from "motion/react";
+import useMobile from "../../Hooks/useMobile";
 
 export default function Signup() {
   const [email, setEmail] = useState("");
@@ -11,6 +13,7 @@ export default function Signup() {
   const [loading, setLoading] = useState(false);
   const { signup } = useAuth();
   const navigate = useNavigate();
+  const { isMobile } = useMobile();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -34,10 +37,13 @@ export default function Signup() {
   return (
     <>
       <ToHomeBtn />
-      <section className="formContainer container-fluid row justify-content-center align-items-center m-0">
-        <form
+      <section className="formContainer container-fluid row justify-content-between align-items-center gap-3 px-0 m-0">
+        <motion.form
+          initial={{ opacity: 0, x: -100 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5, delay: 0.5, ease: "easeInOut" }}
           onSubmit={handleSubmit}
-          className="accountform col-lg-2 col-10 row justify-content-center align-items-center m-0 gap-2 text-center"
+          className="accountform col-lg-6 col-11 row justify-content-center align-items-center m-0 gap-2 text-start"
         >
           <h3>sign up</h3>
           {error && <div className="alert alert-danger">{error}</div>}
@@ -50,7 +56,6 @@ export default function Signup() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="glassmorphism"
             />
           </div>
           <div className="inputContainer col-12">
@@ -62,7 +67,6 @@ export default function Signup() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               require
-              className="glassmorphism"
             />
           </div>
           <div className="inputContainer col-12">
@@ -74,18 +78,30 @@ export default function Signup() {
               value={passwordConfirm}
               onChange={(e) => setPasswordConfirm(e.target.value)}
               required
-              className="glassmorphism"
             />
           </div>
           <div className="col-12 py-2">
-            <button className="basicBtnStyle" disabled={loading} type="submit">
+            <button className="accountFormBtn" disabled={loading} type="submit">
               {loading ? "Creating Account..." : "Sign Up"}
             </button>
           </div>
-          <div className="col-12 p-0">
-            <Link to={"/login"}>already have accont ? log in</Link>
-          </div>
-        </form>
+        </motion.form>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.5, ease: "easeInOut" }}
+          className="iconSection text-center col-12 col-md-5"
+        >
+          <img
+            src="/images/user.webp"
+            alt="userIcon"
+            loading="lazy"
+            style={{ width: isMobile ? "80%" : "50%", display: "block" }}
+          />
+          <button className="toOtherFormBtn my-2">
+            <Link to={"/login"}>already have accont ?</Link>
+          </button>
+        </motion.div>
       </section>
     </>
   );

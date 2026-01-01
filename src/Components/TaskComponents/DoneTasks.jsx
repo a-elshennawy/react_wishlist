@@ -200,7 +200,7 @@ export default function DoneTasks() {
   if (error) {
     return (
       <div className="col-12">
-        <CustomizedComponent imgSrc="/images/sorry.png" text={error} />
+        <CustomizedComponent imgSrc="/images/sorry.webp" text={error} />
       </div>
     );
   }
@@ -234,7 +234,7 @@ export default function DoneTasks() {
         {filteredTasks.length === 0 ? (
           <div className="col-12 text-start py-4">
             <CustomizedComponent
-              imgSrc="/images/nothing.png"
+              imgSrc="/images/nothing.webp"
               text="nothing is done yet"
             />
           </div>

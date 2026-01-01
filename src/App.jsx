@@ -9,7 +9,6 @@ const LandingPage = lazy(() => import("./Components/Pages/LandingPage"));
 const Login = lazy(() => import("./Components/Pages/Login"));
 const Signup = lazy(() => import("./Components/Pages/Signup"));
 const ForgotPassword = lazy(() => import("./Components/Pages/ForgotPassword"));
-const Docs = lazy(() => import("./Components/Pages/Docs"));
 const Not_Found = lazy(() => import("./Components/Pages/Not_Found"));
 
 const createRoute = (path, element) => ({
@@ -22,10 +21,7 @@ function App() {
     {
       path: "/",
       element: <Layout />,
-      children: [
-        createRoute("", <LandingPage />),
-        createRoute("docs", <Docs />),
-      ],
+      children: [createRoute("", <LandingPage />)],
     },
     createRoute("/login", <Login />),
     createRoute("/signup", <Signup />),

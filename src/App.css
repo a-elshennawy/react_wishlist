@@ -255,12 +255,32 @@ nav {
 
 .formContainer {
     padding: 100px 0px;
+    height: 100dvh;
+
+    .iconSection {
+        img {
+            margin: auto;
+            animation: iconHover 2s infinite;
+        }
+
+        .toOtherFormBtn {
+            background-color: var(--white);
+            padding: 5px 10px;
+            border: none;
+            border-radius: 8px;
+            a {
+                text-decoration: none;
+                color: var(--mainColor);
+            }
+        }
+    }
 }
 
 .accountform {
-    background: var(--taskBG);
-    color: var(--white);
-    border-radius: 10px;
+    width: 100%;
+    background-color: var(--white);
+    color: var(--mainColor);
+    border-radius: 0px 10px 10px 0px;
     padding: 20px 10px;
     font-weight: bold;
 
@@ -269,15 +289,32 @@ nav {
             padding: 5px 0px;
             display: block;
         }
+
         input {
             width: 100%;
+            background-color: transparent;
             text-transform: none !important;
-            padding: 5px;
-            border-radius: 10px;
+            padding: 5px 0px;
             border: none;
+            border-bottom: 1px solid var(--mainColor);
             outline: none;
-            box-shadow: 0 0 5px var(--mainColor);
-            color: var(--white);
+            color: var(--mainColor);
+            transition: all 0.3s ease-in-out;
+        }
+    }
+
+    .accountFormBtn {
+        padding: 5px 10px;
+        border: none;
+        border-bottom: 1px solid var(--mainColor);
+        background-color: transparent;
+        color: var(--mainColor);
+        transition: all 0.3s ease-in-out;
+
+        &:hover {
+            border-radius: 8px;
+            transform: translateY(-5px);
+            box-shadow: 0 4px 10px var(--mainColor);
         }
     }
 }
@@ -828,26 +865,6 @@ nav {
     }
 }
 
-.docs {
-    .explainSection {
-        padding: 20px 0px;
-
-        ul {
-            list-style: none;
-            padding: 10px;
-            background: var(--taskBG);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: var(--white);
-            border-radius: 10px;
-
-            li {
-                margin: 10px 0px;
-            }
-        }
-    }
-}
-
 .loader {
     position: absolute;
     top: 50%;
@@ -855,15 +872,17 @@ nav {
     transform: translate(-50%, -50%);
 }
 
-@keyframes alertOffline {
+@keyframes iconHover {
     0% {
-        opacity: 1;
+        transform: translateY(0);
     }
+
     50% {
-        opacity: 0;
+        transform: translateY(-10px);
     }
+
     100% {
-        opacity: 1;
+        transform: translateY(0);
     }
 }
 

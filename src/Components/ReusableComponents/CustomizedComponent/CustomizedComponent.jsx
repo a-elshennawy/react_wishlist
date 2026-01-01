@@ -4,7 +4,7 @@ import { motion } from "motion/react";
 import useMobile from "../../../Hooks/useMobile";
 
 function CustomizedComponent({
-  imgSrc = "/images/allDone.png",
+  imgSrc = "/images/allDone.webp",
   imgWidth = 400,
   imgMobileWidth = imgWidth / 2,
   className,
