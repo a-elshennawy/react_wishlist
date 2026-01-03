@@ -85,7 +85,6 @@ src/
 │   │   ├── OverDueTasks.jsx      # Overdue tasks view
 │   │   ├── TaskDetails.jsx       # Task edit/detail modal
 │   │   ├── Progress.jsx          # Progress visualization
-│   │   ├── CategoryTab.jsx       # Category filter tabs
 │   │   └── DateFilter.jsx        # Date filtering component
 │   └── ReusableComponents/
 │       ├── LeaderBoard.jsx       # Leaderboard modal
@@ -110,7 +109,6 @@ The app uses a single `tasks` collection with documents structured as:
 {
   title: string,
   description: string | null,
-  category: string,
   links: string[] | null,
   dueDate: string | null,
   status: "pending" | "inProgress" | "done" | "overdue",

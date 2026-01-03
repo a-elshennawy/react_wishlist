@@ -4,10 +4,12 @@ import { useState } from "react";
 import { useAuth } from "../Contexts/AuthContext";
 import { motion } from "motion/react";
 import useMobile from "../../Hooks/useMobile";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const { login } = useAuth();
@@ -56,13 +58,19 @@ export default function Login() {
           <div className="inputContainer col-12">
             <label htmlFor="password">password</label>
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               name="password"
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
+            <span
+              className="showPassBtn"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </span>
           </div>
           <div className="col-12 py-2">
             <button className="accountFormBtn" disabled={loading} type="submit">

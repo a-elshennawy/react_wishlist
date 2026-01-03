@@ -16,7 +16,6 @@ import {
 } from "firebase/firestore";
 import TaskDetails from "./TaskDetails";
 import { AiFillPushpin, AiOutlinePushpin } from "react-icons/ai";
-import CategoryTab from "./CategoryTab";
 import DateFilter from "./DateFilter";
 import CustomizedComponent from "../ReusableComponents/CustomizedComponent/CustomizedComponent";
 
@@ -28,7 +27,6 @@ export default function PendingTasks() {
   const [selectedTask, setSelectedTask] = useState(null);
   const [showTaskDetails, setShowTaskDetails] = useState(false);
   const [filteredTasks, setFilteredTasks] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState("all");
   const [showTodayTasksOnly, setShowTodayTasksOnly] = useState(true);
 
   useEffect(() => {
@@ -39,7 +37,7 @@ export default function PendingTasks() {
       const offsetFromTop = rect.top + 20;
       element.style.setProperty("--component-offset", `${offsetFromTop}px`);
     }
-  }, [filteredTasks, showTodayTasksOnly, selectedCategory]);
+  }, [filteredTasks, showTodayTasksOnly]);
 
   const isToday = (dateString) => {
     if (!dateString) return false;
@@ -61,26 +59,6 @@ export default function PendingTasks() {
     } catch (e) {
       return url.length > 30 ? url.substring(0, 30) + "..." : url;
     }
-  };
-
-  useEffect(() => {
-    let tasksToFilter = pendingTasks;
-
-    if (selectedCategory !== "all") {
-      tasksToFilter = tasksToFilter.filter(
-        (task) => task.category === selectedCategory,
-      );
-    }
-
-    if (showTodayTasksOnly) {
-      tasksToFilter = tasksToFilter.filter((task) => isToday(task.dueDate));
-    }
-
-    setFilteredTasks(tasksToFilter);
-  }, [selectedCategory, pendingTasks, showTodayTasksOnly]);
-
-  const handleCategoryChange = (category) => {
-    setSelectedCategory(category);
   };
 
   const handleDateFilterChange = () => {
@@ -236,10 +214,6 @@ export default function PendingTasks() {
         <DateFilter
           onDateFilterChange={handleDateFilterChange}
           isActive={showTodayTasksOnly}
-        />
-        <CategoryTab
-          onCategoryChange={handleCategoryChange}
-          activeCategory={selectedCategory}
         />
 
         {filteredTasks.length === 0 ? (

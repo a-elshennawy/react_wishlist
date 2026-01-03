@@ -13,7 +13,6 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 import TaskDetails from "./TaskDetails";
-import CategoryTab from "./CategoryTab";
 import { AiFillPushpin, AiOutlinePushpin } from "react-icons/ai";
 import { MdDeleteForever } from "react-icons/md";
 import { FaCheckCircle, FaExclamationCircle } from "react-icons/fa";
@@ -28,7 +27,6 @@ export default function InProgressTasks() {
   const [selectedTask, setSelectedTask] = useState(null);
   const [showTaskDetails, setShowTaskDetails] = useState(false);
   const [filteredTasks, setFilteredTasks] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState("all");
 
   useEffect(() => {
     const element = document.querySelector(".taskComp");
@@ -47,22 +45,6 @@ export default function InProgressTasks() {
     } catch (e) {
       return url.length > 30 ? url.substring(0, 30) + "..." : url;
     }
-  };
-
-  useEffect(() => {
-    let tasksToFilter = inProgressTasks;
-
-    if (selectedCategory !== "all") {
-      tasksToFilter = tasksToFilter.filter(
-        (task) => task.category === selectedCategory,
-      );
-    }
-
-    setFilteredTasks(tasksToFilter);
-  }, [selectedCategory, inProgressTasks]);
-
-  const handleCategoryChange = (category) => {
-    setSelectedCategory(category);
   };
 
   useEffect(() => {
@@ -211,11 +193,6 @@ export default function InProgressTasks() {
   return (
     <>
       <div className="col-12 p-0">
-        <CategoryTab
-          onCategoryChange={handleCategoryChange}
-          activeCategory={selectedCategory}
-        />
-
         {filteredTasks.length === 0 ? (
           <div className="col-12 text-start py-4">
             <CustomizedComponent text="no tasks are in progress yet" />
@@ -239,9 +216,6 @@ export default function InProgressTasks() {
                       {isPinned ? <AiFillPushpin /> : <AiOutlinePushpin />}
                     </span>
                   </div>
-                  <h6 className={`col-12 m-0 p-0 ${task.category} `}>
-                    {task.category}
-                  </h6>
                   {task.dueDate ? (
                     <p className="col-12 m-0 p-0">
                       due to: {formatDate(task.dueDate)}

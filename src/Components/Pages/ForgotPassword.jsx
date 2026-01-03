@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useAuth } from "../Contexts/AuthContext";
 import ToHomeBtn from "../ReusableComponents/ToHomeBtn";
 import { Link } from "react-router-dom";
+import { motion } from "motion/react";
+import useMobile from "../../Hooks/useMobile";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -9,6 +11,7 @@ export default function ForgotPassword() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const { resetPassword } = useAuth();
+  const { isMobile } = useMobile();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -30,10 +33,13 @@ export default function ForgotPassword() {
     <>
       <>
         <ToHomeBtn />
-        <section className="formContainer container-fluid row justify-content-center align-items-center m-0">
-          <form
+        <section className="formContainer container-fluid row justify-content-center align-items-center gap-3 px-0 m-0">
+          <motion.form
+            initial={{ opacity: 0, x: -100 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.5, ease: "easeInOut" }}
             onSubmit={handleSubmit}
-            className="accountform col-lg-2 col-10 row justify-content-center align-items-center m-0 gap-3 text-center"
+            className="accountform resetPassForm col-lg-3 col-10 row justify-content-center align-items-center m-0 p-3 text-center gap-3"
           >
             <h3>Password Reset</h3>
             {message && <div className="alert alert-success">{message}</div>}
@@ -47,24 +53,35 @@ export default function ForgotPassword() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                placeholder="Enter your email"
               />
             </div>
 
             <div className="col-12">
               <button
-                className="basicBtnStyle"
+                className="accountFormBtn"
                 disabled={loading}
                 type="submit"
               >
                 {loading ? "Sending..." : "Reset Password"}
               </button>
             </div>
-
-            <div className="col-12">
-              <Link to={"/login"}>Back to Login</Link>
-            </div>
-          </form>
+          </motion.form>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.5, ease: "easeInOut" }}
+            className="iconSection text-center col-12 col-md-5"
+          >
+            <img
+              src="/images/forgot-password.webp"
+              alt="userIcon"
+              loading="lazy"
+              style={{ width: isMobile ? "80%" : "50%", display: "block" }}
+            />
+            <button className="toOtherFormBtn my-2">
+              <Link to={"/login"}>back to login</Link>
+            </button>
+          </motion.div>
         </section>
       </>
     </>

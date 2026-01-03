@@ -15,7 +15,6 @@ import {
 import { MdDeleteForever } from "react-icons/md";
 import TaskDetails from "./TaskDetails";
 import { AiFillPushpin, AiOutlinePushpin } from "react-icons/ai";
-import CategoryTab from "./CategoryTab";
 import CustomizedComponent from "../ReusableComponents/CustomizedComponent/CustomizedComponent";
 
 export default function DoneTasks() {
@@ -25,8 +24,6 @@ export default function DoneTasks() {
   const [error, setError] = useState("");
   const [selectedTask, setSelectedTask] = useState(null);
   const [showTaskDetails, setShowTaskDetails] = useState(false);
-  const [filteredTasks, setFilteredTasks] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState("all");
 
   useEffect(() => {
     const element = document.querySelector(".taskComp");
@@ -36,7 +33,7 @@ export default function DoneTasks() {
       const offsetFromTop = rect.top;
       element.style.setProperty("--component-offset", `${offsetFromTop}px`);
     }
-  }, [filteredTasks]);
+  }, [doneTasks]);
 
   const getDomainFromUrl = (url) => {
     try {
@@ -48,22 +45,7 @@ export default function DoneTasks() {
   };
 
   useEffect(() => {
-    if (selectedCategory === "all") {
-      setFilteredTasks(doneTasks);
-    } else {
-      setFilteredTasks(
-        doneTasks.filter((task) => task.category === selectedCategory),
-      );
-    }
-  }, [selectedCategory, doneTasks]);
-
-  const handleCategoryChange = (category) => {
-    setSelectedCategory(category);
-  };
-
-  useEffect(() => {
     if (!currentUser) return;
-
     let unsubscribe = null;
 
     try {
@@ -226,12 +208,7 @@ export default function DoneTasks() {
   return (
     <>
       <div className="col-12 p-0">
-        <CategoryTab
-          onCategoryChange={handleCategoryChange}
-          activeCategory={selectedCategory}
-        />
-
-        {filteredTasks.length === 0 ? (
+        {doneTasks.length === 0 ? (
           <div className="col-12 text-start py-4">
             <CustomizedComponent
               imgSrc="/images/nothing.webp"
@@ -240,7 +217,7 @@ export default function DoneTasks() {
           </div>
         ) : (
           <div className="row gap-2 m-0 taskComp">
-            {filteredTasks.map((task) => {
+            {doneTasks.map((task) => {
               const isPinned = task.pinned || false;
               return (
                 <div

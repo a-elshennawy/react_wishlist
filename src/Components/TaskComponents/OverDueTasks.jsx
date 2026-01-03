@@ -22,7 +22,6 @@ import {
 import { MdDeleteForever } from "react-icons/md";
 import TaskDetails from "./TaskDetails";
 import { AiFillPushpin, AiOutlinePushpin } from "react-icons/ai";
-import CategoryTab from "./CategoryTab";
 import CustomizedComponent from "../ReusableComponents/CustomizedComponent/CustomizedComponent";
 
 export default function OverDueTasks() {
@@ -33,7 +32,6 @@ export default function OverDueTasks() {
   const [selectedTask, setSelectedTask] = useState(null);
   const [showTaskDetails, setShowTaskDetails] = useState(false);
   const [filteredTasks, setFilteredTasks] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState("all");
 
   useEffect(() => {
     const element = document.querySelector(".taskComp");
@@ -52,20 +50,6 @@ export default function OverDueTasks() {
     } catch (e) {
       return url.length > 30 ? url.substring(0, 30) + "..." : url;
     }
-  };
-
-  useEffect(() => {
-    if (selectedCategory === "all") {
-      setFilteredTasks(overdueTasks);
-    } else {
-      setFilteredTasks(
-        overdueTasks.filter((task) => task.category === selectedCategory),
-      );
-    }
-  }, [selectedCategory, overdueTasks]);
-
-  const handleCategoryChange = (category) => {
-    setSelectedCategory(category);
   };
 
   const calcDaysOverdue = (dueDate) => {
@@ -287,11 +271,6 @@ export default function OverDueTasks() {
   return (
     <>
       <div className="col-12 p-0">
-        <CategoryTab
-          onCategoryChange={handleCategoryChange}
-          activeCategory={selectedCategory}
-        />
-
         {filteredTasks.length === 0 ? (
           <div className="col-12 text-start py-4">
             <CustomizedComponent
@@ -317,9 +296,7 @@ export default function OverDueTasks() {
                       {isPinned ? <AiFillPushpin /> : <AiOutlinePushpin />}
                     </span>
                   </div>
-                  <h6 className={`col-12 p-0 ${task.category}`}>
-                    {task.category}
-                  </h6>
+
                   <p className="col-12 m-0 p-0">
                     due to : {formatDate(task.dueDate)} <FaQuestionCircle />
                   </p>

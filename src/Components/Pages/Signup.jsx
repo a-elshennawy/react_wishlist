@@ -4,11 +4,13 @@ import { useState } from "react";
 import { useAuth } from "../Contexts/AuthContext";
 import { motion } from "motion/react";
 import useMobile from "../../Hooks/useMobile";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 export default function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const { signup } = useAuth();
@@ -61,24 +63,36 @@ export default function Signup() {
           <div className="inputContainer col-12">
             <label htmlFor="password">password</label>
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               name="password"
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               require
             />
+            <span
+              className="showPassBtn"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </span>
           </div>
           <div className="inputContainer col-12">
             <label htmlFor="passwordConfirm">Confirm Password</label>
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               name="passwordConfirm"
               id="passwordConfirm"
               value={passwordConfirm}
               onChange={(e) => setPasswordConfirm(e.target.value)}
               required
             />
+            <span
+              className="showPassBtn"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </span>
           </div>
           <div className="col-12 py-2">
             <button className="accountFormBtn" disabled={loading} type="submit">
@@ -99,7 +113,7 @@ export default function Signup() {
             style={{ width: isMobile ? "80%" : "50%", display: "block" }}
           />
           <button className="toOtherFormBtn my-2">
-            <Link to={"/login"}>already have accont ?</Link>
+            <Link to={"/login"}>already have account ?</Link>
           </button>
         </motion.div>
       </section>

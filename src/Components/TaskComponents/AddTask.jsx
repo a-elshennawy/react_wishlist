@@ -8,7 +8,6 @@ export default function AddTask() {
   const { currentUser } = useAuth();
   const [taskTitle, setTaskTitle] = useState("");
   const [taskDesc, setTaskDesc] = useState("");
-  const [taskCategory, setTaskCategory] = useState("");
   const [taskLinks, setTaskLinks] = useState([""]);
   const [dueDate, setDueDate] = useState("");
   const [loading, setLoading] = useState(false);
@@ -93,7 +92,6 @@ export default function AddTask() {
       await addDoc(collection(db, "tasks"), {
         title: taskTitle,
         description: taskDesc || null,
-        category: taskCategory || "no category",
         links: nonEmptyLinks.length > 0 ? nonEmptyLinks : null,
         user: currentUser.email,
         timestamp: serverTimestamp(),
@@ -104,7 +102,6 @@ export default function AddTask() {
 
       setTaskTitle("");
       setTaskDesc("");
-      setTaskCategory("");
       setTaskLinks([""]);
       setDueDate("");
 
@@ -166,24 +163,7 @@ export default function AddTask() {
                       }}
                     />
                   </div>
-                  <div className="inputContainer col-12">
-                    <label htmlFor="category">category (optional)</label>
-                    <select
-                      id="category"
-                      onChange={(e) => setTaskCategory(e.target.value)}
-                      value={taskCategory}
-                    >
-                      <option disabled value="">
-                        select the task category
-                      </option>
-                      <option value="work">work</option>
-                      <option value="study">study</option>
-                      <option value="personal">personal</option>
-                      <option value="workout">workout</option>
-                      <option value="entertainment">entertainment</option>
-                      <option value="daily">daily</option>
-                    </select>
-                  </div>
+
                   <div className="inputContainer col-12">
                     <label>related links (optional)</label>
                     {taskLinks.map((link, index) => (

@@ -285,6 +285,7 @@ nav {
     font-weight: bold;
 
     .inputContainer {
+        position: relative;
         label {
             padding: 5px 0px;
             display: block;
@@ -296,8 +297,19 @@ nav {
             text-transform: none !important;
             padding: 5px 0px;
             border: none;
-            border-bottom: 1px solid var(--mainColor);
+            border-bottom: 1px solid var(--mainColoFaEyeSlashr);
             outline: none;
+            color: var(--mainColor);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .showPassBtn {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 10px;
+            font-size: 1.2rem;
             color: var(--mainColor);
             transition: all 0.3s ease-in-out;
         }
@@ -317,6 +329,10 @@ nav {
             box-shadow: 0 4px 10px var(--mainColor);
         }
     }
+}
+
+.resetPassForm {
+    border-radius: 10px !important;
 }
 
 .addTaskBtn {
@@ -622,50 +638,6 @@ nav {
     .overDueTab {
         background-color: var(--red);
         color: #fff;
-    }
-}
-
-.categoryTab {
-    padding: 0px 0px 10px 0px !important;
-
-    .categoryTabBtn {
-        padding: 5px;
-        background: var(--taskBG);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        color: var(--white);
-        text-transform: uppercase !important;
-        width: fit-content;
-        font-weight: bold;
-    }
-
-    .all {
-        background-color: var(--white);
-        color: var(--mainColor);
-    }
-
-    .work {
-        background-color: #002fff;
-        color: #fff;
-    }
-    .study {
-        background-color: #00701c;
-        color: #fff;
-    }
-    .personal {
-        background-color: #ffae00;
-        color: #000;
-    }
-    .workout {
-        background-color: #ff0000;
-        color: #fff;
-    }
-    .entertainment {
-        background-color: #00ffea;
-        color: #000;
-    }
-    .daily {
-        background-color: #a6ff00;
-        color: #000;
     }
 }
 
