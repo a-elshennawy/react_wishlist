@@ -1,11 +1,11 @@
-import AddTask from "../TaskComponents/AddTask";
-import DoneTasks from "../TaskComponents/DoneTasks";
-import OverDueTasks from "../TaskComponents/OverDueTasks";
-import PendingTasks from "../TaskComponents/PendingTasks";
+import AddTask from "../Components/TaskComponents/AddTask";
+import DoneTasks from "../Components/TaskComponents/DoneTasks";
+import OverDueTasks from "../Components/TaskComponents/OverDueTasks";
+import PendingTasks from "../Components/TaskComponents/PendingTasks";
 import { useState } from "react";
-import OverdueChecker from "../ReusableComponents/OverdueChecker";
-import Progress from "../TaskComponents/Progress";
-import InProgressTasks from "../TaskComponents/InProgressTasks";
+import OverdueChecker from "../Components/ReusableComponents/OverdueChecker";
+import Progress from "../Components/TaskComponents/Progress";
+import InProgressTasks from "../Components/TaskComponents/InProgressTasks";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState("pending");

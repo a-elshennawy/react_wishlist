@@ -8,6 +8,7 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 import { TiDelete } from "react-icons/ti";
+import { CircularProgress } from "@mui/material";
 
 export default function TaskDetails({
   task,
@@ -489,7 +490,11 @@ export default function TaskDetails({
                       onClick={handleSave}
                       disabled={loading}
                     >
-                      {loading ? "applying..." : "apply changes"}
+                      {loading ? (
+                        <CircularProgress size={24} color="var(--white)" />
+                      ) : (
+                        "apply changes"
+                      )}
                     </button>
                   </div>
                 </form>
@@ -542,7 +547,11 @@ export default function TaskDetails({
                       }}
                     />
                     <button onClick={handleAddActivity} disabled={loading}>
-                      {loading ? "Posting..." : "Post"}
+                      {loading ? (
+                        <CircularProgress size={24} color="var(--white)" />
+                      ) : (
+                        "Post"
+                      )}
                     </button>
                     <button onClick={() => markAsDone(task.id)}>
                       set task complete

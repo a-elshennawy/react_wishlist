@@ -5,11 +5,11 @@ import LoaderSpinner from "./Components/ReusableComponents/LoaderSpinner";
 import Layout from "./Components/Layout/Layout";
 import { AuthProvider } from "./Components/Contexts/AuthContext";
 
-const LandingPage = lazy(() => import("./Components/Pages/LandingPage"));
-const Login = lazy(() => import("./Components/Pages/Login"));
-const Signup = lazy(() => import("./Components/Pages/Signup"));
-const ForgotPassword = lazy(() => import("./Components/Pages/ForgotPassword"));
-const Not_Found = lazy(() => import("./Components/Pages/Not_Found"));
+const LandingPage = lazy(() => import("./Pages/LandingPage"));
+const Login = lazy(() => import("./Pages/Login"));
+const Signup = lazy(() => import("./Pages/Signup"));
+const ForgotPassword = lazy(() => import("./Pages/ForgotPassword"));
+const Not_Found = lazy(() => import("./Pages/Not_Found"));
 
 const createRoute = (path, element) => ({
   path,

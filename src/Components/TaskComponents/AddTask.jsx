@@ -3,6 +3,7 @@ import { IoAddCircleSharp } from "react-icons/io5";
 import { db } from "../../firebase";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { useAuth } from "../Contexts/AuthContext";
+import { CircularProgress } from "@mui/material";
 
 export default function AddTask() {
   const { currentUser } = useAuth();
@@ -218,7 +219,11 @@ export default function AddTask() {
                       type="submit"
                       disabled={loading}
                     >
-                      {loading ? "adding..." : "add task"}
+                      {loading ? (
+                        <CircularProgress size={24} color="var(--white)" />
+                      ) : (
+                        "add task"
+                      )}
                     </button>
                   </div>
                 </form>
