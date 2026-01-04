@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import { Link } from "react-router-dom";
-import useMobile from "../../Hooks/useMobile";
+import useMobile from "../Hooks/useMobile";
 
 function Not_Found() {
   const { isMobile } = useMobile();

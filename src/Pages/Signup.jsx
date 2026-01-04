@@ -1,9 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
-import ToHomeBtn from "../ReusableComponents/ToHomeBtn";
+import ToHomeBtn from "../Components/ReusableComponents/ToHomeBtn";
 import { useState } from "react";
 import { useAuth } from "../Components/Contexts/AuthContext";
 import { motion } from "motion/react";
-import useMobile from "../../Hooks/useMobile";
+import useMobile from "../Hooks/useMobile";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 export default function Signup() {

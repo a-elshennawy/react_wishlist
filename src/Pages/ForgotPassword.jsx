@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { useAuth } from "../Contexts/AuthContext";
-import ToHomeBtn from "../ReusableComponents/ToHomeBtn";
+import { useAuth } from "../Components/Contexts/AuthContext";
+import ToHomeBtn from "../Components/ReusableComponents/ToHomeBtn";
 import { Link } from "react-router-dom";
 import { motion } from "motion/react";
-import useMobile from "../../Hooks/useMobile";
+import useMobile from "../Hooks/useMobile";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
