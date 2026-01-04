@@ -1,0 +1,61 @@
+.outerContainer {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min-content !important;
+}
+
+.addTaskModal {
+    border-radius: 10px;
+
+    .inputContainer {
+        label {
+            display: block;
+            padding: 5px 0px !important;
+        }
+
+        input,
+        textarea,
+        select {
+            padding: 5px;
+            border: 1px solid var(--mainColor);
+            border-radius: 10px !important;
+            box-shadow: none;
+            text-transform: none !important;
+            background: rgba(255, 255, 255, 0.1) !important;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+
+            option {
+                color: #000;
+            }
+
+            &::placeholder {
+                color: #fff;
+            }
+
+            &:focus {
+                outline: none;
+            }
+        }
+
+        .link-input-group {
+            .removeBtn {
+                background-color: var(--red);
+                color: #fff;
+            }
+        }
+        .addBtn {
+            background-color: var(--triColor);
+            color: #fff;
+        }
+    }
+
+    .actions {
+        button {
+            width: fit-content !important;
+        }
+    }
+}
