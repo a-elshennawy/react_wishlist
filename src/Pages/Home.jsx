@@ -1,4 +1,4 @@
-import AddTask from "../Components/TaskComponents/AddTask";
+import AddTask from "../Components/TaskComponents/AddTask/AddTask";
 import DoneTasks from "../Components/TaskComponents/DoneTasks";
 import OverDueTasks from "../Components/TaskComponents/OverDueTasks";
 import PendingTasks from "../Components/TaskComponents/PendingTasks";
