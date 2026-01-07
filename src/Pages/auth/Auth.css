@@ -1,0 +1,106 @@
+.errorToast,
+.messageToast {
+    position: fixed;
+    top: 20px;
+    right: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    z-index: 9999;
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+    color: var(--white);
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+
+    svg {
+        color: #fd0000;
+    }
+}
+
+.messageToast {
+    svg {
+        color: #00ff20;
+    }
+}
+
+.formContainer {
+    padding: 100px 0px;
+    height: 100dvh;
+
+    .accountform {
+        background-color: var(--white);
+        color: var(--mainColor);
+        border-radius: 0px 10px 10px 0px;
+        padding: 20px 10px;
+        font-weight: bold;
+
+        .inputContainer {
+            position: relative;
+            label {
+                padding: 5px 0px;
+                display: block;
+            }
+
+            input {
+                width: 100%;
+                background-color: transparent;
+                text-transform: none !important;
+                padding: 5px 0px;
+                border: none;
+                border-bottom: 1px solid var(--mainColor);
+                outline: none;
+                color: var(--mainColor);
+                transition: all 0.3s ease-in-out;
+            }
+
+            .showPassBtn {
+                cursor: pointer;
+                position: absolute;
+                bottom: 10px;
+                right: 10px;
+                font-size: 1.2rem;
+                color: var(--mainColor);
+                transition: all 0.3s ease-in-out;
+            }
+        }
+
+        .accountFormBtn {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background-color: var(--mainColor);
+            color: var(--white);
+            transition: all 0.3s ease-in-out;
+
+            &:hover {
+                border-radius: 8px;
+                transform: translateY(-5px);
+            }
+        }
+    }
+
+    .inMobileForm {
+        border-radius: 10px;
+    }
+
+    .iconSection {
+        img {
+            margin: auto;
+            animation: iconHover 2s infinite;
+        }
+
+        .toOtherFormBtn {
+            background-color: var(--white);
+            padding: 5px 10px;
+            border: none;
+            border-radius: 8px;
+            a {
+                text-decoration: none;
+                color: var(--mainColor);
+            }
+        }
+    }
+}

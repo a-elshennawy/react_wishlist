@@ -193,23 +193,6 @@ nav {
     }
 }
 
-.howTo {
-    position: relative;
-    color: #fff;
-
-    .bgLayer {
-        position: absolute;
-        inset: 0;
-        z-index: -1;
-        background-image: url("/public/images/secondBG.webp");
-        background-position: center;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        filter: brightness(30%);
-    }
-}
-
 .toSignUpSec {
     position: relative;
     color: #fff;
@@ -251,84 +234,6 @@ nav {
     top: 20px;
     left: 20px;
     z-index: 1111;
-}
-
-.formContainer {
-    padding: 100px 0px;
-    height: 100dvh;
-
-    .iconSection {
-        img {
-            margin: auto;
-            animation: iconHover 2s infinite;
-        }
-
-        .toOtherFormBtn {
-            background-color: var(--white);
-            padding: 5px 10px;
-            border: none;
-            border-radius: 8px;
-            a {
-                text-decoration: none;
-                color: var(--mainColor);
-            }
-        }
-    }
-}
-
-.accountform {
-    width: 100%;
-    background-color: var(--white);
-    color: var(--mainColor);
-    border-radius: 0px 10px 10px 0px;
-    padding: 20px 10px;
-    font-weight: bold;
-
-    .inputContainer {
-        position: relative;
-        label {
-            padding: 5px 0px;
-            display: block;
-        }
-
-        input {
-            width: 100%;
-            background-color: transparent;
-            text-transform: none !important;
-            padding: 5px 0px;
-            border: none;
-            border-bottom: 1px solid var(--mainColoFaEyeSlashr);
-            outline: none;
-            color: var(--mainColor);
-            transition: all 0.3s ease-in-out;
-        }
-
-        .showPassBtn {
-            cursor: pointer;
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            right: 10px;
-            font-size: 1.2rem;
-            color: var(--mainColor);
-            transition: all 0.3s ease-in-out;
-        }
-    }
-
-    .accountFormBtn {
-        padding: 5px 10px;
-        border: none;
-        border-bottom: 1px solid var(--mainColor);
-        background-color: transparent;
-        color: var(--mainColor);
-        transition: all 0.3s ease-in-out;
-
-        &:hover {
-            border-radius: 8px;
-            transform: translateY(-5px);
-            box-shadow: 0 4px 10px var(--mainColor);
-        }
-    }
 }
 
 .resetPassForm {

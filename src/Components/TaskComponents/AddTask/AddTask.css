@@ -7,7 +7,29 @@
 }
 
 .addTaskModal {
+    position: relative;
     border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+
+    .colseBtn {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        background-color: transparent;
+        border: none;
+
+        svg {
+            color: var(--white);
+            transition: all 0.3s ease-in-out;
+        }
+
+        &:hover {
+            svg {
+                transform: rotate(90deg);
+                color: #fd0000;
+            }
+        }
+    }
 
     .inputContainer {
         label {
@@ -42,6 +64,9 @@
         }
 
         .link-input-group {
+            display: flex;
+            align-items: center;
+
             .removeBtn {
                 background-color: var(--red);
                 color: #fff;
@@ -54,8 +79,43 @@
     }
 
     .actions {
-        button {
+        .formBtn {
             width: fit-content !important;
+            color: var(--white);
+            transition: all 0.3s ease-in-out;
+            svg {
+                transition: all 0.3s ease-in-out;
+            }
+
+            &:hover {
+                svg {
+                    margin-inline-start: 5px;
+                    transform: rotate(90deg);
+                    color: #00ff20;
+                }
+            }
+        }
+
+        .btn-content {
+            display: flex;
+            align-items: center;
+            gap: 0px;
+            overflow: hidden;
+            font-weight: bold;
+        }
+
+        .btn-text {
+            max-width: 0;
+            opacity: 0;
+            white-space: nowrap;
+            transition:
+                max-width 0.3s ease,
+                opacity 0.2s ease;
+        }
+
+        .btn-text.show {
+            max-width: 100px;
+            opacity: 1;
         }
     }
 }

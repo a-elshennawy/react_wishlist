@@ -6,9 +6,9 @@ import Layout from "./Components/Layout/Layout";
 import { AuthProvider } from "./Components/Contexts/AuthContext";
 
 const LandingPage = lazy(() => import("./Pages/LandingPage"));
-const Login = lazy(() => import("./Pages/Login"));
-const Signup = lazy(() => import("./Pages/Signup"));
-const ForgotPassword = lazy(() => import("./Pages/ForgotPassword"));
+const Login = lazy(() => import("./Pages/auth/Login"));
+const Signup = lazy(() => import("./Pages/auth/Signup"));
+const ForgotPassword = lazy(() => import("./Pages/auth/ForgotPassword"));
 const Not_Found = lazy(() => import("./Pages/Not_Found"));
 
 const createRoute = (path, element) => ({

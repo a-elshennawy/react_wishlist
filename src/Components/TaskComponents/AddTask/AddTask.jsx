@@ -1,11 +1,13 @@
 import "./AddTask.css";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { IoAddCircleSharp } from "react-icons/io5";
 import { db } from "../../../firebase";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { useAuth } from "../../Contexts/AuthContext";
 import { CircularProgress } from "@mui/material";
 import { motion, AnimatePresence } from "motion/react";
+import { IoMdAddCircle } from "react-icons/io";
+import { MdAddLink, MdCancel } from "react-icons/md";
 
 function AddTask() {
   const { currentUser } = useAuth();
@@ -15,6 +17,8 @@ function AddTask() {
   const [dueDate, setDueDate] = useState("");
   const [loading, setLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [btnIsHovered, setBtnIsHovered] = useState(false);
+  const modalRef = useRef(null);
 
   const addLinkField = () => {
     setTaskLinks([...taskLinks, ""]);
@@ -74,6 +78,26 @@ function AddTask() {
     }
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        isOpen &&
+        modalRef.current &&
+        !modalRef.current.contains(event.target)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen]);
+
   return (
     <>
       <div className="col-12 text-start py-2 px-0">
@@ -90,10 +114,18 @@ function AddTask() {
                 <motion.div
                   initial={{ opacity: 0, y: -100 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 100 }}
+                  exit={{ opacity: 0, y: 200 }}
                   transition={{ duration: 0.3, delay: 0.3, ease: "easeInOut" }}
                   className="addTaskModal glassmorphism"
+                  ref={modalRef}
                 >
+                  <button
+                    className="colseBtn"
+                    type="button"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <MdCancel size={24} />
+                  </button>
                   <form
                     onSubmit={addTask}
                     className="row justify-content-center align-items-center text-start m-0 gap-2"
@@ -124,34 +156,43 @@ function AddTask() {
                     </div>
                     <div className="inputContainer col-12">
                       <label>related links (optional)</label>
-                      {taskLinks.map((link, index) => (
-                        <div key={index} className="link-input-group mb-2">
-                          <input
-                            className="me-2"
-                            type="text"
-                            value={link}
-                            onChange={(e) =>
-                              handleLinkChange(index, e.target.value)
-                            }
-                            placeholder="https://example.com"
-                          />
-                          {taskLinks.length > 1 && (
-                            <button
-                              type="button"
-                              onClick={() => removeLinkField(index)}
-                              className="basicBtnStyle removeBtn mt-2"
-                            >
-                              Remove
-                            </button>
-                          )}
-                        </div>
-                      ))}
+                      <AnimatePresence>
+                        {taskLinks.map((link, index) => (
+                          <motion.div
+                            initial={{ opacity: 0, y: -20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -20 }}
+                            key={index}
+                            className="link-input-group mb-2"
+                          >
+                            <input
+                              className="me-2"
+                              type="text"
+                              value={link}
+                              onChange={(e) =>
+                                handleLinkChange(index, e.target.value)
+                              }
+                              placeholder="https://example.com"
+                            />
+                            {taskLinks.length > 1 && (
+                              <button
+                                type="button"
+                                onClick={() => removeLinkField(index)}
+                                className="basicBtnStyle removeBtn mt-2"
+                              >
+                                <MdCancel />
+                              </button>
+                            )}
+                          </motion.div>
+                        ))}
+                      </AnimatePresence>
+
                       <button
                         type="button"
                         onClick={addLinkField}
                         className="basicBtnStyle addBtn"
                       >
-                        + Add Another Link
+                        <MdAddLink />
                       </button>
                     </div>
                     <div className="inputContainer col-12">
@@ -165,21 +206,23 @@ function AddTask() {
                     </div>
                     <div className="actions row justify-content-start align-items-center gap-2 col-12 m-0 py-2">
                       <button
-                        className="basicBtnStyle"
-                        type="button"
-                        onClick={() => setIsOpen(false)}
-                      >
-                        cancel
-                      </button>
-                      <button
-                        className="basicBtnStyle"
+                        className="glassmorphism formBtn"
                         type="submit"
                         disabled={loading}
+                        onMouseEnter={() => setBtnIsHovered(true)}
+                        onMouseLeave={() => setBtnIsHovered(false)}
                       >
                         {loading ? (
-                          <CircularProgress size={24} color="var(--white)" />
+                          <CircularProgress size={24} color="inherit" />
                         ) : (
-                          "add task"
+                          <div className="btn-content">
+                            <span
+                              className={`btn-text ${btnIsHovered ? "show" : ""}`}
+                            >
+                              add task
+                            </span>
+                            <IoMdAddCircle size={24} />
+                          </div>
                         )}
                       </button>
                     </div>
