@@ -37,7 +37,7 @@ export default function NavBar() {
             </>
           ) : (
             <button className="basicBtnStyle landingBtn ">
-              <Link to={"/login"}>Login</Link>
+              <Link to={"/auth"}>Login</Link>
             </button>
           )}
         </div>

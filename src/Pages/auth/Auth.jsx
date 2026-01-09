@@ -3,11 +3,9 @@ import ToHomeBtn from "../../Components/ReusableComponents/ToHomeBtn";
 import { useState, useEffect } from "react";
 import { AnimatePresence } from "motion/react";
 import useMobile from "../../Hooks/useMobile";
-import Login from "./Login";
-import Signup from "./Signup";
+import AuthForm from "./AuthForm";
 
 function Auth() {
-  const [activeTab, setActiveTab] = useState("signup");
   const { isMobile } = useMobile();
   const [hoveredSquare, setHoveredSquare] = useState(null);
   const [autoHoveredSquare, setAutoHoveredSquare] = useState(null);
@@ -48,24 +46,8 @@ function Auth() {
           ))}
         </div>
 
-        <div className="switchTabs p-0">
-          <button
-            className={`glassmorphism switchBtn ${activeTab === "signup" ? "active" : ""}`}
-            onClick={() => setActiveTab("signup")}
-          >
-            signup
-          </button>
-          <button
-            className={`glassmorphism switchBtn ${activeTab === "login" ? "active" : ""}`}
-            onClick={() => setActiveTab("login")}
-          >
-            login
-          </button>
-        </div>
-
         <AnimatePresence mode="wait">
-          {activeTab === "signup" && <Signup key="signup" />}
-          {activeTab === "login" && <Login key="login" />}
+          <AuthForm />
         </AnimatePresence>
       </div>
     </>

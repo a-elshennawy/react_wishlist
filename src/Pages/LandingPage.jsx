@@ -94,7 +94,7 @@ export default function LandingPage() {
                 Stop wrestling with complicated apps. Get started in seconds.
               </h5>
               <button className="basicBtnStyle mt-3">
-                <Link to={"/signup"}>Sign Up for Free - It's Simple</Link>
+                <Link to={"/auth"}>Sign Up for Free - It's Simple</Link>
               </button>
             </div>
             <div className="footer col-12 row justify-content-center align-items-start text-start gap-2 m-0 py-5">
@@ -157,7 +157,7 @@ export default function LandingPage() {
               <div className="col-lg-3 col-10 m-0 footerItem">
                 <h3>Stop organizing. Start doing.</h3>
                 <button className="basicBtnStyle mt-3">
-                  <Link to={"/signup"}>Get Started Now</Link>
+                  <Link to={"/auth"}>Get Started Now</Link>
                 </button>
               </div>
             </div>
