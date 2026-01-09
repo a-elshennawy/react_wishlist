@@ -42,7 +42,7 @@ export default function Signup() {
         exit={{ opacity: 0 }}
         transition={{ duration: 0.3, delay: 0.2, ease: "easeInOut" }}
         onSubmit={handleSubmit}
-        className="logForm glassmorphism text-center col-10 col-md-2 py-3 px-2 row justify-content-center align-items-center m-0 gap-3"
+        className="logForm glassmorphism text-center col-xl-2 col-lg-3 col-md-5 col-sm-7 col-10 py-3 px-2 row justify-content-center align-items-center m-0 gap-3"
       >
         <h3 className="m-0 p-0">sign up</h3>
         <div className="inputContainer p-0 col-12">
