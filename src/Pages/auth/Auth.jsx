@@ -20,7 +20,7 @@ function Auth() {
     const interval = setInterval(() => {
       const randomIndex = Math.floor(Math.random() * totalSquares);
       setAutoHoveredSquare(randomIndex);
-    }, 300);
+    }, 500);
 
     return () => clearInterval(interval);
   }, [totalSquares]);
