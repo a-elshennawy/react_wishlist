@@ -1,8 +1,9 @@
 .errorToast,
 .messageToast {
-    position: fixed;
-    top: 20px;
-    right: 5px;
+    position: absolute;
+    top: 10%;
+    transform: translateY(-10%);
+    width: fit-content;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -26,80 +27,103 @@
     }
 }
 
-.formContainer {
-    padding: 100px 0px;
+.mainContainer {
+    position: relative;
     height: 100dvh;
+    width: 100dvw;
+    background-color: #0c0c0c;
+    overflow: hidden;
 
-    .accountform {
-        background-color: var(--white);
-        color: var(--mainColor);
-        border-radius: 0px 10px 10px 0px;
-        padding: 20px 10px;
-        font-weight: bold;
+    .backGroundLayer {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        display: grid;
+        gap: 1px;
+
+        .square {
+            background-color: var(--mainColor);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .hovered {
+            background-color: var(--white);
+            filter: drop-shadow(0 0 10px var(--white));
+            transition: all 0.3s ease-in-out;
+        }
+    }
+
+    .switchTabs {
+        position: absolute;
+        top: 10px;
+        width: fit-content;
+
+        .switchBtn {
+            padding: 5px 10px;
+            color: var(--white);
+            transition: all 0.3s ease-in-out;
+
+            &:first-child {
+                border-radius: 8px 0px 0px 8px;
+            }
+
+            &:last-child {
+                border-radius: 0px 8px 8px 0px;
+            }
+        }
+
+        .active {
+            background-color: var(--white);
+            color: var(--mainColor);
+            box-shadow: 0 0 10px var(--white);
+            font-weight: bold;
+            transition: all 0.4s ease-in-out;
+        }
+    }
+
+    .logForm {
+        border-radius: 10px;
+        transition: all 0.3s ease-in-out;
 
         .inputContainer {
             position: relative;
             label {
-                padding: 5px 0px;
                 display: block;
+                margin-bottom: 5px;
             }
-
             input {
                 width: 100%;
-                background-color: transparent;
+                padding: 8px;
+                border-radius: 8px;
+                color: var(--white);
                 text-transform: none !important;
-                padding: 5px 0px;
-                border: none;
-                border-bottom: 1px solid var(--mainColor);
-                outline: none;
-                color: var(--mainColor);
-                transition: all 0.3s ease-in-out;
-            }
 
+                &:focus {
+                    outline: none;
+                }
+            }
             .showPassBtn {
-                cursor: pointer;
                 position: absolute;
                 bottom: 10px;
                 right: 10px;
-                font-size: 1.2rem;
-                color: var(--mainColor);
-                transition: all 0.3s ease-in-out;
+                cursor: pointer;
             }
         }
 
         .accountFormBtn {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            background-color: var(--mainColor);
+            display: inline-block;
+            justify-content: center;
+            align-items: center;
+            padding: 5px 10px;
+            border-radius: 8px;
             color: var(--white);
+            font-weight: bold;
             transition: all 0.3s ease-in-out;
 
             &:hover {
-                border-radius: 8px;
-                transform: translateY(-5px);
-            }
-        }
-    }
-
-    .inMobileForm {
-        border-radius: 10px;
-    }
-
-    .iconSection {
-        img {
-            margin: auto;
-            animation: iconHover 2s infinite;
-        }
-
-        .toOtherFormBtn {
-            background-color: var(--white);
-            padding: 5px 10px;
-            border: none;
-            border-radius: 8px;
-            a {
-                text-decoration: none;
-                color: var(--mainColor);
+                box-shadow: 0 0 10px var(--white);
             }
         }
     }

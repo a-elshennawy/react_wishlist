@@ -6,9 +6,7 @@ import Layout from "./Components/Layout/Layout";
 import { AuthProvider } from "./Components/Contexts/AuthContext";
 
 const LandingPage = lazy(() => import("./Pages/LandingPage"));
-const Login = lazy(() => import("./Pages/auth/Login"));
-const Signup = lazy(() => import("./Pages/auth/Signup"));
-const ForgotPassword = lazy(() => import("./Pages/auth/ForgotPassword"));
+const Auth = lazy(() => import("./Pages/auth/Auth"));
 const Not_Found = lazy(() => import("./Pages/Not_Found"));
 
 const createRoute = (path, element) => ({
@@ -23,9 +21,7 @@ function App() {
       element: <Layout />,
       children: [createRoute("", <LandingPage />)],
     },
-    createRoute("/login", <Login />),
-    createRoute("/signup", <Signup />),
-    createRoute("/forgotPassword", <ForgotPassword />),
+    createRoute("/auth", <Auth />),
     createRoute("*", <Not_Found />),
   ]);
   return (
