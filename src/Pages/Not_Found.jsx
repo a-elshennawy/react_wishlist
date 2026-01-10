@@ -12,12 +12,12 @@ function Not_Found() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.3, ease: "easeInOut" }}
-          className="col-12 col-md-10"
+          className="col-12"
         >
           <img
-            src="/images/notFound.webp"
+            src="/images/404.webp"
             alt="not found icon"
-            className={`${isMobile ? "notFoundIcon-mobile" : "notFoundIcon"}`}
+            style={{ width: isMobile ? "70%" : "20%" }}
           />
         </motion.div>
         <motion.div

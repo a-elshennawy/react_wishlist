@@ -17,29 +17,25 @@ export default function NavBar() {
     }
   }
 
+  if (!currentUser) {
+    return null;
+  }
+
   return (
     <>
       <nav className="container-fluid m-0">
         <div className="text-end">
-          {currentUser ? (
-            <>
-              <div className="float-start">
-                <ThemeToggle />
-              </div>
+          <div className="float-start">
+            <ThemeToggle />
+          </div>
 
-              <button onClick={handleLogout} className="logOutBtn float-end">
-                <PiSignOutDuotone />
-              </button>
+          <button onClick={handleLogout} className="logOutBtn float-end">
+            <PiSignOutDuotone />
+          </button>
 
-              <div className="float-end mx-2">
-                <LeaderBoard />
-              </div>
-            </>
-          ) : (
-            <button className="basicBtnStyle landingBtn ">
-              <Link to={"/auth"}>Login</Link>
-            </button>
-          )}
+          <div className="float-end mx-2">
+            <LeaderBoard />
+          </div>
         </div>
       </nav>
     </>

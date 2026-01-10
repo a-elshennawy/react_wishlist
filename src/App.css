@@ -1,4 +1,5 @@
 @import url("./fonts.css");
+@import url("./ReusableStyles.css");
 
 :root {
     --mainColor: #000;
@@ -20,14 +21,6 @@
 
 img {
     width: 100%;
-}
-
-.notFoundIcon {
-    width: 30% !important;
-}
-
-.notFoundIcon-mobile {
-    width: 60% !important;
 }
 
 body {
@@ -52,83 +45,41 @@ body.light {
     transition: all 0.3s ease-in-out;
 }
 
-.basicBtnStyle {
-    padding: 5px 10px;
-    border: none;
-    border-radius: 10px;
-    font-weight: bold;
-    background-color: var(--white);
-    color: var(--mainColor);
-    display: inline-flex;
-
-    a {
-        text-decoration: none;
-        color: var(--mainColor);
-    }
-}
-
-.glassmorphism {
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(1.25rem);
-    -webkit-backdrop-filter: blur(1.25rem);
-    border: 0.063rem solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 0.25rem 1.875rem rgba(0, 0, 0, 0.1);
-}
-
 section {
     padding: 10px 0px;
     overflow-x: hidden;
 }
 
-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    padding: 10px 5px;
-    background-color: var(--mainColorTrans);
-    backdrop-filter: blur(10px);
-    z-index: 111;
+.landingPage {
+    position: relative;
+    height: 100dvh;
+    width: 100dvw;
 
-    span {
-        cursor: pointer;
-        font-size: 25px;
-        color: var(--white);
-        border-radius: 10px;
-        display: inline-flex;
-        align-content: center;
-        justify-content: center;
-    }
+    .bgLayer {
+        position: fixed;
+        inset: 0;
+        filter: brightness(20%);
+        z-index: -1;
 
-    .logOutBtn {
-        display: inline-flex;
-        background-color: transparent;
-        border: none;
-        svg {
-            font-size: 25px;
-            color: var(--red);
+        img {
+            width: 100%;
+            height: 100%;
         }
     }
 
-    .docsBtn {
-        display: inline-flex;
-        background-color: transparent;
-        border: none;
-        a {
-            text-decoration: none;
-            svg {
-                font-size: 25px;
-                color: var(--white);
+    .textSec {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        margin: 0px auto;
+
+        .homeBtn {
+            border-radius: 8px !important;
+
+            a {
+                font-weight: bold;
             }
-        }
-    }
-
-    .leaderboardBtn {
-        display: inline-flex;
-        background-color: transparent;
-        border: none;
-        svg {
-            font-size: 25px;
-            color: var(--white);
         }
     }
 }
@@ -156,79 +107,6 @@ nav {
     }
 }
 
-.hero {
-    position: relative;
-    height: 100dvh;
-    padding: 0 !important;
-    color: #fff;
-
-    .bgLayer {
-        position: absolute;
-        inset: 0;
-        z-index: -1;
-        background-image: url("/public/images/headerBG.webp");
-        background-position: center;
-        background-size: cover;
-        background-repeat: no-repeat;
-        filter: brightness(50%);
-    }
-
-    .textSec {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 100dvw;
-    }
-
-    .scrollDiv {
-        position: absolute;
-        bottom: 10%;
-        left: 50%;
-        transform: translate(-50%, -10%);
-        svg {
-            font-size: 30px;
-            animation: scrollDiv 1.5s infinite ease-in-out;
-        }
-    }
-}
-
-.toSignUpSec {
-    position: relative;
-    color: #fff;
-
-    .bgLayer {
-        position: absolute;
-        inset: 0;
-        z-index: -1;
-        background-image: url("/public/images/startBG.webp");
-        background-position: center;
-        background-size: cover;
-        background-repeat: no-repeat;
-        filter: brightness(30%);
-    }
-}
-
-.footer {
-    background-color: #000;
-    color: #fff;
-
-    .footerItem {
-        padding: 10px 0px;
-    }
-
-    ul {
-        list-style: none;
-
-        li {
-            svg {
-                margin-inline-end: 5px;
-                color: #f9fd00;
-            }
-        }
-    }
-}
-
 .toHomeBtn {
     position: fixed;
     top: 10px;
@@ -242,10 +120,6 @@ nav {
         font-weight: bold;
         text-decoration: none;
     }
-}
-
-.resetPassForm {
-    border-radius: 10px !important;
 }
 
 .addTaskBtn {

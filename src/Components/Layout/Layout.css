@@ -1,0 +1,52 @@
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 10px 5px;
+    background-color: var(--mainColorTrans);
+    backdrop-filter: blur(10px);
+    z-index: 111;
+
+    span {
+        cursor: pointer;
+        font-size: 25px;
+        color: var(--white);
+        border-radius: 10px;
+        display: inline-flex;
+        align-content: center;
+        justify-content: center;
+    }
+
+    .logOutBtn {
+        display: inline-flex;
+        background-color: transparent;
+        border: none;
+        svg {
+            font-size: 25px;
+            color: var(--red);
+        }
+    }
+
+    .docsBtn {
+        display: inline-flex;
+        background-color: transparent;
+        border: none;
+        a {
+            text-decoration: none;
+            svg {
+                font-size: 25px;
+                color: var(--white);
+            }
+        }
+    }
+
+    .leaderboardBtn {
+        display: inline-flex;
+        background-color: transparent;
+        border: none;
+        svg {
+            font-size: 25px;
+            color: var(--white);
+        }
+    }
+}
