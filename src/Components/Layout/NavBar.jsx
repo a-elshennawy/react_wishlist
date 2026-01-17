@@ -1,7 +1,6 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ThemeToggle } from "../Contexts/ThemeProvider";
 import { useAuth } from "../Contexts/AuthContext";
-import LeaderBoard from "../ReusableComponents/LeaderBoard";
 import { PiSignOutDuotone } from "react-icons/pi";
 
 export default function NavBar() {
@@ -32,10 +31,6 @@ export default function NavBar() {
           <button onClick={handleLogout} className="logOutBtn float-end">
             <PiSignOutDuotone />
           </button>
-
-          <div className="float-end mx-2">
-            <LeaderBoard />
-          </div>
         </div>
       </nav>
     </>

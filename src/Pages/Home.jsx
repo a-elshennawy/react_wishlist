@@ -1,28 +1,29 @@
 import AddTask from "../Components/TaskComponents/AddTask/AddTask";
-import DoneTasks from "../Components/TaskComponents/DoneTasks";
-import OverDueTasks from "../Components/TaskComponents/OverDueTasks";
-import PendingTasks from "../Components/TaskComponents/PendingTasks";
+import Tasks from "../Components/TaskComponents/Tasks";
 import { useState } from "react";
 import OverdueChecker from "../Components/ReusableComponents/OverdueChecker";
 import Progress from "../Components/TaskComponents/Progress";
-import InProgressTasks from "../Components/TaskComponents/InProgressTasks";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState("pending");
 
-  const renderTaskComponent = () => {
-    switch (activeTab) {
-      case "pending":
-        return <PendingTasks />;
-      case "inProgress":
-        return <InProgressTasks />;
-      case "done":
-        return <DoneTasks />;
-      case "overdue":
-        return <OverDueTasks />;
-      default:
-        return <PendingTasks />;
-    }
+  const taskConfigs = {
+    pending: {
+      emptyStateMessage: "No pending tasks",
+      emptyStateImage: "/images/nothing.webp",
+    },
+    inProgress: {
+      emptyStateMessage: "no tasks are in progress yet",
+      emptyStateImage: "/images/nothing.webp",
+    },
+    done: {
+      emptyStateMessage: "nothing is done yet",
+      emptyStateImage: "/images/nothing.webp",
+    },
+    overdue: {
+      emptyStateMessage: "Nothing is overdue .. yaaay",
+      emptyStateImage: "/images/thumbs-up.webp",
+    },
   };
 
   return (
@@ -34,9 +35,9 @@ export default function Home() {
         </div>
         <AddTask />
         <hr className="m-0" />
-        <div className="col-12 row justify-content-start align-items-center gap-1 m-0 taskTab">
+        <div className="col-12 row justify-content-start align-items-center m-0 taskTab">
           <button
-            className={`basicBtnStyle taskTabBtn ${
+            className={`taskTabBtn ${
               activeTab === "pending" ? "pendingTab" : ""
             }`}
             onClick={() => setActiveTab("pending")}
@@ -44,7 +45,7 @@ export default function Home() {
             pending
           </button>
           <button
-            className={`basicBtnStyle taskTabBtn ${
+            className={`taskTabBtn ${
               activeTab === "inProgress" ? "progressTab" : ""
             }`}
             onClick={() => setActiveTab("inProgress")}
@@ -52,15 +53,13 @@ export default function Home() {
             in progress
           </button>
           <button
-            className={`basicBtnStyle taskTabBtn ${
-              activeTab === "done" ? "doneTab" : ""
-            }`}
+            className={`taskTabBtn ${activeTab === "done" ? "doneTab" : ""}`}
             onClick={() => setActiveTab("done")}
           >
             done
           </button>
           <button
-            className={`basicBtnStyle taskTabBtn ${
+            className={`taskTabBtn ${
               activeTab === "overdue" ? "overDueTab" : ""
             }`}
             onClick={() => setActiveTab("overdue")}
@@ -68,7 +67,7 @@ export default function Home() {
             overdue
           </button>
         </div>
-        {renderTaskComponent()}
+        <Tasks status={activeTab} {...taskConfigs[activeTab]} />
       </section>
     </>
   );

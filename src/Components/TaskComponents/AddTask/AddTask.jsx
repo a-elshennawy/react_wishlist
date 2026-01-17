@@ -100,21 +100,21 @@ function AddTask() {
 
   return (
     <>
-      <div className="col-12 text-start py-2 px-0">
+      <div className="col-12 text-start px-0">
         <button
-          className="addTaskBtn basicBtnStyle"
+          className="addTaskBtn glassmorphism"
           onClick={() => setIsOpen(true)}
         >
-          <IoAddCircleSharp /> Add Task
+          <IoAddCircleSharp size={24} />
         </button>
         <AnimatePresence>
           {isOpen && (
             <>
               <div className="outerContainer">
                 <motion.div
-                  initial={{ opacity: 0, y: -100 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 200 }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
                   transition={{ duration: 0.3, delay: 0.3, ease: "easeInOut" }}
                   className="addTaskModal glassmorphism"
                   ref={modalRef}

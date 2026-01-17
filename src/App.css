@@ -76,9 +76,12 @@ section {
 
         .homeBtn {
             border-radius: 8px !important;
+            border: none;
 
             a {
+                text-decoration: none;
                 font-weight: bold;
+                color: var(--mainColor);
             }
         }
     }
@@ -93,40 +96,6 @@ section {
     svg {
         font-size: 30px;
         margin-bottom: 10px;
-    }
-}
-
-.taskComp {
-    max-height: calc(100vh - var(--component-offset, 0px));
-    overflow-y: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-
-    &::-webkit-scrollbar {
-        display: none;
-    }
-}
-
-.toHomeBtn {
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    padding: 5px;
-    border-radius: 8px;
-    z-index: 1111;
-
-    a {
-        color: var(--white);
-        font-weight: bold;
-        text-decoration: none;
-    }
-}
-
-.addTaskBtn {
-    svg {
-        align-self: center;
-        font-size: 20px;
-        margin-inline-end: 5px;
     }
 }
 
@@ -399,12 +368,21 @@ section {
 
     .taskTabBtn {
         padding: 5px 10px;
+        border: 0 !important;
         background-color: var(--white);
         color: var(--mainColor);
         font-weight: bold;
         text-transform: uppercase !important;
         letter-spacing: 1px;
         width: fit-content;
+
+        &:first-child {
+            border-radius: 8px 0px 0px 8px !important;
+        }
+
+        &:last-child {
+            border-radius: 0px 8px 8px 0px !important;
+        }
     }
 
     .pendingTab {
@@ -425,102 +403,6 @@ section {
     .overDueTab {
         background-color: var(--red);
         color: #fff;
-    }
-}
-
-.dateFilterTab {
-    padding: 0px 0px 5px 0px !important;
-
-    .dateFilterBtn {
-        padding: 5px;
-        background: var(--taskBG);
-        color: var(--white);
-        text-transform: uppercase !important;
-        width: fit-content;
-        font-weight: bold;
-    }
-    .selected {
-        background-color: var(--triColor);
-        color: #fff;
-    }
-}
-
-.taskItem {
-    border: none;
-    padding: 10px 5px !important;
-    margin: 0 !important;
-    background: var(--taskBG);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: var(--white);
-    border-radius: 10px;
-
-    .pinIcon {
-        cursor: pointer;
-        padding: 0px;
-        width: fit-content;
-        svg {
-            font-size: 20px;
-        }
-    }
-
-    h6 {
-        width: fit-content;
-        background-color: #00000034;
-    }
-
-    .linksList {
-        background-color: transparent !important;
-        list-style: none;
-
-        .linkItem {
-            padding: 5px 0px;
-            font-size: 16px;
-        }
-    }
-
-    .work {
-        background-color: #002fff59;
-    }
-    .study {
-        background-color: #00701c;
-        color: #fff;
-    }
-    .personal {
-        background-color: #ffae0059;
-    }
-    .workout {
-        background-color: #ff000059;
-    }
-    .entertainment {
-        background-color: #00ffea59;
-    }
-    .daily {
-        background-color: #a6ff0059;
-    }
-
-    p {
-        display: inline-flex;
-        svg {
-            align-self: center;
-            margin-inline-start: 5px;
-        }
-    }
-
-    .actions {
-        button {
-            background: var(--taskBG);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: var(--white);
-            width: fit-content;
-
-            svg {
-                align-self: center;
-                font-size: 20px;
-                margin-inline-start: 5px;
-            }
-        }
     }
 }
 

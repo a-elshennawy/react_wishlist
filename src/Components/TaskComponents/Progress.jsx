@@ -4,11 +4,12 @@ import { db } from "../../firebase";
 import { collection, query, where, onSnapshot } from "firebase/firestore";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-
+import useMobile from "../../Hooks/useMobile";
 export default function Progress() {
   const { currentUser } = useAuth();
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { isMobile } = useMobile();
 
   useEffect(() => {
     if (!currentUser) return;
@@ -32,7 +33,7 @@ export default function Progress() {
         (err) => {
           console.error("Error fetching tasks:", err);
           setLoading(false);
-        }
+        },
       );
     } catch (err) {
       console.error("Error setting up listener:", err);
@@ -109,7 +110,7 @@ export default function Progress() {
       ? 0
       : Math.min(
           Math.round((weekCreatedAndDone / weekSubmittedTasks) * 100),
-          100
+          100,
         );
 
   const getPathColor = (percentage) => {
@@ -142,8 +143,13 @@ export default function Progress() {
     <>
       <div className="progress-component row justify-content-start align-items-start p-0 m-0 gap-1">
         {weekSubmittedTasks == 0 ? (
-          <div className="progress-component p-0 mb-1">
-            <h6 className="col-12 text-start m-0 p-1 messageComp">
+          <div className="progress-component text-start p-0 mb-1">
+            <img
+              src="/images/confused.webp"
+              alt="no activity"
+              style={{ width: isMobile ? "80%" : "10%" }}
+            />
+            <h6 className="col-12 text-start mt-2 p-1 messageComp">
               no activity this week
             </h6>
           </div>
@@ -155,7 +161,7 @@ export default function Progress() {
               <h3>tasks this week</h3>
               {oldTasksCompleted > 0 && (
                 <p className="oldTasks m-0 mx-auto">
-                  including {oldTasksCompleted} old{" "}
+                  + {oldTasksCompleted} old &nbsp;
                   {oldTasksCompleted === 1 ? "task" : "tasks"}
                 </p>
               )}

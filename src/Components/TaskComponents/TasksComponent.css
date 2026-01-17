@@ -1,0 +1,98 @@
+.scrollWrapper {
+    height: calc(100vh - var(--component-offset, 0px));
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.taskComp {
+    max-width: 100%;
+    margin: 0 auto;
+    column-count: 4;
+    column-gap: 10px;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    .taskItem {
+        position: relative;
+        break-inside: avoid;
+        width: 100%;
+        margin-bottom: 5px;
+        display: inline-block;
+        padding: 10px 5px !important;
+        margin-bottom: 10px !important;
+        background: var(--taskBG);
+        backdrop-filter: blur(10px);
+        border: none;
+        color: var(--white);
+        border-radius: 10px;
+        overflow: hidden;
+
+        .pinIcon {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            cursor: pointer;
+            padding: 0px;
+            width: fit-content;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease-in-out;
+
+            svg {
+                font-size: 20px;
+            }
+        }
+
+        .pinned {
+            background-color: var(--white);
+            color: var(--mainColor);
+            top: 0;
+            right: 0;
+            padding: 5px !important;
+            border-radius: 0px 10px 0px 10px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        h6 {
+            width: fit-content;
+            background-color: #00000034;
+        }
+
+        .linksList {
+            background-color: transparent !important;
+            list-style: none;
+
+            .linkItem {
+                padding: 5px 0px;
+                font-size: 16px;
+            }
+        }
+
+        p {
+            display: inline-flex;
+            svg {
+                align-self: center;
+                margin-inline-start: 5px;
+            }
+        }
+
+        .actions {
+            display: flex;
+            gap: 5px;
+
+            button {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                color: var(--white);
+                padding: 5px;
+                width: fit-content;
+                border-radius: 8px;
+            }
+        }
+    }
+}

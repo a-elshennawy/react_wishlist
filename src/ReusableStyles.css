@@ -13,6 +13,21 @@
     }
 }
 
+.toHomeBtn {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    padding: 5px;
+    border-radius: 8px;
+    z-index: 1111;
+
+    a {
+        color: var(--white);
+        font-weight: bold;
+        text-decoration: none;
+    }
+}
+
 .glassmorphism {
     background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(1.25rem);

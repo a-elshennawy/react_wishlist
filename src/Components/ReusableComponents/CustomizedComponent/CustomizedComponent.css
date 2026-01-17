@@ -1,4 +1,4 @@
-button {
+.custBtn {
     border: none;
     padding: 5px 10px;
     background-color: var(--white);
